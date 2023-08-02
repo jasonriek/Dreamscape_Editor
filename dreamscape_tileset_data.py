@@ -28,6 +28,12 @@ class TilesetLayers:
             return self.order.index(self.active_layer_name)
         return None
 
+    def getPathByLayerName(self, layer_name:str):
+        for layer in self.layers.values():
+            if layer['name'] == layer_name:
+                return layer['tileset']
+        return None
+
     def changeVisibility(self, state):
         index = self.layerIndex(self.active_layer_name)
         self.layer_visibilty[index] = state
@@ -51,7 +57,6 @@ class TilesetLayers:
                 return True
         return False
             
-
     def appendTilesetLayer(self, tileset_name: str, src: str, tile_w: int, tile_h: int, tiles=None, z=0):
         if tiles is None:
             tiles = []
@@ -96,6 +101,20 @@ class TilesetLayers:
             self.layer_pixmaps[layer_1_index], self.layer_pixmaps[layer_2_index] = self.layer_pixmaps[layer_2_index], self.layer_pixmaps[layer_1_index]
             return True
         return False
+    
+    def onlyLayerWithTileset(self, layer_name):
+        count = 0
+        tileset = self.layers[layer_name]['tileset']
+        for layer in self.layers.values():
+            if layer['tileset'] == tileset:
+                count += 1
+        return (count == 1)
+    
+    def indexOfFirstTilesetWithPath(self, tileset_path):
+        for i, layer in enumerate(self.layers.values()):
+            if layer['tileset'] == tileset_path:
+                return i
+        return None
 
     def removeTilesetLayerAtIndex(self, index:int):
         if index >= 0 and index < len(self.order):
@@ -114,7 +133,7 @@ class TilesetLayers:
                 y,
                 b
             ])
-            self.checkMemoryLocations()
+            
             return len(self.layers[tileset_name]['tiles']) - 1
         return None
     
@@ -166,7 +185,7 @@ class TilesetLayers:
             'start_position': {'x': self.start_position_x, 'y': self.start_position_y},
             'doors': self.doors,
             'layers': layers
-        })
+        }, indent=4)
     
     def checkMemoryLocations(self):
         for key, layer in self.layers.items():

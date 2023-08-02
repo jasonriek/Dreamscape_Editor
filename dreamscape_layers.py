@@ -6,6 +6,7 @@ import dreamscape_config
 
 class LayerListModel(QAbstractListModel):
     swapped = Signal(int, int)
+    
     def __init__(self, layers=None):
         super().__init__()
         if layers is None:
@@ -90,6 +91,7 @@ class LayerListModel(QAbstractListModel):
         return True
 
 class Layers(QWidget):
+    layerClicked = Signal(str)
     def __init__(self, canvas):
         super().__init__()
         self.tile_canvas = canvas
@@ -113,11 +115,16 @@ class Layers(QWidget):
         self.model.dataChanged.connect(self.view.update)
         self.view.setMinimumWidth(250)
         layout.addWidget(self.view)
+        self.view.selectionModel().currentChanged.connect(self.clickLayer)
 
         # Create sample layers for this example
         for i in range(dreamscape_config.tileset_layers.length()):
             layer = {'name': f"Layer {i+1} ({dreamscape_config.tileset_layers.getLayerNameByIndex(i)})"}
             self.model.addLayer(layer)
+
+    def clickLayer(self, current_index:QModelIndex, previous_index:QModelIndex):
+        layer_path = dreamscape_config.tileset_layers.getPathByLayerName(dreamscape_config.tileset_layers.active_layer_name)
+        self.layerClicked.emit(layer_path)
 
     def layer_changed(self, current, previous):
         dreamscape_config.tileset_layers.active_layer_name = dreamscape_config.tileset_layers.getLayerNameByIndex(current.row())
@@ -185,6 +192,13 @@ class Layers(QWidget):
         self.view.setCurrentIndex(index)
         self.tile_canvas.update()
         self.tile_canvas.redraw_world()
+    
+    def selectFistLayerWithTilesetPath(self, path):
+        i = dreamscape_config.tileset_layers.indexOfFirstTilesetWithPath(path)
+        index = self.model.index(i, 0)
+        self.view.setCurrentIndex(index)
+        self.tile_canvas.update()
+        self.tile_canvas.redraw_world()
 
     # New method to handle adding a new layer from the context menu
     def add_new_layer(self):
@@ -211,6 +225,9 @@ class Layers(QWidget):
         if current_index != -1:  # Ensure a layer is selected
             button = QMessageBox.warning(self, 'Remove Layer', f'Are you sure you want to remove layer "{dreamscape_config.tileset_layers.active_layer_name}"?', QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
             if button == QMessageBox.StandardButton.Ok:
+                if(dreamscape_config.tileset_layers.onlyLayerWithTileset(dreamscape_config.tileset_layers.active_layer_name)):
+                    QMessageBox.warning(self, 'Last Tileset Layer', 'This Layer is associated with a tileset, cannont remove.')
+                    return
                 self.model.beginRemoveRows(QModelIndex(), current_index, current_index)
                 del self.model.layers[current_index]
                 dreamscape_config.tileset_layers.removeTilesetLayerAtIndex(current_index)

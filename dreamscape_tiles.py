@@ -1,25 +1,25 @@
-from PySide6.QtWidgets import (QWidget, QSizePolicy)
+from PySide6.QtWidgets import (QWidget, QSizePolicy, QTabBar, QVBoxLayout)
 from PySide6.QtGui import (QPainter, QPixmap, QMouseEvent, QImage)
-from PySide6.QtCore import (Qt)
+from PySide6.QtCore import (Qt, Signal)
 
 import dreamscape_config
 
 class TileSelector(QWidget):
     def __init__(self):
         super().__init__()
-        dreamscape_config.tileset_layers.active_layer_path = 'cyberpunk_1_assets_1.png'
-        dreamscape_config.tileset_layers.active_layer_name = 'Cyber Punk 1'
-        self.tileset = QImage(dreamscape_config.tileset_layers.active_layer_path)
-        self.setFixedSize(self.tileset.width(), self.tileset.height())
+        self.setFixedSize(672, 352)
         self.selected_tile = None
         self.active_tile_widget = None
     
-    def setTileset(self, name:str, path:str):
-        dreamscape_config.tileset_layers.appendTilesetLayer(name, path, 32, 32)
+    def changeTileset(self, name:str, path:str):
         dreamscape_config.tileset_layers.active_layer_name = name
         dreamscape_config.tileset_layers.active_layer_path = path
         self.tileset = QImage(path)
         self.update()
+
+    def setTileset(self, name:str, path:str):
+        dreamscape_config.tileset_layers.appendTilesetLayer(name, path, 32, 32)
+        self.changeTileset(name, path)
 
     def paintEvent(self, event):
         painter = QPainter(self)
@@ -61,10 +61,53 @@ class TileSelector(QWidget):
     def get_selected_tile(self):
         return self.selected_tile
 
-class TileCanvas(QWidget):
-    def __init__(self, tile_selector):
+class TilesetBar(QWidget):
+    tilesetChanged = Signal(str)
+    def __init__(self):
         super().__init__()
-        self.tile_selector = tile_selector
+
+        # Create the TileSelector and QTabBar
+        self.tile_selector = TileSelector()
+        self.tab_bar = QTabBar()
+
+        # Connect tab change to update function
+        self.tab_bar.currentChanged.connect(self.changeTileset)
+
+        # Layout
+        layout = QVBoxLayout()
+        layout.addWidget(self.tab_bar)
+        layout.addWidget(self.tile_selector)
+        self.setLayout(layout)
+
+        # Dictionary to store tilesets paths associated with tab indexes
+        self.tilesets = {}
+
+        self.addTileset('Cyber Punk 1', 'cyberpunk_1_assets_1.png')
+    
+    def changeIndexByTilesetPath(self, tileset_path):
+        for i in range(self.tab_bar.count()):
+            if self.tilesets[i][1] == tileset_path:
+                self.tab_bar.setCurrentIndex(i)
+                break
+
+    def addTileset(self, tileset_name, tileset_path):
+        self.tile_selector.setTileset(tileset_name, tileset_path)
+        index = self.tab_bar.addTab(tileset_name)
+        self.tilesets[index] = (tileset_name, tileset_path)
+        # If it's the first tileset, set it immediately
+        if self.tab_bar.count() == 1:
+            self.changeTileset(0)
+
+    def changeTileset(self, index):
+        tileset_data = self.tilesets.get(index)
+        if tileset_data:
+            self.tile_selector.changeTileset(tileset_data[0], tileset_data[1])
+            self.tilesetChanged.emit(tileset_data[1])
+
+class TileCanvas(QWidget):
+    def __init__(self, tileset_bar):
+        super().__init__()
+        self.tile_selector = tileset_bar.tile_selector
         self.setFixedSize(dreamscape_config.DISPLAY_WIDTH, dreamscape_config.DISPLAY_HEIGHT)
         self.show_grid = True
         dreamscape_config.tileset_layers.layer_pixmaps = [QPixmap(dreamscape_config.DISPLAY_WIDTH, dreamscape_config.DISPLAY_HEIGHT) for _ in range(dreamscape_config.tileset_layers.length())]
@@ -175,4 +218,5 @@ class TileCanvas(QWidget):
 
     def update_layer_visibility(self):
         self.update()  # Trigger repaint
+
 

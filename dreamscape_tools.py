@@ -1,16 +1,29 @@
-from PySide6.QtWidgets import (QWidget, QVBoxLayout, QPushButton, QFileDialog, QHBoxLayout, QLabel, QSizePolicy, QGroupBox, QCheckBox, QLineEdit, QInputDialog, QMessageBox)
+from PySide6.QtWidgets import (QWidget, QTabBar, QVBoxLayout, QPushButton, QFileDialog, QHBoxLayout, QLabel, QSizePolicy, QGroupBox, QCheckBox, QLineEdit, QInputDialog, QMessageBox)
 from PySide6.QtGui import (QPixmap, QImage)
 import dreamscape_config
 
 class LoadTilesetWidget(QWidget):
-    def __init__(self, tile_selector, tile_canvas, layers_widget):
+    def __init__(self, tileset_bar, tile_canvas, layers_widget):
         super().__init__()
-        self.tile_selector = tile_selector
+        self.tileset_bar = tileset_bar
         self.tile_canvas = tile_canvas
         self.layers_widget = layers_widget
+        self.layers_widget.layerClicked.connect(self.activateLayerTab)
+        self.tileset_bar.tilesetChanged.connect(self.activateLayerSelection)
+        
 
         # Initialize the active tile display and checkbox
         self.init_ui()
+
+    def activateLayerSelection(self, tileset_path):
+        self.tileset_bar.tab_bar.blockSignals(True)
+        self.layers_widget.selectFistLayerWithTilesetPath(tileset_path)
+        self.tileset_bar.tab_bar.blockSignals(False)
+
+    def activateLayerTab(self, tileset_path):
+        self.layers_widget.blockSignals(True)
+        self.tileset_bar.changeIndexByTilesetPath(tileset_path)
+        self.layers_widget.blockSignals(False)
 
     def init_ui(self):
         layout = QHBoxLayout(self)
@@ -47,7 +60,7 @@ class LoadTilesetWidget(QWidget):
 
             if ok and tileset_name:
                 self.tileset_src_entry.setText(path)
-                self.tile_selector.setTileset(tileset_name, path)
+                self.tileset_bar.addTileset(tileset_name, path)
                 self.layers_widget.addLayer(tileset_name, path)
             
 
@@ -102,16 +115,21 @@ class ActiveTileWidget(QWidget):
 
 
 class Tools(QWidget):
-    def __init__(self, tile_selector, tile_canvas, layers_widget):
+    def __init__(self, tileset_bar, tile_canvas, layers_widget):
         super().__init__()
         self._layout = QVBoxLayout(self)
-        self.tile_setloader = LoadTilesetWidget(tile_selector, tile_canvas, layers_widget)
+        self.tile_setloader = LoadTilesetWidget(tileset_bar, tile_canvas, layers_widget)
         self._layout.addWidget(self.tile_setloader)
-
+        self.export_json_button = QPushButton('Export JSON')
+        self.export_json_button.clicked.connect(self.exportJson)
         # Additional tools can be added here
     
+    def exportJson(self):
+        with open('test.json', 'w') as f:
+            f.write(dreamscape_config.tileset_layers.getJson())
+    
     def setInternalWidgets(self):
-        pass
+        self._layout.addWidget(self.export_json_button)
         #self._layout.addWidget(self.tile_setloader)
 
     def addToLayout(self, widget):

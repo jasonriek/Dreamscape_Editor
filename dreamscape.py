@@ -9,27 +9,23 @@ from PySide6.QtCore import (Qt, QAbstractListModel, QModelIndex, QMimeData, QByt
 import dreamscape_config
 
 from dreamscape_layers import (Layers)
-from dreamscape_tiles import (TileSelector, TileCanvas)
+from dreamscape_tiles import (TilesetBar, TileCanvas)
 from dreamscape_tools import (Tools, ActiveTileWidget)
-
-dreamscape_config.tileset_layers.appendTilesetLayer('Cyber Punk 1','cyberpunk_1_assets_1.png',32,32)
-dreamscape_config.tileset_layers.appendTilesetLayer('Cyber Punk 2','cyberpunk_1_assets_1.png',32,32)
-dreamscape_config.tileset_layers.appendTilesetLayer('Cyber Punk 3','cyberpunk_1_assets_1.png',32,32)
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        tile_selector = TileSelector()
-        tile_selector.active_tile_widget = ActiveTileWidget()
+        tileset_bar = TilesetBar()
+        tileset_bar.tile_selector.active_tile_widget = ActiveTileWidget()
 
         # Create and set up the TileSelector dock
         selector_dock = QDockWidget("Tile Selector", self)
-        selector_dock.setWidget(tile_selector)
+        selector_dock.setWidget(tileset_bar)
         self.addDockWidget(Qt.DockWidgetArea.TopDockWidgetArea, selector_dock)
 
         # Create and set up the TileCanvas dock
         canvas_dock = QDockWidget("Tile Canvas", self)
-        tile_canvas = TileCanvas(tile_selector)
+        tile_canvas = TileCanvas(tileset_bar)
         layers_widget = Layers(tile_canvas)
         tile_canvas.layers_widget = layers_widget
         scroll_area = QScrollArea()
@@ -38,8 +34,8 @@ class MainWindow(QMainWindow):
         
         # Create and set up the ToolDock
         tool_dock = QDockWidget("Tools", self)
-        tools = Tools(tile_selector, tile_canvas, layers_widget)
-        tools.addToLayout(tile_selector.active_tile_widget)
+        tools = Tools(tileset_bar, tile_canvas, layers_widget)
+        tools.addToLayout(tileset_bar.tile_selector.active_tile_widget)
         tools.setInternalWidgets()
         tool_dock.setWidget(tools)
         

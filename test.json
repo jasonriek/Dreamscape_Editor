@@ -1,0 +1,109 @@
+{
+    "name": "World",
+    "world_size": {
+        "width": 150,
+        "height": 150
+    },
+    "weather": true,
+    "start_position": {
+        "x": 0,
+        "y": 0
+    },
+    "doors": [],
+    "layers": [
+        {
+            "name": "base",
+            "tileset": "",
+            "tile_width": 32,
+            "tile_height": 32,
+            "z": 0,
+            "tiles": [
+                [
+                    0,
+                    0,
+                    32,
+                    32
+                ]
+            ]
+        },
+        {
+            "name": "Cyber Punk 1",
+            "tileset": "/images/jportfolio/tilemaps/cyberpunk_1_assets_1.png",
+            "tile_width": 32,
+            "tile_height": 32,
+            "z": 0,
+            "tiles": [
+                [
+                    1,
+                    2,
+                    11,
+                    2,
+                    0
+                ],
+                [
+                    1,
+                    2,
+                    11,
+                    3,
+                    0
+                ],
+                [
+                    1,
+                    2,
+                    12,
+                    3,
+                    0
+                ],
+                [
+                    1,
+                    2,
+                    12,
+                    2,
+                    0
+                ],
+                [
+                    1,
+                    2,
+                    13,
+                    2,
+                    0
+                ],
+                [
+                    1,
+                    2,
+                    13,
+                    3,
+                    0
+                ],
+                [
+                    1,
+                    2,
+                    14,
+                    3,
+                    0
+                ],
+                [
+                    1,
+                    2,
+                    14,
+                    2,
+                    0
+                ],
+                [
+                    1,
+                    2,
+                    15,
+                    2,
+                    0
+                ],
+                [
+                    1,
+                    2,
+                    15,
+                    3,
+                    0
+                ]
+            ]
+        }
+    ]
+}
