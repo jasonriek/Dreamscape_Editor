@@ -22,6 +22,11 @@ class TilesetLayers:
         self.base_tile_src_h = 32
         self.doors = []
         self.layer_pixmaps = []
+    
+    def getActiveLayerIndex(self):
+        if self.active_layer_name in self.order:
+            return self.order.index(self.active_layer_name)
+        return None
 
     def changeVisibility(self, state):
         index = self.layerIndex(self.active_layer_name)
@@ -87,6 +92,8 @@ class TilesetLayers:
             layer_2_tileset_name = self.order[layer_2_index]
             self.order[layer_1_index] = layer_2_tileset_name
             self.order[layer_2_index] = layer_1_tileset_name
+            self.layer_visibilty[layer_1_index], self.layer_visibilty[layer_2_index] = self.layer_visibilty[layer_2_index], self.layer_visibilty[layer_1_index]
+            self.layer_pixmaps[layer_1_index], self.layer_pixmaps[layer_2_index] = self.layer_pixmaps[layer_2_index], self.layer_pixmaps[layer_1_index]
             return True
         return False
 
@@ -143,13 +150,22 @@ class TilesetLayers:
         return len(self.order)
 
     def getJson(self):
+        layers = [{
+            'name': 'base',
+            'tileset': self.base_tile_src,
+            'tile_width': self.base_tile_src_w,
+            'tile_height': self.base_tile_src_h,
+            'z': 0,
+            'tiles': [[self.base_tile_src_x, self.base_tile_src_y, self.base_tile_src_w, self.base_tile_src_h]]
+        }]
+        layers.extend([self.modifyImgPath(self.layers[layer]) for layer in self.order])
         return json.dumps({
             'name': self.name,
             'world_size': {'width': self.world_size_width, 'height': self.world_size_height},
             'weather': self.weather,
             'start_position': {'x': self.start_position_x, 'y': self.start_position_y},
             'doors': self.doors,
-            'layers': [self.modifyImgPath(self.layers[layer]) for layer in self.order]
+            'layers': layers
         })
     
     def checkMemoryLocations(self):
