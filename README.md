@@ -16,3 +16,6 @@
   - The moths act as keys and the lantern a lock.
   - Once 5 moths are flying around the lantern it will turn on and the door below will unlock.
   - Each new themed area -or "Parakosm" --as I'll call them-- will be locked behind a mothless lantern door.
+
+- 08/03/2023
+  - Have music transition options (like crossfade and others) on the transition or "door" window for moving from map to map.
