@@ -1,7 +1,7 @@
-from PySide6.QtWidgets import (QMainWindow, QWidget, QScrollArea, QMenu, QDockWidget, 
+from PySide6.QtWidgets import (QMainWindow, QToolBar, QWidget, QScrollArea, QMenu, QDockWidget, 
                                QCheckBox, QVBoxLayout, QSizePolicy, QDialog)
-from PySide6.QtGui import (QAction)
-from PySide6.QtCore import (Qt, Signal)
+from PySide6.QtGui import (QAction, QIcon, QImage, QPixmap, QActionGroup)
+from PySide6.QtCore import (Qt, Signal, QRect)
 
 from dreamscape_layers import (Layers)
 from dreamscape_tiles import (TilesetBar, TileCanvas)
@@ -69,8 +69,55 @@ class MainWindow(QMainWindow):
         # This line places layers_dock beside canvas_dock and sets the initial size ratio.
         self.setWindowTitle("Dreamscape Editor")
         self.setupTopMenu()
+        self.setupToolBar()
         self.setCentralWidget(scroll_area)
 
+    def _getToolIcon(self, x, y, icons:QPixmap=None, w=64, h=64):
+        clip_space = QRect(x, y, w, h)
+        clipped = icons.copy(clip_space)
+        icon = QIcon()
+        icon.addPixmap(clipped)
+        return icon
+
+    def setupToolBar(self):
+        self.icons = QPixmap('resources/paint_tool_icons.png')
+        # Create the toolbar
+        self.toolbar = QToolBar(self)
+        self.addToolBar(Qt.TopToolBarArea, self.toolbar)
+
+        # Tile Paint Brush
+        self.brush_action = QAction(self._getToolIcon(64*3, 0, self.icons), 'Brush', self)
+        self.brush_action.setCheckable(True)
+        self.toolbar.addAction(self.brush_action)
+
+        # Eraser
+        self.eraser_action = QAction(self._getToolIcon(64*6, 0, self.icons), 'Eraser', self)
+        self.eraser_action.setCheckable(True)
+        self.toolbar.addAction(self.eraser_action)
+
+        # Drag and Draw
+        self.drag_draw_action = QAction(self._getToolIcon(64, 0, self.icons), 'Drag & Draw', self)
+        self.drag_draw_action.setCheckable(True)
+        self.toolbar.addAction(self.drag_draw_action)
+
+        # Paint Bucket
+        self.bucket_action = QAction(self._getToolIcon(64*5, 0, self.icons), 'Bucket Fill', self)
+        self.bucket_action.setCheckable(True)
+        self.toolbar.addAction(self.bucket_action)
+
+        # Dropper
+        self.dropper_action = QAction(self._getToolIcon(64*4, 0, self.icons), 'Dropper', self)
+        self.dropper_action.setCheckable(True)
+        self.toolbar.addAction(self.dropper_action)
+
+        # Ensure only one toggle button can be active at a time
+        self.tool_group = QActionGroup(self)
+        self.tool_group.addAction(self.brush_action)
+        self.tool_group.addAction(self.eraser_action)
+        self.tool_group.addAction(self.drag_draw_action)
+        self.tool_group.addAction(self.bucket_action)
+        self.tool_group.addAction(self.dropper_action)
+        self.tool_group.setExclusive(True)
 
     def setupTopMenu(self):
         # Create the File menu
