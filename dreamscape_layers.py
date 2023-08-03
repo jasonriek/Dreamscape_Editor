@@ -39,7 +39,7 @@ class LayerListModel(QAbstractListModel):
     
     def createLayerLabel(self, layer_name, old_layer_index, new_layer_index):
         hidden_label = '(Hidden)'
-        visibility = dreamscape_config.tileset_layers.layer_visibilty[old_layer_index]
+        visibility = dreamscape_config.tileset_layers.layer_visibility[old_layer_index]
         if visibility:
             hidden_label = '' 
         return {'name': f'Layer {new_layer_index + 1} ({layer_name}) {hidden_label}'}
@@ -164,7 +164,7 @@ class Layers(QWidget):
             context_menu.addSeparator()  # Add a line separator
             visible_action = QAction('Visible', self.view)
             visible_action.setCheckable(True)
-            visible_action.setChecked(dreamscape_config.tileset_layers.layer_visibilty[index.row()])
+            visible_action.setChecked(dreamscape_config.tileset_layers.layer_visibility[index.row()])
             visible_action.toggled.connect(self.updateVisibility)
             context_menu.addAction(visible_action)
             context_menu.addSeparator()
@@ -184,7 +184,7 @@ class Layers(QWidget):
     
     def addLayer(self, name:str, path:str):
         dreamscape_config.tileset_layers.appendTilesetLayer(name, path, 32, 32)
-        dreamscape_config.tileset_layers.layer_pixmaps.append(QPixmap(dreamscape_config.DISPLAY_WIDTH, dreamscape_config.DISPLAY_HEIGHT))
+        dreamscape_config.tileset_layers.layer_pixmaps.append(QPixmap(dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.tileset_layers.displayHeight()))
         row = self.model.rowCount()
         new_layer = {'name': f"Layer {row + 1} ({name})"}
         self.model.addLayer(new_layer)
@@ -213,8 +213,7 @@ class Layers(QWidget):
                 QMessageBox.warning(self, 'Name Already Exists', f'Layer name "{layer_name}" already exists.')
             else:
                 self.addLayer(layer_name, dreamscape_config.tileset_layers.active_layer_path)
-
-                
+    
     # New method to handle removing the selected layer from the context menu
     def remove_selected_layer(self):
         current_index = self.get_selected_layer_index()

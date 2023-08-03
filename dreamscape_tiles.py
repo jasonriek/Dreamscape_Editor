@@ -1,20 +1,26 @@
-from PySide6.QtWidgets import (QWidget, QSizePolicy, QTabBar, QVBoxLayout)
+from PySide6.QtWidgets import (QWidget, QSizePolicy, QTabBar, QVBoxLayout, QScrollArea)
 from PySide6.QtGui import (QPainter, QPixmap, QMouseEvent, QImage)
 from PySide6.QtCore import (Qt, Signal)
 
 import dreamscape_config
 
 class TileSelector(QWidget):
+    tileSelected = Signal(int, int)
     def __init__(self):
         super().__init__()
-        self.setFixedSize(672, 352)
         self.selected_tile = None
         self.active_tile_widget = None
+        self.show_grid = False
+
+    def toggle_grid(self, state=1):
+        self.show_grid = bool(state)
+        self.update()
     
     def changeTileset(self, name:str, path:str):
         dreamscape_config.tileset_layers.active_layer_name = name
         dreamscape_config.tileset_layers.active_layer_path = path
         self.tileset = QImage(path)
+        self.setFixedSize(self.tileset.width(), self.tileset.height())
         self.update()
 
     def setTileset(self, name:str, path:str):
@@ -36,6 +42,14 @@ class TileSelector(QWidget):
 
         painter.drawImage(0, 0, self.tileset)
 
+        # Draw the grid if the flag is set
+        if self.show_grid:
+            painter.setPen(Qt.GlobalColor.black)
+            for x in range(0, self.width(), dreamscape_config.TILE_SIZE):
+                painter.drawLine(x, 0, x, self.height())
+            for y in range(0, self.height(), dreamscape_config.TILE_SIZE):
+                painter.drawLine(0, y, self.width(), y)
+
         if self.selected_tile:
             tile_x, tile_y = self.selected_tile
             painter.setPen(Qt.GlobalColor.red)
@@ -46,6 +60,7 @@ class TileSelector(QWidget):
         y = int(event.position().y()) // dreamscape_config.TILE_SIZE
         dreamscape_config.tileset_layers.selected_x = x
         dreamscape_config.tileset_layers.selected_y = y
+        self.tileSelected.emit(x, y)
         self.selected_tile = (x, y)
         if self.selected_tile:
                 tile_x, tile_y = self.selected_tile
@@ -61,23 +76,48 @@ class TileSelector(QWidget):
     def get_selected_tile(self):
         return self.selected_tile
 
+class TilesetScrollArea(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        # Create an instance of the TileSelector
+        self.tile_selector = TileSelector()
+
+        # Create a QScrollArea and set its properties
+        self.scroll_area = QScrollArea(self)
+        #self.setFixedSize(320, 320)
+        self.setMinimumWidth(576)
+        self.scroll_area.setWidgetResizable(False)
+        self.scroll_area.setWidget(self.tile_selector)
+
+        # Set the layout
+        layout = QVBoxLayout()
+        layout.addWidget(self.scroll_area)
+        self.setLayout(layout)
+
 class TilesetBar(QWidget):
     tilesetChanged = Signal(str)
     def __init__(self):
         super().__init__()
 
         # Create the TileSelector and QTabBar
-        self.tile_selector = TileSelector()
+        self.tileset_scroll_area = TilesetScrollArea()
+        self.tile_selector = self.tileset_scroll_area.tile_selector
         self.tab_bar = QTabBar()
-
+        self.tab_bar.setExpanding(False)
+        self.tab_bar.setStyleSheet("""
+            QTabBar::tab {
+                min-width: 100px;
+            }
+        """)
         # Connect tab change to update function
         self.tab_bar.currentChanged.connect(self.changeTileset)
 
         # Layout
-        layout = QVBoxLayout()
-        layout.addWidget(self.tab_bar)
-        layout.addWidget(self.tile_selector)
-        self.setLayout(layout)
+        self.layout_ = QVBoxLayout()
+        self.layout_.addWidget(self.tab_bar)
+        self.layout_.addWidget(self.tileset_scroll_area)
+        self.setLayout(self.layout_)
 
         # Dictionary to store tilesets paths associated with tab indexes
         self.tilesets = {}
@@ -105,37 +145,74 @@ class TilesetBar(QWidget):
             self.tilesetChanged.emit(tileset_data[1])
 
 class TileCanvas(QWidget):
+    mouseMoved = Signal(int, int)
     def __init__(self, tileset_bar):
         super().__init__()
+        self.setMouseTracking(True)
         self.tile_selector = tileset_bar.tile_selector
-        self.setFixedSize(dreamscape_config.DISPLAY_WIDTH, dreamscape_config.DISPLAY_HEIGHT)
+        self.setFixedSize(dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.tileset_layers.displayHeight())
         self.show_grid = True
-        dreamscape_config.tileset_layers.layer_pixmaps = [QPixmap(dreamscape_config.DISPLAY_WIDTH, dreamscape_config.DISPLAY_HEIGHT) for _ in range(dreamscape_config.tileset_layers.length())]
+        dreamscape_config.tileset_layers.layer_pixmaps = [QPixmap(dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.tileset_layers.displayHeight()) for _ in range(dreamscape_config.tileset_layers.length())]
         for pixmap in dreamscape_config.tileset_layers.layer_pixmaps:
             pixmap.fill(Qt.GlobalColor.transparent)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-    def toggle_grid(self):
-        self.show_grid = not self.show_grid
+    def toggle_grid(self, state=1):
+        self.show_grid = bool(state)
         self.update()
 
     def paintEvent(self, event):
         painter = QPainter(self)
+        
+        # Paint the base tiles first
+        if dreamscape_config.tileset_layers.base_pixmap:
+            if dreamscape_config.tileset_layers.base_tiles_visible:
+                painter.drawPixmap(0, 0, dreamscape_config.tileset_layers.base_pixmap)
+
         # Paint tiles from all layers based on visibility
         for layer_index in reversed(range(len(dreamscape_config.tileset_layers.layer_pixmaps))):
             pixmap = dreamscape_config.tileset_layers.layer_pixmaps[layer_index]
-            if dreamscape_config.tileset_layers.layer_visibilty[layer_index]:  # Check if this layer should be rendered
+            if dreamscape_config.tileset_layers.layer_visibility[layer_index]:  # Check if this layer should be rendered
                 painter.drawPixmap(0, 0, pixmap)
 
         # Draw the grid if the flag is set
         if self.show_grid:
             painter.setPen(Qt.GlobalColor.black)
-            for x in range(0, dreamscape_config.DISPLAY_WIDTH, dreamscape_config.TILE_SIZE):
-                painter.drawLine(x, 0, x, dreamscape_config.DISPLAY_HEIGHT)
-            for y in range(0, dreamscape_config.DISPLAY_HEIGHT, dreamscape_config.TILE_SIZE):
-                painter.drawLine(0, y, dreamscape_config.DISPLAY_WIDTH, y)
+            for x in range(0, dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.TILE_SIZE):
+                painter.drawLine(x, 0, x, dreamscape_config.tileset_layers.displayHeight())
+            for y in range(0, dreamscape_config.tileset_layers.displayHeight(), dreamscape_config.TILE_SIZE):
+                painter.drawLine(0, y, dreamscape_config.tileset_layers.displayWidth(), y)
         painter.end()
+    
+    def drawBaseTiles(self):
+        if not dreamscape_config.tileset_layers.base_tile_src:
+            return
 
+        # Check if we already have the pixmap, and if not, create it.
+        if not dreamscape_config.tileset_layers.base_pixmap:
+            dreamscape_config.tileset_layers.base_pixmap = QPixmap(dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.tileset_layers.displayHeight())
+
+        base_tile_img = QImage(dreamscape_config.tileset_layers.base_tile_src)
+        
+        if base_tile_img.isNull():
+            print("The base tile image couldn't be loaded!")
+            return
+
+        painter = QPainter(dreamscape_config.tileset_layers.base_pixmap)
+
+        tile_w = dreamscape_config.tileset_layers.base_tile_src_w
+        tile_h = dreamscape_config.tileset_layers.base_tile_src_h
+
+        src_x = dreamscape_config.tileset_layers.base_tile_src_x * tile_w
+        src_y = dreamscape_config.tileset_layers.base_tile_src_y * tile_h
+
+        # Draw the base tile repeatedly over the entire canvas
+        for x in range(0, dreamscape_config.tileset_layers.displayWidth(), tile_w):
+            for y in range(0, dreamscape_config.tileset_layers.displayHeight(), tile_h):
+                painter.drawImage(x, y, base_tile_img, src_x, src_y, tile_w, tile_h)
+
+        painter.end()
+    
     def draw_tile_on_layer(self, tileset_name, tile_index):
         tile_data = dreamscape_config.tileset_layers.tile(tileset_name, tile_index)
         if tile_data:
@@ -157,11 +234,11 @@ class TileCanvas(QWidget):
         tileset_info = dreamscape_config.tileset_layers.tilesetLayer(tileset_name)
         tileset_img = QImage(tileset_info['tileset'])
         
-        pixmap = QPixmap(dreamscape_config.DISPLAY_WIDTH, dreamscape_config.DISPLAY_HEIGHT)
+        pixmap = QPixmap(dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.tileset_layers.displayHeight())
         pixmap.fill(Qt.GlobalColor.transparent)
         painter = QPainter(pixmap)
         
-        for i, tile_data in enumerate(tileset_info['tiles']):
+        for tile_data in tileset_info['tiles']:
             src_x, src_y, x, y, b = tile_data
             painter.drawImage(x * dreamscape_config.TILE_SIZE, y * dreamscape_config.TILE_SIZE,
                             tileset_img,
@@ -169,6 +246,14 @@ class TileCanvas(QWidget):
                             tileset_info['tile_width'], tileset_info['tile_height'])
         dreamscape_config.tileset_layers.layer_pixmaps[dreamscape_config.tileset_layers.layerIndex(tileset_name)] = pixmap
         painter.end()  # End painting
+
+    def resize_canvas(self, width, height):
+        self.setFixedSize(width, height)
+        # Resize underlying QPixmaps to the new dimensions
+        dreamscape_config.tileset_layers.layer_pixmaps = [QPixmap(width, height) for _ in range(dreamscape_config.tileset_layers.length())]
+        for pixmap in dreamscape_config.tileset_layers.layer_pixmaps:
+            pixmap.fill(Qt.GlobalColor.transparent)
+        self.redraw_world()  # Redraw all tiles
 
     def swap_layers(self, layer1_index, layer2_index):
         # Swap the tilesets in TilesetLayers
@@ -182,12 +267,20 @@ class TileCanvas(QWidget):
             self.redraw_layer(tileset_name)
         self.update()  # Trigger a repaint
 
+    def mouseMoveEvent(self, event: QMouseEvent):
+        x = int(event.position().x()) // dreamscape_config.TILE_SIZE
+        y = int(event.position().y()) // dreamscape_config.TILE_SIZE
+
+        self.mouseMoved.emit(x, y)
+
     def mousePressEvent(self, event: QMouseEvent):
         if not self.tile_selector.get_selected_tile():
             return
 
         x = int(event.position().x()) // dreamscape_config.TILE_SIZE
         y = int(event.position().y()) // dreamscape_config.TILE_SIZE
+        if x < 0 or x >= dreamscape_config.tileset_layers.world_size_width or y < 0 or y >= dreamscape_config.tileset_layers.world_size_height:
+            return
 
         # Check if tile already exists here at this layer, if so, replace it.
         current_layer_index = dreamscape_config.tileset_layers.layerIndex(dreamscape_config.tileset_layers.active_layer_name)

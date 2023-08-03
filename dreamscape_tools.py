@@ -1,6 +1,11 @@
-from PySide6.QtWidgets import (QWidget, QTabBar, QVBoxLayout, QPushButton, QFileDialog, QHBoxLayout, QLabel, QSizePolicy, QGroupBox, QCheckBox, QLineEdit, QInputDialog, QMessageBox)
-from PySide6.QtGui import (QPixmap, QImage)
+from PySide6.QtWidgets import (
+    QWidget, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, QFileDialog,
+    QHBoxLayout, QHeaderView, QLabel, QSizePolicy, QGroupBox, QCheckBox, QLineEdit, QInputDialog, QMessageBox
+)
+from PySide6.QtGui import QPixmap
+from PySide6.QtCore import Signal
 import dreamscape_config
+
 
 class LoadTilesetWidget(QWidget):
     def __init__(self, tileset_bar, tile_canvas, layers_widget):
@@ -8,37 +13,30 @@ class LoadTilesetWidget(QWidget):
         self.tileset_bar = tileset_bar
         self.tile_canvas = tile_canvas
         self.layers_widget = layers_widget
-        self.layers_widget.layerClicked.connect(self.activateLayerTab)
-        self.tileset_bar.tilesetChanged.connect(self.activateLayerSelection)
-        
 
-        # Initialize the active tile display and checkbox
+        self.layers_widget.layerClicked.connect(self.updateByTilesetPath(self.tileset_bar.changeIndexByTilesetPath))
+        self.tileset_bar.tilesetChanged.connect(self.updateByTilesetPath(self.layers_widget.selectFistLayerWithTilesetPath))
+
         self.init_ui()
 
-    def activateLayerSelection(self, tileset_path):
-        self.tileset_bar.tab_bar.blockSignals(True)
-        self.layers_widget.selectFistLayerWithTilesetPath(tileset_path)
-        self.tileset_bar.tab_bar.blockSignals(False)
-
-    def activateLayerTab(self, tileset_path):
-        self.layers_widget.blockSignals(True)
-        self.tileset_bar.changeIndexByTilesetPath(tileset_path)
-        self.layers_widget.blockSignals(False)
+    def updateByTilesetPath(self, callback):
+        def _updateByTilesetPath(tileset_path):
+            self.layers_widget.blockSignals(True)
+            callback(tileset_path)
+            self.layers_widget.blockSignals(False)
+            self.tileset_src_entry.setText(tileset_path)
+        return _updateByTilesetPath
 
     def init_ui(self):
         layout = QHBoxLayout(self)
-        # Create the layout
 
-        # Set the layout to the ActiveTileWidget
-        label = QLabel('Tileset:')
-        self.tileset_src_entry = QLineEdit(self)
-        self.tileset_src_entry.setText('cyberpunk_1_assets_1.png')
-        self.tileset_src_entry.setReadOnly(True)
-        self.load_tileset_btn = QPushButton("Browse")
-        self.load_tileset_btn.clicked.connect(self.load_tileset)
-        layout.addWidget(label)
+        self.tileset_src_entry = QLineEdit('cyberpunk_1_assets_1.png', readOnly=True)
+        self.load_tileset_btn = QPushButton("Browse", clicked=self.load_tileset)
+
+        layout.addWidget(QLabel('Tileset Path:'))
         layout.addWidget(self.tileset_src_entry)
         layout.addWidget(self.load_tileset_btn)
+
         self.setLayout(layout)
     
     def tilesetPath(self):
@@ -63,19 +61,17 @@ class LoadTilesetWidget(QWidget):
                 self.tileset_bar.addTileset(tileset_name, path)
                 self.layers_widget.addLayer(tileset_name, path)
             
-
-
 class ActiveTileWidget(QWidget):
-    def __init__(self):
+    def __init__(self, tile_canvas):
         super().__init__()
-
+        self.tile_canvas = tile_canvas
         # Initialize the active tile display and checkbox
         self.init_ui()
 
     def init_ui(self):
         layout = QVBoxLayout(self)
         # Create the layout
-        self.gbox1 = QGroupBox(self, 'Active Tile')
+        self.gbox1 = QGroupBox(self, 'Selected Tile')
         self.gbox1_layout = QHBoxLayout(self.gbox1)
         self.gbox2 = QGroupBox(self, 'Base Tile')
         self.gbox2_layout = QHBoxLayout(self.gbox2)
@@ -85,21 +81,24 @@ class ActiveTileWidget(QWidget):
         filler_2.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
 
         # Create the QLabel for displaying the active tile
-        label1 = QLabel('Active Tile: ')
+        label1 = QLabel('Selected Tile: ')
         self.active_tile_label = QLabel(self)
         self.active_tile_label.setFixedSize(32, 32)  # Set size to 32x32
         self.gbox1_layout.addWidget(label1)
         self.gbox1_layout.addWidget(self.active_tile_label)
         # Create the QCheckBox for setting the tile as base
-        self.base_tile_checkbox = QCheckBox("Set as base tile", self)
-        self.gbox1_layout.addWidget(self.base_tile_checkbox)
+        self.base_tile_button = QPushButton("Set as base tile", self)
+        self.base_tile_button.clicked.connect(self.setBaseTile)
+        self.hide_base_tile_checkbox = QCheckBox('Hide', self)
+        self.hide_base_tile_checkbox.stateChanged.connect(self.hideBaseTiles)
+        self.gbox1_layout.addWidget(self.base_tile_button)
         self.gbox1_layout.addWidget(filler_1)
-        # Create the QCheckBox for setting the tile as base
-        label2 = QLabel('Base Tile: ')
+        label2 = QLabel('Base Tile:    ')
         self.base_tile_label = QLabel(self)
         self.base_tile_label.setFixedSize(32, 32)
         self.gbox2_layout.addWidget(label2)
         self.gbox2_layout.addWidget(self.base_tile_label)
+        self.gbox2_layout.addWidget(self.hide_base_tile_checkbox)
         self.gbox2_layout.addWidget(filler_2)
 
         # Set the layout to the ActiveTileWidget
@@ -107,22 +106,55 @@ class ActiveTileWidget(QWidget):
         layout.addWidget(self.gbox2)
         self.setLayout(layout)
 
-
     # This function can be called when the selected tile changes
     def update_active_tile_display(self, image):
         pixmap = QPixmap.fromImage(image)
         self.active_tile_label.setPixmap(pixmap)
-
+    
+    def setBaseTile(self):
+        self.base_tile_label.setPixmap(self.active_tile_label.pixmap().copy())
+        dreamscape_config.tileset_layers.base_tile_src = dreamscape_config.tileset_layers.active_layer_path
+        dreamscape_config.tileset_layers.base_tile_src_x = dreamscape_config.tileset_layers.selected_x
+        dreamscape_config.tileset_layers.base_tile_src_y = dreamscape_config.tileset_layers.selected_y
+        dreamscape_config.tileset_layers.base_tile_src_w = 32
+        dreamscape_config.tileset_layers.base_tile_src_h = 32
+        self.tile_canvas.drawBaseTiles()
+        self.tile_canvas.redraw_world()
+        self.tile_canvas.update()
+    
+    def hideBaseTiles(self, hide):
+        dreamscape_config.tileset_layers.base_tiles_visible = not bool(hide)
+        if dreamscape_config.tileset_layers.base_pixmap:
+            self.tile_canvas.redraw_world()
+            self.tile_canvas.update()  
 
 class Tools(QWidget):
     def __init__(self, tileset_bar, tile_canvas, layers_widget):
         super().__init__()
         self._layout = QVBoxLayout(self)
         self.tile_setloader = LoadTilesetWidget(tileset_bar, tile_canvas, layers_widget)
+        self.tile_canvas = tile_canvas
         self._layout.addWidget(self.tile_setloader)
         self.export_json_button = QPushButton('Export JSON')
         self.export_json_button.clicked.connect(self.exportJson)
+
+        self.tile_selector = tileset_bar.tile_selector
         # Additional tools can be added here
+        self.tile_table = QTableWidget(2, 1)  # 1 row, 4 columns
+        self.tile_table.setHorizontalHeaderLabels(["Tile Information"])
+        self.tile_table.setVerticalHeaderLabels(["World Coord.", "Tile Selection"])
+        self.tile_table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
+        self.tile_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.tile_selector.tileSelected.connect(self.setTileXYInTileTable)
+        self.tile_canvas.mouseMoved.connect(self.setWorldXYInTileTable)
+
+        self._layout.addWidget(self.tile_table)
+    
+    def setTileXYInTileTable(self, x, y):
+        self.tile_table.setItem(0, 1, QTableWidgetItem(f"({str(x)}, {str(y)})"))
+
+    def setWorldXYInTileTable(self, x, y):
+        self.tile_table.setItem(0, 0, QTableWidgetItem(f"({str(x)}, {str(y)})"))
     
     def exportJson(self):
         with open('test.json', 'w') as f:
