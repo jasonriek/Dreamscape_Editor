@@ -8,6 +8,8 @@ class TilesetLayers:
         self.base_tiles_visible = True
         self.tile_w = 32
         self.tile_h = 32
+        self.selected_x = 0
+        self.selected_y = 0
         self.world_size_width = 150
         self.world_size_height = 150
         self.start_position_x = 0
@@ -133,13 +135,20 @@ class TilesetLayers:
             return True
         return False
     
+    def lastTileset(self, tileset_path:str):
+        count = 0
+        for layer in self.layers.values():
+            if layer['tileset'] == tileset_path:
+                count += 1
+        return count == 1
+
     def onlyLayerWithTileset(self, layer_name):
         count = 0
         tileset = self.layers[layer_name]['tileset']
         for layer in self.layers.values():
             if layer['tileset'] == tileset:
                 count += 1
-        return (count == 1)
+        return count == 1
     
     def indexOfFirstTilesetWithPath(self, tileset_path):
         for i, layer in enumerate(self.order):

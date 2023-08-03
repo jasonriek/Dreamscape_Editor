@@ -13,7 +13,6 @@ class LayerListModel(QAbstractListModel):
             layers = []
         self.layers = layers
         
-
     def data(self, index, role):
         if role == Qt.ItemDataRole.DisplayRole:
             return self.layers[index.row()]['name']
@@ -42,7 +41,7 @@ class LayerListModel(QAbstractListModel):
         visibility = dreamscape_config.tileset_layers.layer_visibility[old_layer_index]
         if visibility:
             hidden_label = '' 
-        return {'name': f'Layer {new_layer_index + 1} ({layer_name}) {hidden_label}'}
+        return {'name': f'[Layer {new_layer_index + 1}]   ({layer_name}) {hidden_label}'}
 
     def swapRows(self, row1, row2):
         if 0 <= row1 < self.rowCount() and 0 <= row2 < self.rowCount():
@@ -92,6 +91,7 @@ class LayerListModel(QAbstractListModel):
 
 class Layers(QWidget):
     layerClicked = Signal(str)
+    tilesetRemoved = Signal(str)
     def __init__(self, canvas):
         super().__init__()
         self.tile_canvas = canvas
@@ -119,7 +119,7 @@ class Layers(QWidget):
 
         # Create sample layers for this example
         for i in range(dreamscape_config.tileset_layers.length()):
-            layer = {'name': f"Layer {i+1} ({dreamscape_config.tileset_layers.getLayerNameByIndex(i)})"}
+            layer = {'name': f"[Layer {i+1}]   {dreamscape_config.tileset_layers.getLayerNameByIndex(i)}"}
             self.model.addLayer(layer)
 
     def clickLayer(self, current_index:QModelIndex, previous_index:QModelIndex):
@@ -142,7 +142,7 @@ class Layers(QWidget):
             if row is not None:
                 hidden_label = '(Hidden)'
                 
-        data = {'name': f'Layer {row + 1} ({dreamscape_config.tileset_layers.active_layer_name}) {hidden_label}'}
+        data = {'name': f'[Layer {row + 1}]   {dreamscape_config.tileset_layers.active_layer_name} {hidden_label}'}
         self.model.layers[row] = data
      
         dreamscape_config.tileset_layers.changeVisibility(state)
@@ -186,7 +186,7 @@ class Layers(QWidget):
         dreamscape_config.tileset_layers.appendTilesetLayer(name, path, 32, 32)
         dreamscape_config.tileset_layers.layer_pixmaps.append(QPixmap(dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.tileset_layers.displayHeight()))
         row = self.model.rowCount()
-        new_layer = {'name': f"Layer {row + 1} ({name})"}
+        new_layer = {'name': f"[Layer {row + 1}]   {name}"}
         self.model.addLayer(new_layer)
         index = self.model.index(self.model.rowCount() - 1, 0)
         self.view.setCurrentIndex(index)
@@ -222,11 +222,17 @@ class Layers(QWidget):
             return
         
         if current_index != -1:  # Ensure a layer is selected
-            button = QMessageBox.warning(self, 'Remove Layer', f'Are you sure you want to remove layer "{dreamscape_config.tileset_layers.active_layer_name}"?', QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
+            layer_name = dreamscape_config.tileset_layers.active_layer_name
+            layer_path = dreamscape_config.tileset_layers.active_layer_path
+            button = QMessageBox.warning(self, 'Remove Layer', f'Are you sure you want to remove layer "{layer_name}"?', QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
             if button == QMessageBox.StandardButton.Ok:
-                if(dreamscape_config.tileset_layers.onlyLayerWithTileset(dreamscape_config.tileset_layers.active_layer_name)):
-                    QMessageBox.warning(self, 'Last Tileset Layer', 'This Layer is associated with a tileset, cannont remove.')
-                    return
+                if(dreamscape_config.tileset_layers.lastTileset(layer_path)):
+                    button = QMessageBox.warning(self, 'Last Tileset Layer', f'This Layer is associated with a tileset, and will remove the "{layer_name}" tileset from the world.', QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
+                    if(button == QMessageBox.StandardButton.Ok):
+                        dreamscape_config.tileset_layers.removeTilesetLayerAtIndex(current_index)
+                        self.tilesetRemoved.emit(layer_path)
+                    else:
+                        return
                 self.model.beginRemoveRows(QModelIndex(), current_index, current_index)
                 del self.model.layers[current_index]
                 dreamscape_config.tileset_layers.removeTilesetLayerAtIndex(current_index)
