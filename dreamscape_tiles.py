@@ -155,6 +155,7 @@ class TilesetBar(QWidget):
             self.tilesetChanged.emit(tileset_data[1])
 
 class TileCanvas(QWidget):
+    tileDropperClicked = Signal(int, int)
     mouseMoved = Signal(int, int)
     def __init__(self, tileset_bar, scroll_area:QScrollArea):
         super().__init__()
@@ -170,6 +171,8 @@ class TileCanvas(QWidget):
         self.start_drag_x = 0
         self.start_drag_y = 0
         self.drag_rectangle = None
+        self.bucket_fill = False
+
         dreamscape_config.tileset_layers.layer_pixmaps = [QPixmap(dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.tileset_layers.displayHeight()) for _ in range(dreamscape_config.tileset_layers.length())]
         for pixmap in dreamscape_config.tileset_layers.layer_pixmaps:
             pixmap.fill(Qt.GlobalColor.transparent)
@@ -378,9 +381,36 @@ class TileCanvas(QWidget):
                 self.paintTileAt(xi, yi)  # Assuming you have such a function.
         self.update()
     
+    def getTile(self, x, y):
+        tile_index = dreamscape_config.tileset_layers.getTileIndexFromXY(x, y)
+        tile = dreamscape_config.tileset_layers.tile(dreamscape_config.tileset_layers.active_layer_name, tile_index) if tile_index is not None else None
+        return tile
+    
+    def floodFill(self, x, y, target_tile, replace_tile):
+        # Base cases
+        if x < 0 or x >= dreamscape_config.tileset_layers.world_size_width or y < 0 or y >= dreamscape_config.tileset_layers.world_size_height:
+            return
+        current_tile_index = dreamscape_config.tileset_layers.getTileIndexFromXY(x, y)
+        current_tile = dreamscape_config.tileset_layers.tile(dreamscape_config.tileset_layers.active_layer_name, current_tile_index) if current_tile_index is not None else None
+        if not current_tile or current_tile[0:2] != target_tile:
+            return
+        if current_tile[0:2] == replace_tile:
+            return
+
+        # Replace the current tile with the new tile
+        self.paintTileAt(x, y)
+
+        # Recur in all directions
+        self.floodFill(x+1, y, target_tile, replace_tile)
+        self.floodFill(x-1, y, target_tile, replace_tile)
+        self.floodFill(x, y+1, target_tile, replace_tile)
+        self.floodFill(x, y-1, target_tile, replace_tile)
+
     def mousePressEvent(self, event: QMouseEvent):
         # Start drawing when left mouse button is pressed
         if event.button() == Qt.MouseButton.LeftButton:
+            x = int(event.position().x()) // dreamscape_config.TILE_SIZE
+            y = int(event.position().y()) // dreamscape_config.TILE_SIZE
             paint_tool = dreamscape_config.paint_tools.selection
             if paint_tool == dreamscape_config.PENCIL or paint_tool == dreamscape_config.BRUSH:
                 self.is_drawing = True
@@ -392,13 +422,26 @@ class TileCanvas(QWidget):
                 self.eraseTile(event)
             elif paint_tool == dreamscape_config.DRAG_DRAW:
                 self.is_drawing = True
-                self.start_drag_x = int(event.position().x()) // dreamscape_config.TILE_SIZE
-                self.start_drag_y = int(event.position().y()) // dreamscape_config.TILE_SIZE
+                self.start_drag_x = x
+                self.start_drag_y = y
                 self.calculateDragArea(event)
                 self.paintTile(event)
             elif paint_tool == dreamscape_config.DRAG:
                 self.start_drag_point = event.position().toPoint()
                 self.setCursor(Qt.CursorShape.ClosedHandCursor)
+            elif paint_tool == dreamscape_config.BUCKET:
+                target_tile = self.getTile(x, y)
+                replace_tile = (dreamscape_config.tileset_layers.selected_x, dreamscape_config.tileset_layers.selected_y)
+                if target_tile:
+                    self.floodFill(x, y, target_tile[0:2], replace_tile)
+                self.redraw_world()
+                self.update()  # Redraw canvas after flood fill
+
+            elif paint_tool == dreamscape_config.DROPPER:
+                target_tile = self.getTile(x, y)
+                if target_tile:
+                    self.tileDropperClicked.emit(target_tile[0], target_tile[1])
+
             event.accept()
         else:
             event.ignore()
@@ -444,8 +487,6 @@ class TileCanvas(QWidget):
                 
                 # Update the initial position for the next move event
                 self.start_drag_point = event.position().toPoint()  # Convert QPointF to QPoint
-
-    
 
     def update_layer_visibility(self):
         self.update()  # Trigger repaint

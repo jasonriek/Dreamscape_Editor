@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import (QMainWindow, QToolBar, QWidget, QScrollArea, QMenu, QDockWidget, 
                                QCheckBox, QVBoxLayout, QSizePolicy, QDialog)
-from PySide6.QtGui import (QAction, QIcon, QImage, QPixmap, QActionGroup)
-from PySide6.QtCore import (Qt, Signal, QRect)
+from PySide6.QtGui import (QAction, QIcon, QImage, QCursor, QPixmap, QActionGroup)
+from PySide6.QtCore import (Qt, Signal, QRect, QSize)
 
 from dreamscape_layers import (Layers)
 from dreamscape_tiles import (TilesetBar, TileCanvas)
@@ -35,6 +35,7 @@ class MainWindow(QMainWindow):
         
 
         tileset_bar.tile_selector.active_tile_widget = ActiveTileWidget(self.tile_canvas)
+        self.tile_canvas.tileDropperClicked.connect(tileset_bar.tile_selector.selectTile)
         
         layers_area = QWidget(self)
         layers_layout = QVBoxLayout(layers_area)
@@ -67,21 +68,48 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Dreamscape Editor")
         self.setupTopMenu()
         self.setupToolBar()
+        self.tile_canvas.tileDropperClicked.connect(self.pencil_action.toggle)
         self.setCentralWidget(scroll_area)
 
         tileset_bar.tile_selector.selectTile(0, 2)
+        self.pencil_action.toggle()
+        
 
-    def _getToolIcon(self, x, y, icons:QPixmap=None, w=64, h=64):
+    def _getToolIcon(self, x, y, w=64, h=64):
         clip_space = QRect(x, y, w, h)
-        clipped = icons.copy(clip_space)
+        clipped = self.icons.copy(clip_space)
         icon = QIcon()
         icon.addPixmap(clipped)
         return icon
+    
+    def setToolCursorIcon(self, x, y, w=64, h=64):
+        clip_space = QRect(x, y, w, h)
+        clipped = self.icons.copy(clip_space)
+        self.scaled_pix = clipped.scaled(QSize(20, 20), Qt.AspectRatioMode.KeepAspectRatio)
+        self.current_cursor = QCursor(self.scaled_pix, -1, -1)
+        self.tile_canvas.setCursor(self.current_cursor)
 
+    def setCursorIconByTool(self, tool_name:str):
+        if tool_name == 'Pencil':
+            self.setToolCursorIcon(0, 0)
+        elif tool_name == 'Brush':
+            self.setToolCursorIcon(64*3, 0)
+        elif tool_name == 'Drag & Draw':
+            self.setToolCursorIcon(64, 0)
+        elif tool_name == 'Drag':
+            self.setToolCursorIcon(64*2, 0)
+        elif tool_name == 'Bucket':
+            self.setToolCursorIcon(64*5, 0)
+        elif tool_name == 'Eraser':
+            self.setToolCursorIcon(64*6, 0)
+        elif tool_name == 'Dropper':
+            self.setToolCursorIcon(64*4, 0)
+        
     def setToolSelection(self, state):
         tool = self.tool_group.checkedAction()
         if tool and state:
             tool_name = tool.text()
+            self.setCursorIconByTool(tool_name)
             dreamscape_config.paint_tools.changeSelection(tool_name)
             print(dreamscape_config.paint_tools.selection)
         else:
@@ -94,44 +122,43 @@ class MainWindow(QMainWindow):
         self.addToolBar(Qt.TopToolBarArea, self.toolbar)
 
         # Tile Pencil Brush
-        self.pencil_action = QAction(self._getToolIcon(0, 0, self.icons), 'Pencil', self)
+        self.pencil_action = QAction(self._getToolIcon(0, 0), 'Pencil', self)
         self.pencil_action.setCheckable(True)
-        self.pencil_action.setChecked(True)
         self.pencil_action.toggled.connect(self.setToolSelection)
         self.toolbar.addAction(self.pencil_action)
 
         # Tile Paint Brush
-        self.brush_action = QAction(self._getToolIcon(64*3, 0, self.icons), 'Brush', self)
+        self.brush_action = QAction(self._getToolIcon(64*3, 0), 'Brush', self)
         self.brush_action.setCheckable(True)
         self.brush_action.toggled.connect(self.setToolSelection)
         self.toolbar.addAction(self.brush_action)
 
         # Drag and Draw
-        self.drag_draw_action = QAction(self._getToolIcon(64, 0, self.icons), 'Drag & Draw', self)
+        self.drag_draw_action = QAction(self._getToolIcon(64, 0), 'Drag & Draw', self)
         self.drag_draw_action.setCheckable(True)
         self.drag_draw_action.toggled.connect(self.setToolSelection)
         self.toolbar.addAction(self.drag_draw_action)
 
         # Drag
-        self.drag_action = QAction(self._getToolIcon(64*2, 0, self.icons), 'Drag', self)
+        self.drag_action = QAction(self._getToolIcon(64*2, 0), 'Drag', self)
         self.drag_action.setCheckable(True)
         self.drag_action.toggled.connect(self.setToolSelection)
         self.toolbar.addAction(self.drag_action)
 
         # Paint Bucket
-        self.bucket_action = QAction(self._getToolIcon(64*5, 0, self.icons), 'Bucket Fill', self)
+        self.bucket_action = QAction(self._getToolIcon(64*5, 0), 'Bucket Fill', self)
         self.bucket_action.setCheckable(True)
         self.bucket_action.toggled.connect(self.setToolSelection)
         self.toolbar.addAction(self.bucket_action)
 
         # Dropper
-        self.dropper_action = QAction(self._getToolIcon(64*4, 0, self.icons), 'Dropper', self)
+        self.dropper_action = QAction(self._getToolIcon(64*4, 0), 'Dropper', self)
         self.dropper_action.setCheckable(True)
         self.dropper_action.toggled.connect(self.setToolSelection)
         self.toolbar.addAction(self.dropper_action)
 
         # Eraser
-        self.eraser_action = QAction(self._getToolIcon(64*6, 0, self.icons), 'Eraser', self)
+        self.eraser_action = QAction(self._getToolIcon(64*6, 0), 'Eraser', self)
         self.eraser_action.setCheckable(True)
         self.eraser_action.toggled.connect(self.setToolSelection)
         self.toolbar.addAction(self.eraser_action)
