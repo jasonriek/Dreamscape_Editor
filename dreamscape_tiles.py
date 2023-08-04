@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import (QWidget, QSizePolicy, QTabBar, QVBoxLayout, QScrollArea)
+from PySide6.QtWidgets import (QWidget, QGraphicsView, QSizePolicy, QTabBar, QVBoxLayout, QScrollArea)
 from PySide6.QtGui import (QPainter, QPixmap, QColor, QMouseEvent, QImage)
 from PySide6.QtCore import (Qt, Signal, QPoint, QRect)
 
@@ -156,10 +156,11 @@ class TilesetBar(QWidget):
 
 class TileCanvas(QWidget):
     mouseMoved = Signal(int, int)
-    def __init__(self, tileset_bar):
+    def __init__(self, tileset_bar, scroll_area:QScrollArea):
         super().__init__()
         self.setMouseTracking(True)
         self.tile_selector = tileset_bar.tile_selector
+        self.scroll_area = scroll_area
         self.setFixedSize(dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.tileset_layers.displayHeight())
         self.show_grid = True
         self.is_drawing =  False
@@ -370,7 +371,6 @@ class TileCanvas(QWidget):
         )
         self.update()
 
-
     def fillDragArea(self):
         for xi in range(self.fill_x_start, self.fill_x_end + 1):  # +1 to include the end position
             for yi in range(self.fill_y_start, self.fill_y_end + 1):
@@ -378,7 +378,6 @@ class TileCanvas(QWidget):
                 self.paintTileAt(xi, yi)  # Assuming you have such a function.
         self.update()
     
-
     def mousePressEvent(self, event: QMouseEvent):
         # Start drawing when left mouse button is pressed
         if event.button() == Qt.MouseButton.LeftButton:
@@ -397,18 +396,30 @@ class TileCanvas(QWidget):
                 self.start_drag_y = int(event.position().y()) // dreamscape_config.TILE_SIZE
                 self.calculateDragArea(event)
                 self.paintTile(event)
+            elif paint_tool == dreamscape_config.DRAG:
+                self.start_drag_point = event.position().toPoint()
+                self.setCursor(Qt.CursorShape.ClosedHandCursor)
+            event.accept()
+        else:
+            event.ignore()
             
-
     def mouseReleaseEvent(self, event: QMouseEvent):
         paint_tool = dreamscape_config.paint_tools.selection
         # Stop drawing when left mouse button is released
         if event.button() == Qt.LeftButton:
             if paint_tool == dreamscape_config.DRAG_DRAW:
                 self.fillDragArea()
+            elif paint_tool == dreamscape_config.DRAG and self.start_drag_point is not None:
+                self.setCursor(Qt.ArrowCursor)  # Reset the cursor
+                self.start_drag_point = None  # Reset the dragging state
+           
             self.drag_rectangle = None
             self.is_drawing = False
             self.is_erasing = False
             self.update()
+            event.accept()
+        else:
+            event.ignore()
 
     def mouseMoveEvent(self, event: QMouseEvent):
         x = int(event.position().x()) // dreamscape_config.TILE_SIZE
@@ -422,6 +433,18 @@ class TileCanvas(QWidget):
             self.eraseTile(event)
         elif self.is_drawing and (paint_tool == dreamscape_config.DRAG_DRAW):
             self.calculateDragArea(event)
+        elif paint_tool == dreamscape_config.DRAG:
+            if self.start_drag_point is not None:  # Check if we started dragging
+                # Calculate the distance moved
+                delta = event.position().toPoint() - self.start_drag_point  # Convert QPointF to QPoint
+                h_scroll_bar = self.scroll_area.horizontalScrollBar()  # Assuming the parent is the QScrollArea
+                v_scroll_bar = self.scroll_area.verticalScrollBar()
+                h_scroll_bar.setValue(h_scroll_bar.value() - delta.x())
+                v_scroll_bar.setValue(v_scroll_bar.value() - delta.y())
+                
+                # Update the initial position for the next move event
+                self.start_drag_point = event.position().toPoint()  # Convert QPointF to QPoint
+
     
 
     def update_layer_visibility(self):

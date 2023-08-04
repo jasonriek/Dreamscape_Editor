@@ -15,9 +15,9 @@ class MainWindow(QMainWindow):
         super().__init__()
         tileset_bar = TilesetBar()
         
-        
         # Create and set up the TileCanvas dock
-        self.tile_canvas = TileCanvas(tileset_bar)
+        scroll_area = QScrollArea(self)
+        self.tile_canvas = TileCanvas(tileset_bar, scroll_area)
 
         # Create and set up the TileSelector dock
         tileset_selector_area = QWidget(self)
@@ -44,7 +44,7 @@ class MainWindow(QMainWindow):
         layers_layout.addWidget(layers_widget)
         
         self.tile_canvas.layers_widget = layers_widget
-        scroll_area = QScrollArea()
+        
         scroll_area.setWidget(self.tile_canvas)
         scroll_area.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
         
