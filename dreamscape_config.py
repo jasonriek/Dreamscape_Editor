@@ -34,6 +34,17 @@ class PaintTools:
             'Eraser': self.ERASER
         }
         self.selection = selelections.get(tool_name)
+    
+    def isDrawingTool(self, tool=None):
+        if tool is None:
+            tool = self.selection
+        return {
+            PENCIL: True,
+            BRUSH: True,
+            DRAG_DRAW: True,
+            BUCKET: True
+        }.get(tool, False)
+        
 
 
 PENCIL = PaintTools.PENCIL

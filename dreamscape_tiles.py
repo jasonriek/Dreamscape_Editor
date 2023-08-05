@@ -62,12 +62,12 @@ class TileSelector(QWidget):
         self.selected_tile = (x, y)
         if self.selected_tile:
             tile_x, tile_y = self.selected_tile
-            tile_pixmap = self.tileset.copy(tile_x * dreamscape_config.TILE_SIZE, 
+            self.selected_tile_pixmap = self.tileset.copy(tile_x * dreamscape_config.TILE_SIZE, 
                                                 tile_y * dreamscape_config.TILE_SIZE, 
                                                 dreamscape_config.TILE_SIZE, 
                                                 dreamscape_config.TILE_SIZE)
                 # Assuming you have a reference to the ActiveTileWidget instance
-        self.active_tile_widget.update_active_tile_display(tile_pixmap)
+        self.active_tile_widget.update_active_tile_display(self.selected_tile_pixmap)
         self.update()  # Trigger a repaint
 
     def mousePressEvent(self, event: QMouseEvent):
@@ -170,6 +170,9 @@ class TileCanvas(QWidget):
         self.last_drag_point = None # Store the last drag point to avoid redrawing the same tiles
         self.start_drag_x = 0
         self.start_drag_y = 0
+        self.cursor_x = 0
+        self.cursor_y = 0
+        self.cursor_tile = None
         self.drag_rectangle = None
         self.bucket_fill = False
 
@@ -206,8 +209,16 @@ class TileCanvas(QWidget):
         if self.drag_rectangle:
             painter.setBrush(QColor(0, 255, 0, 127))  # Semi-transparent green
             painter.drawRect(self.drag_rectangle)
-
+        
+        # Draw the tile under the cursor
+        if self.cursor_tile is not None:
+            if dreamscape_config.paint_tools.isDrawingTool(): 
+                painter.drawImage(self.cursor_x * dreamscape_config.TILE_SIZE, 
+                                self.cursor_y * dreamscape_config.TILE_SIZE,
+                                self.tile_selector.selected_tile_pixmap)
+        
         painter.end()
+        
     
     def drawBaseTiles(self):
         if not dreamscape_config.tileset_layers.base_tile_src:
@@ -487,6 +498,11 @@ class TileCanvas(QWidget):
                 
                 # Update the initial position for the next move event
                 self.start_drag_point = event.position().toPoint()  # Convert QPointF to QPoint
+        
+        self.cursor_x = int(event.position().x()) // dreamscape_config.TILE_SIZE
+        self.cursor_y = int(event.position().y()) // dreamscape_config.TILE_SIZE
+        self.cursor_tile = self.tile_selector.get_selected_tile()  # update the tile under the cursor
+        self.update()
 
     def update_layer_visibility(self):
         self.update()  # Trigger repaint

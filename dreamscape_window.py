@@ -98,7 +98,7 @@ class MainWindow(QMainWindow):
             self.setToolCursorIcon(64, 0)
         elif tool_name == 'Drag':
             self.setToolCursorIcon(64*2, 0)
-        elif tool_name == 'Bucket':
+        elif tool_name == 'Bucket Fill':
             self.setToolCursorIcon(64*5, 0)
         elif tool_name == 'Eraser':
             self.setToolCursorIcon(64*6, 0)
