@@ -19,3 +19,6 @@
 
 - 08/03/2023
   - Have music transition options (like crossfade and others) on the transition or "door" window for moving from map to map.
+
+- 08/05/2023
+  - Add a dungeon crawler like feature, where the player can explore a 90's like dungeon crawler envrionment (2D-3D design). 
