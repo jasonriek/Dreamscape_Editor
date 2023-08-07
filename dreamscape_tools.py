@@ -62,6 +62,7 @@ class LoadTilesetWidget(QWidget):
                 self.layers_widget.addLayer(tileset_name, path)
             
 class ActiveTileWidget(QWidget):
+    worldTileClicked = Signal(int, int)
     def __init__(self, tile_canvas):
         super().__init__()
         self.tile_canvas = tile_canvas
@@ -93,6 +94,11 @@ class ActiveTileWidget(QWidget):
         self.hide_base_tile_checkbox.stateChanged.connect(self.hideBaseTiles)
         self.gbox1_layout.addWidget(self.base_tile_button)
         self.gbox1_layout.addWidget(filler_1)
+        self.collision_checkbox = QCheckBox('Has Collision', self)
+        self.overlay_checkbox = QCheckBox('Overylay', self)
+        self.gbox1_layout.addWidget(self.collision_checkbox)
+        self.gbox1_layout.addWidget(self.overlay_checkbox)
+
         label2 = QLabel('Base Tile:    ')
         self.base_tile_label = QLabel(self)
         self.base_tile_label.setFixedSize(32, 32)
@@ -126,7 +132,12 @@ class ActiveTileWidget(QWidget):
         dreamscape_config.tileset_layers.base_tiles_visible = not bool(hide)
         if dreamscape_config.tileset_layers.base_pixmap:
             self.tile_canvas.redraw_world()
-            self.tile_canvas.update()  
+            self.tile_canvas.update()
+
+    def updateTileProperties(self, tile):
+        self.worldTileClicked.emit(tile[0], tile[1])
+        self.collision_checkbox.setChecked(bool(tile[4]))
+        self.overlay_checkbox.setChecked(bool(tile[5]))  
 
 class Tools(QWidget):
     def __init__(self, tileset_bar, tile_canvas, layers_widget):

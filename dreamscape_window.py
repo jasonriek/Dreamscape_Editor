@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import (QMainWindow, QToolBar, QWidget, QScrollArea, QMenu, QDockWidget, 
-                               QCheckBox, QVBoxLayout, QSizePolicy, QDialog)
-from PySide6.QtGui import (QAction, QIcon, QImage, QCursor, QPixmap, QActionGroup)
-from PySide6.QtCore import (Qt, Signal, QRect, QSize)
+                               QCheckBox, QVBoxLayout, QSizePolicy, QStyle)
+from PySide6.QtGui import (QAction, QIcon, QCursor, QPixmap, QActionGroup)
+from PySide6.QtCore import (Qt, QRect, QSize)
 
 from dreamscape_layers import (Layers)
 from dreamscape_tiles import (TilesetBar, TileCanvas)
@@ -33,10 +33,14 @@ class MainWindow(QMainWindow):
         selector_dock = QDockWidget("Tile Selector", self)
         selector_dock.setWidget(tileset_selector_area)
         
-
-        tileset_bar.tile_selector.active_tile_widget = ActiveTileWidget(self.tile_canvas)
-        self.tile_canvas.tileDropperClicked.connect(tileset_bar.tile_selector.selectTile)
         
+        tileset_bar.tile_selector.active_tile_widget = ActiveTileWidget(self.tile_canvas)
+        tileset_bar.tile_selector.active_tile_widget.collision_checkbox.stateChanged.connect(self.tile_canvas.setTileCollision)
+        tileset_bar.tile_selector.active_tile_widget.overlay_checkbox.stateChanged.connect(self.tile_canvas.setTileOverlay)
+        tileset_bar.tile_selector.active_tile_widget.worldTileClicked.connect(tileset_bar.tile_selector.selectTile)
+        self.tile_canvas.tileDropperClicked.connect(tileset_bar.tile_selector.selectTile)
+        self.tile_canvas.tileSelected.connect(tileset_bar.tile_selector.active_tile_widget.updateTileProperties)
+
         layers_area = QWidget(self)
         layers_layout = QVBoxLayout(layers_area)
         layers_layout.setContentsMargins(0,0,0,0)
@@ -52,6 +56,8 @@ class MainWindow(QMainWindow):
         # Create and set up the ToolDock
         tool_dock = QDockWidget("Tools", self)
         tools = Tools(tileset_bar, self.tile_canvas, layers_widget)
+        
+
         tools.addToLayout(tileset_bar.tile_selector.active_tile_widget)
         tools.setInternalWidgets()
         tool_dock.setWidget(tools)
@@ -72,7 +78,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(scroll_area)
 
         tileset_bar.tile_selector.selectTile(0, 2)
-        self.pencil_action.toggle()
+        self.select_action.toggle()
         
 
     def _getToolIcon(self, x, y, w=64, h=64):
@@ -104,6 +110,8 @@ class MainWindow(QMainWindow):
             self.setToolCursorIcon(64*6, 0)
         elif tool_name == 'Dropper':
             self.setToolCursorIcon(64*4, 0)
+        elif tool_name == 'Select':
+            self.setDefaultCursor()
         
     def setToolSelection(self, state):
         tool = self.tool_group.checkedAction()
@@ -114,12 +122,30 @@ class MainWindow(QMainWindow):
             print(dreamscape_config.paint_tools.selection)
         else:
             print("No tools are currently selected.")
+    
+    def defaultMouseIcon(self):
+        clip_space = QRect(0, 0, 32, 6432)
+        clipped = self.mouse_icon.copy(clip_space)
+        scaled = clipped.scaled(QSize(20, 20), Qt.AspectRatioMode.KeepAspectRatio)
+        icon = QIcon()
+        icon.addPixmap(scaled)
+        return icon
+
+    def setDefaultCursor(self):
+        self.tile_canvas.setCursor(Qt.CursorShape.ArrowCursor)
 
     def setupToolBar(self):
         self.icons = QPixmap('resources/paint_tool_icons.png')
+        self.mouse_icon = QPixmap('resources/mouse.png')
         # Create the toolbar
         self.toolbar = QToolBar(self)
-        self.addToolBar(Qt.TopToolBarArea, self.toolbar)
+        self.addToolBar(Qt.ToolBarArea.TopToolBarArea, self.toolbar)
+
+        # Select Mode
+        self.select_action = QAction(self.defaultMouseIcon(), 'Select', self)
+        self.select_action.setCheckable(True)
+        self.select_action.toggled.connect(self.setToolSelection)
+        self.toolbar.addAction(self.select_action)
 
         # Tile Pencil Brush
         self.pencil_action = QAction(self._getToolIcon(0, 0), 'Pencil', self)
@@ -165,6 +191,7 @@ class MainWindow(QMainWindow):
 
         # Ensure only one toggle button can be active at a time
         self.tool_group = QActionGroup(self)
+        self.tool_group.addAction(self.select_action)
         self.tool_group.addAction(self.pencil_action)
         self.tool_group.addAction(self.brush_action)
         self.tool_group.addAction(self.drag_draw_action)
@@ -195,6 +222,12 @@ class MainWindow(QMainWindow):
         self.action_world_grid.setChecked(True)
         self.action_world_grid.toggled.connect(self.tile_canvas.toggle_grid)
         self.menu_view.addAction(self.action_world_grid)
+
+        self.action_show_tile_collisions = QAction('Tile Collisions')
+        self.action_show_tile_collisions.setCheckable(True)
+        self.action_show_tile_collisions.setChecked(True)
+        self.action_show_tile_collisions.toggled.connect(self.tile_canvas.toggleShowTileCollisons)
+        self.menu_view.addAction(self.action_show_tile_collisions)
 
 
         # Add menus to the menu bar

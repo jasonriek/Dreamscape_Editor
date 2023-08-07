@@ -8,6 +8,8 @@ class TilesetLayers:
         self.base_tiles_visible = True
         self.tile_w = 32
         self.tile_h = 32
+        self.barrier = 0
+        self.overylay = 0
         self.selected_x = 0
         self.selected_y = 0
         self.world_size_width = 150
@@ -82,8 +84,9 @@ class TilesetLayers:
     
     def tileExists(self, tileset_name:str, index:int):
         """Check if a tile exists in a given tileset."""
-        if self.tilesetNameExists(tileset_name):
+        if index is not None and self.tilesetNameExists(tileset_name):
             return index >= 0 and index < len(self.layers[tileset_name]['tiles'])
+        return False
     
     def layerNameExists(self, layer_name: str):
         """Check if a layer name exists."""
@@ -166,14 +169,15 @@ class TilesetLayers:
             return layer
         return None
     
-    def appendTile(self, tileset_name: str, src_x: int, src_y: int, x: int, y: int, b=0):
+    def appendTile(self, tileset_name: str, src_x: int, src_y: int, x: int, y: int, b=0, overlay=0):
         if self.layers.get(tileset_name):
             self.layers[tileset_name]['tiles'].append([
                 src_x,
                 src_y,
                 x,
                 y,
-                b
+                b,
+                overlay
             ])
             self.buildPositionIndexMap()
             return len(self.layers[tileset_name]['tiles']) - 1
@@ -218,12 +222,34 @@ class TilesetLayers:
             'z': 0,
             'tiles': [[self.base_tile_src_x, self.base_tile_src_y, self.base_tile_src_w, self.base_tile_src_h]]
         }]
+        overlay_layers = self.layers.copy()
+        for layer in reversed(self.order):
+            tiles = []
+            overlay_tiles = []
+            for tile in self.layers[layer]['tiles']:
+                if tile[5] == 1:
+                    overlay_tiles.append(tile)
+                else:
+                    tiles.append(tile)
+            self.layers[layer]['tiles'] = tiles.copy()
+            overlay_layers[layer]['tiles'] = overlay_tiles.copy()
+        
         layers.extend([self._modifyImgPath(self.layers[layer]) for layer in self.order])
-        return json.dumps({
+
+        layers_json = json.dumps({
             'name': self.name,
             'world_size': {'width': self.world_size_width, 'height': self.world_size_height},
             'weather': self.weather,
             'start_position': {'x': self.start_position_x, 'y': self.start_position_y},
             'doors': self.doors,
             'layers': layers
-        }, indent=4)
+        }, indent=3)
+
+        overlay_json = json.dumps({
+            'name': self.name + ' Overlay',
+            'world_size': {'width': self.world_size_width, 'height': self.world_size_height},
+            'layers': overlay_layers
+
+        }, indent=3)
+
+        return layers_json, overlay_json 

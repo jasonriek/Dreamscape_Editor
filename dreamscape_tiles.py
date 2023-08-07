@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import (QWidget, QGraphicsView, QSizePolicy, QTabBar, QVBoxLayout, QScrollArea)
-from PySide6.QtGui import (QPainter, QPixmap, QColor, QMouseEvent, QImage)
+from PySide6.QtGui import (QPainter, QPixmap, QColor, QMouseEvent, QImage, QBrush)
 from PySide6.QtCore import (Qt, Signal, QPoint, QRect)
 
 import dreamscape_config
@@ -156,6 +156,7 @@ class TilesetBar(QWidget):
 
 class TileCanvas(QWidget):
     tileDropperClicked = Signal(int, int)
+    tileSelected = Signal(list)
     mouseMoved = Signal(int, int)
     def __init__(self, tileset_bar, scroll_area:QScrollArea):
         super().__init__()
@@ -164,6 +165,7 @@ class TileCanvas(QWidget):
         self.scroll_area = scroll_area
         self.setFixedSize(dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.tileset_layers.displayHeight())
         self.show_grid = True
+        self.show_tile_collisons = True
         self.is_drawing =  False
         self.is_erasing = False
         self.start_drag_point = None
@@ -172,17 +174,24 @@ class TileCanvas(QWidget):
         self.start_drag_y = 0
         self.cursor_x = 0
         self.cursor_y = 0
+        self.selected_x = 0
+        self.selected_y = 0
         self.cursor_tile = None
         self.drag_rectangle = None
         self.bucket_fill = False
+        self.selected_tile = None
 
         dreamscape_config.tileset_layers.layer_pixmaps = [QPixmap(dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.tileset_layers.displayHeight()) for _ in range(dreamscape_config.tileset_layers.length())]
         for pixmap in dreamscape_config.tileset_layers.layer_pixmaps:
             pixmap.fill(Qt.GlobalColor.transparent)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-    def toggle_grid(self, state=1):
+    def toggle_grid(self, state):
         self.show_grid = bool(state)
+        self.update()
+    
+    def toggleShowTileCollisons(self, state):
+        self.show_tile_collisons = bool(state)
         self.update()
 
     def paintEvent(self, event):
@@ -216,9 +225,26 @@ class TileCanvas(QWidget):
                 painter.drawImage(self.cursor_x * dreamscape_config.TILE_SIZE, 
                                 self.cursor_y * dreamscape_config.TILE_SIZE,
                                 self.tile_selector.selected_tile_pixmap)
+        if dreamscape_config.paint_tools.selection == dreamscape_config.SELECT:
+            painter.setPen(QColor(0, 255, 0, 200))  # Semi-transparent green
+            painter.drawRect(self.cursor_x * dreamscape_config.TILE_SIZE, self.cursor_y * dreamscape_config.TILE_SIZE, dreamscape_config.TILE_SIZE, dreamscape_config.TILE_SIZE)
+
+        # Draw a semi-transparent red square for barrier tiles
+        if self.show_tile_collisons:
+            barrier_brush = QBrush(QColor(255, 0, 0, 75))  # Semi-transparent red
+            for layer_index in range(len(dreamscape_config.tileset_layers.layer_pixmaps)):
+                if dreamscape_config.tileset_layers.layer_visibility[layer_index]:  # Check if this layer should be rendered
+                    for tile_data in dreamscape_config.tileset_layers.tilesetLayer(dreamscape_config.tileset_layers.order[layer_index])['tiles']:
+                        _, _, x, y, b, overlay = tile_data
+                        if b == 1:
+                            painter.fillRect(x * dreamscape_config.TILE_SIZE, y * dreamscape_config.TILE_SIZE, dreamscape_config.TILE_SIZE, dreamscape_config.TILE_SIZE, barrier_brush)
         
+        if dreamscape_config.paint_tools.selection == dreamscape_config.SELECT and self.selected_tile:
+            painter.setBrush(QColor(0, 255, 0, 75))  # Semi-transparent green
+            painter.drawRect(self.selected_tile[2] * dreamscape_config.TILE_SIZE, self.selected_tile[3] * dreamscape_config.TILE_SIZE, dreamscape_config.TILE_SIZE, dreamscape_config.TILE_SIZE)
+                
+
         painter.end()
-        
     
     def drawBaseTiles(self):
         if not dreamscape_config.tileset_layers.base_tile_src:
@@ -252,7 +278,7 @@ class TileCanvas(QWidget):
     def draw_tile_on_layer(self, tileset_name, tile_index):
         tile_data = dreamscape_config.tileset_layers.tile(tileset_name, tile_index)
         if tile_data:
-            src_x, src_y, x, y, b = tile_data
+            src_x, src_y, x, y, b, overlay = tile_data
             tileset_info = dreamscape_config.tileset_layers.tilesetLayer(tileset_name)
             tileset_img = QImage(tileset_info['tileset'])
             painter = QPainter(dreamscape_config.tileset_layers.layer_pixmaps[dreamscape_config.tileset_layers.layerIndex(tileset_name)])  # Assuming you have one QPixmap per tileset layer
@@ -275,7 +301,7 @@ class TileCanvas(QWidget):
         painter = QPainter(pixmap)
         
         for tile_data in tileset_info['tiles']:
-            src_x, src_y, x, y, b = tile_data
+            src_x, src_y, x, y, b, overlay = tile_data
             painter.drawImage(x * dreamscape_config.TILE_SIZE, y * dreamscape_config.TILE_SIZE,
                             tileset_img,
                             src_x * tileset_info['tile_width'], src_y * tileset_info['tile_height'],
@@ -316,7 +342,8 @@ class TileCanvas(QWidget):
                 dreamscape_config.tileset_layers.selected_y,
                 x,
                 y,
-                0]
+                dreamscape_config.tileset_layers.barrier,
+                dreamscape_config.tileset_layers.overylay]
             )
             # Redraw every layer to ensure correct stacking order
             #for tileset_name in dreamscape_config.tileset_layers.order:
@@ -328,11 +355,36 @@ class TileCanvas(QWidget):
                 dreamscape_config.tileset_layers.selected_y,
                 x,
                 y,
-                0)
+                dreamscape_config.tileset_layers.barrier)
         if current_layer_index is not None:
             # Register the tile drawing as an operation for the selected layer
             self.draw_tile_on_layer(dreamscape_config.tileset_layers.active_layer_name, tile_index)
             self.update()  # Trigger a repaint
+    
+    def setTileCollision(self, state):
+        if state:
+            state = 1
+        dreamscape_config.tileset_layers.barrier = int(state)
+        tile_index = dreamscape_config.tileset_layers.getTileIndexFromXY(self.selected_x, self.selected_y)
+        tile = self.getTile(self.selected_x, self.selected_y)
+        if tile:
+            tile[4] = state
+            dreamscape_config.tileset_layers.updateTile(
+                dreamscape_config.tileset_layers.active_layer_name, tile_index, tile
+            )
+            self.update()
+
+    def setTileOverlay(self, state):
+        if state:
+            state = 1
+        dreamscape_config.tileset_layers.overylay = int(state)
+        tile_index = dreamscape_config.tileset_layers.getTileIndexFromXY(self.selected_x, self.selected_y)
+        tile = self.getTile(self.selected_x, self.selected_y)
+        if tile:
+            tile[5] = state
+            dreamscape_config.tileset_layers.updateTile(
+                dreamscape_config.tileset_layers.active_layer_name, tile_index, tile
+            )
 
     def paintTile(self, event:QMouseEvent):
         if not self.tile_selector.get_selected_tile():
@@ -351,6 +403,8 @@ class TileCanvas(QWidget):
         tile_index = dreamscape_config.tileset_layers.getTileIndexFromXY(x, y)
         if tile_index is not None and tile_index >= 0: # update the current tile
             tile = dreamscape_config.tileset_layers.removeTile(dreamscape_config.tileset_layers.active_layer_name, tile_index)
+            if tile == self.selected_tile:
+                self.selected_tile = None
             print(f"{tile} tile removed.")
             # Redraw every layer to ensure correct stacking order
             for tileset_name in dreamscape_config.tileset_layers.order:
@@ -452,6 +506,13 @@ class TileCanvas(QWidget):
                 target_tile = self.getTile(x, y)
                 if target_tile:
                     self.tileDropperClicked.emit(target_tile[0], target_tile[1])
+            
+            elif paint_tool == dreamscape_config.SELECT:
+                self.selected_x = x
+                self.selected_y = y
+                self.selected_tile = self.getTile(x, y)
+                if self.selected_tile is not None:
+                    self.tileSelected.emit(self.selected_tile)
 
             event.accept()
         else:

@@ -19,6 +19,7 @@ class PaintTools:
     BUCKET = 4
     DROPPER = 5
     ERASER = 6
+    SELECT = 7
 
     def __init__(self):
         self.selection = 0
@@ -31,9 +32,10 @@ class PaintTools:
             'Drag': self.DRAG,
             'Bucket Fill': self.BUCKET,
             'Dropper': self.DROPPER,
-            'Eraser': self.ERASER
+            'Eraser': self.ERASER,
+            'Select': self.SELECT
         }
-        self.selection = selelections.get(tool_name)
+        self.selection = selelections.get(tool_name, self.SELECT)
     
     def isDrawingTool(self, tool=None):
         if tool is None:
@@ -42,7 +44,6 @@ class PaintTools:
             PENCIL: True,
             BRUSH: True,
             DRAG_DRAW: True,
-            BUCKET: True
         }.get(tool, False)
         
 
@@ -54,6 +55,7 @@ DRAG = PaintTools.DRAG
 BUCKET = PaintTools.BUCKET
 DROPPER = PaintTools.DROPPER
 ERASER = PaintTools.ERASER
+SELECT = PaintTools.SELECT
 
 
 tileset_layers = TilesetLayers()
