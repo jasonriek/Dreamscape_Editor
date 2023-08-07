@@ -168,8 +168,11 @@ class Tools(QWidget):
         self.tile_table.setItem(0, 0, QTableWidgetItem(f"({str(x)}, {str(y)})"))
     
     def exportJson(self):
-        with open('test.json', 'w') as f:
-            f.write(dreamscape_config.tileset_layers.getJson())
+        with open('test.json', 'w') as f, open('test_overlay.json', 'w') as fo:
+            game, game_overlay = dreamscape_config.tileset_layers.getJson()
+            f.write(game)
+            fo.write(game_overlay)
+
     
     def setInternalWidgets(self):
         self._layout.addWidget(self.export_json_button)

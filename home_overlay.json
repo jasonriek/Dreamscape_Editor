@@ -1,0 +1,122 @@
+{
+  "name": "World Overlay",
+  "world_size": {
+    "width": 150,
+    "height": 150
+  },
+  "layers": {
+    "Cyber Punk 1": {
+      "name": "Cyber Punk 1",
+      "tileset": "cyberpunk_1_assets_1.png",
+      "tile_width": 32,
+      "tile_height": 32,
+      "z": 0,
+      "tiles": [
+        [
+          0,
+          0,
+          11,
+          6,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          12,
+          6,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          13,
+          6,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          14,
+          6,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          15,
+          6,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          16,
+          6,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          17,
+          6,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          18,
+          6,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          19,
+          6,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          20,
+          6,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          21,
+          6,
+          0,
+          1
+        ]
+      ]
+    },
+    "c1": {
+      "name": "c1",
+      "tileset": "cyberpunk_1_assets_1.png",
+      "tile_width": 32,
+      "tile_height": 32,
+      "z": 0,
+      "tiles": []
+    },
+    "Cottage": {
+      "name": "Cottage",
+      "tileset": "C:/Users/Jason Reek/Desktop/DreamscapeEditor/Dreamscape_Editor/Cottage_Tileset.png",
+      "tile_width": 32,
+      "tile_height": 32,
+      "z": 0,
+      "tiles": []
+    }
+  }
+}

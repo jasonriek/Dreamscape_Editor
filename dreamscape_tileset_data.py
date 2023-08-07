@@ -1,4 +1,5 @@
 import json
+import copy
 
 class TilesetLayers:
     def __init__(self):
@@ -204,7 +205,8 @@ class TilesetLayers:
     def _modifyImgPath(self, layer:dict):
         """Private method to modify the image path."""
         _layer = layer.copy()
-        path = f'/images/jportfolio/tilemaps/{_layer["tileset"]}'
+        file = str(_layer['tileset']).split('/')[-1]
+        path = f'/images/jportfolio/tilemaps/{file}'
         _layer['tileset'] = path
         return _layer
     
@@ -222,7 +224,10 @@ class TilesetLayers:
             'z': 0,
             'tiles': [[self.base_tile_src_x, self.base_tile_src_y, self.base_tile_src_w, self.base_tile_src_h]]
         }]
-        overlay_layers = self.layers.copy()
+
+        modified_layers = copy.deepcopy(self.layers)
+        overlay_layers =  copy.deepcopy(self.layers)
+
         for layer in reversed(self.order):
             tiles = []
             overlay_tiles = []
@@ -231,10 +236,10 @@ class TilesetLayers:
                     overlay_tiles.append(tile)
                 else:
                     tiles.append(tile)
-            self.layers[layer]['tiles'] = tiles.copy()
-            overlay_layers[layer]['tiles'] = overlay_tiles.copy()
+            modified_layers[layer]['tiles'] = tiles
+            overlay_layers[layer]['tiles'] = overlay_tiles
         
-        layers.extend([self._modifyImgPath(self.layers[layer]) for layer in self.order])
+        layers.extend([self._modifyImgPath(modified_layers[layer]) for layer in self.order])
 
         layers_json = json.dumps({
             'name': self.name,
@@ -243,13 +248,13 @@ class TilesetLayers:
             'start_position': {'x': self.start_position_x, 'y': self.start_position_y},
             'doors': self.doors,
             'layers': layers
-        }, indent=3)
+        }, indent=2)
 
         overlay_json = json.dumps({
             'name': self.name + ' Overlay',
             'world_size': {'width': self.world_size_width, 'height': self.world_size_height},
             'layers': overlay_layers
 
-        }, indent=3)
+        }, indent=2)
 
         return layers_json, overlay_json 
