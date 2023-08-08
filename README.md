@@ -3,6 +3,7 @@
 ## Helpful Design Suggestions
 - A seperation between the layer number and name
 - Right eye dropper
+- Eye dropper changes based on tile pixel that the dropper is touching, not the layer. 
 
 ## Potential Polished Features
 - Give the ability to change bar color of the layers to whatever you want.
