@@ -1,0 +1,945 @@
+[2023-08-07T19:00:34.676131 17928] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:34.676131 16248] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:34.676131 17928] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:34.676131 17928] Config: (default) base_dir = 
+[2023-08-07T19:00:34.676131 17928] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:34.676131 17928] Config: (default) compiler = 
+[2023-08-07T19:00:34.676131 17928] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:34.676131 17928] Config: (default) compiler_type = auto
+[2023-08-07T19:00:34.676131 17928] Config: (default) compression = true
+[2023-08-07T19:00:34.676131 17928] Config: (default) compression_level = 0
+[2023-08-07T19:00:34.676131 17928] Config: (default) cpp_extension = 
+[2023-08-07T19:00:34.676131 17928] Config: (default) debug = false
+[2023-08-07T19:00:34.676131 17928] Config: (default) debug_dir = 
+[2023-08-07T19:00:34.676131 17928] Config: (default) depend_mode = false
+[2023-08-07T19:00:34.676131 17928] Config: (default) direct_mode = true
+[2023-08-07T19:00:34.676131 17928] Config: (default) disable = false
+[2023-08-07T19:00:34.676131 17928] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:34.676131 17928] Config: (default) file_clone = false
+[2023-08-07T19:00:34.676131 17928] Config: (default) hard_link = false
+[2023-08-07T19:00:34.676131 17928] Config: (default) hash_dir = true
+[2023-08-07T19:00:34.676131 17928] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:34.676131 17928] Config: (default) ignore_options = 
+[2023-08-07T19:00:34.676131 17928] Config: (default) inode_cache = false
+[2023-08-07T19:00:34.676131 17928] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:34.676131 17928] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:34.676131 17928] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:34.676131 17928] Config: (default) max_files = 0
+[2023-08-07T19:00:34.676131 17928] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:34.676131 17928] Config: (default) namespace = 
+[2023-08-07T19:00:34.676131 17928] Config: (default) path = 
+[2023-08-07T19:00:34.676131 17928] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:34.676131 17928] Config: (default) prefix_command = 
+[2023-08-07T19:00:34.676131 17928] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:34.676131 17928] Config: (default) read_only = false
+[2023-08-07T19:00:34.676131 17928] Config: (default) read_only_direct = false
+[2023-08-07T19:00:34.676131 17928] Config: (default) recache = false
+[2023-08-07T19:00:34.676131 17928] Config: (default) reshare = false
+[2023-08-07T19:00:34.676131 17928] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:34.676131 17928] Config: (default) secondary_storage = 
+[2023-08-07T19:00:34.676131 17928] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:34.676131 17928] Config: (default) stats = true
+[2023-08-07T19:00:34.676131 17928] Config: (default) stats_log = 
+[2023-08-07T19:00:34.676131 17928] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:34.676131 17928] Config: (default) umask = 
+[2023-08-07T19:00:34.677131 17928] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o module.PySide6.support.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src module.PySide6.support.c
+ore-postLoad.c
+[2023-08-07T19:00:34.677131 29388] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:34.677131 21508] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:34.677131 21508] Config: (default) base_dir = 
+[2023-08-07T19:00:34.677131 21508] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:34.677131 21508] Config: (default) compiler = 
+[2023-08-07T19:00:34.677131 21508] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:34.677131 21508] Config: (default) compiler_type = auto
+[2023-08-07T19:00:34.677131 21508] Config: (default) compression = true
+[2023-08-07T19:00:34.677131 21508] Config: (default) compression_level = 0
+[2023-08-07T19:00:34.677131 21508] Config: (default) cpp_extension = 
+[2023-08-07T19:00:34.677131 21508] Config: (default) debug = false
+[2023-08-07T19:00:34.677131 21508] Config: (default) debug_dir = 
+[2023-08-07T19:00:34.677131 21508] Config: (default) depend_mode = false
+[2023-08-07T19:00:34.677131 21508] Config: (default) direct_mode = true
+[2023-08-07T19:00:34.677131 21508] Config: (default) disable = false
+[2023-08-07T19:00:34.677131 21508] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:34.677131 21508] Config: (default) file_clone = false
+[2023-08-07T19:00:34.677131 21508] Config: (default) hard_link = false
+[2023-08-07T19:00:34.677131 21508] Config: (default) hash_dir = true
+[2023-08-07T19:00:34.677131 21508] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:34.677131 21508] Config: (default) ignore_options = 
+[2023-08-07T19:00:34.677131 21508] Config: (default) inode_cache = false
+[2023-08-07T19:00:34.677131 21508] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:34.677131 21508] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:34.677131 21508] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:34.677131 21508] Config: (default) max_files = 0
+[2023-08-07T19:00:34.677131 21508] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:34.677131 21508] Config: (default) namespace = 
+[2023-08-07T19:00:34.677131 21508] Config: (default) path = 
+[2023-08-07T19:00:34.677131 21508] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:34.677131 21508] Config: (default) prefix_command = 
+[2023-08-07T19:00:34.677131 21508] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:34.677131 21508] Config: (default) read_only = false
+[2023-08-07T19:00:34.677131 21508] Config: (default) read_only_direct = false
+[2023-08-07T19:00:34.677131 21508] Config: (default) recache = false
+[2023-08-07T19:00:34.677131 21508] Config: (default) reshare = false
+[2023-08-07T19:00:34.677131 21508] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:34.677131 21508] Config: (default) secondary_storage = 
+[2023-08-07T19:00:34.677131 21508] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:34.677131 21508] Config: (default) stats = true
+[2023-08-07T19:00:34.677131 21508] Config: (default) stats_log = 
+[2023-08-07T19:00:34.677131 21508] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:34.677131 21508] Config: (default) umask = 
+[2023-08-07T19:00:34.677131 21508] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o module.dreamscape_config.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src mo[2023-08-07T19:00:34.677131 29388] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:34.677131 29388] Config: (default) base_dir = 
+[2023-08-07T19:00:34.677131 29388] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:34.677131 29388] Config: (default) compiler = 
+[2023-08-07T19:00:34.677131 29388] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:34.677131 29388] Config: (default) compiler_type = auto
+[2023-08-07T19:00:34.677131 29388] Config: (default) compression = true
+[2023-08-07T19:00:34.677131 29388] Config: (default) compression_level = 0
+[2023-08-07T19:00:34.677131 29388] Config: (default) cpp_extension = 
+[2023-08-07T19:00:34.677131 29388] Config: (default) debug = false
+[2023-08-07T19:00:34.677131 29388] Config: (default) debug_dir = 
+[2023-08-07T19:00:34.677131 29388] Config: (default) depend_mode = false
+[2023-08-07T19:00:34.677131 29388] Config: (default) direct_mode = true
+[2023-08-07T19:00:34.677131 29388] Config: (default) disable = false
+[2023-08-07T19:00:34.677131 29388] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:34.677131 29388] Config: (default) file_clone = false
+[2023-08-07T19:00:34.677131 29388] Config: (default) hard_link = false
+[2023-08-07T19:00:34.677131 29388] Config: (default) hash_dir = true
+[2023-08-07T19:00:34.677131 29388] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:34.677131 29388] Config: (default) ignore_options = 
+[2023-08-07T19:00:34.677131 29388] Config: (default) inode_cache = false
+[2023-08-07T19:00:34.677131 29388] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:34.677131 29388] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:34.677131 29388] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:34.677131 29388] Config: (default) max_files = 0
+[2023-08-07T19:00:34.677131 29388] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:34.677131 29388] Config: (default) namespace = 
+[2023-08-07T19:00:34.677131 29388] Config: (default) path = 
+[2023-08-07T19:00:34.677131 29388] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:34.677131 29388] Config: (default) prefix_command = 
+[2023-08-07T19:00:34.677131 29388] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:34.677131 29388] Config: (default) read_only = false
+[2023-08-07T19:00:34.677131 29388] Config: (default) read_only_direct = false
+[2023-08-07T19:00:34.677131 29388] Config: (default) recache = false
+[2023-08-07T19:00:34.677131 29388] Config: (default) reshare = false
+[2023-08-07T19:00:34.677131 29388] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:34.677131 29388] Config: (default) secondary_storage = 
+[2023-08-07T19:00:34.677131 29388] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:34.677131 29388] Config: (default) stats = true
+[2023-08-07T19:00:34.677131 29388] Config: (default) stats_log = 
+[2023-08-07T19:00:34.677131 29388] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:34.677131 29388] Config: (default) umask = 
+[2023-08-07T19:00:34.677131 29388] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o module.__main__.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src module.__main__.c
+[2023-08-07T19:00:34.677131 13840] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:34.677131 20048] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:34.677131 13840] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:34.677131 13840] Config: (default) base_dir = 
+[2023-08-07T19:00:34.677131 13840] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:34.677131 13840] Config: (default) compiler = 
+[2023-08-07T19:00:34.677131 13840] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:34.677131 13840] Config: (default) compiler_type = auto
+[2023-08-07T19:00:34.677131 13840] Config: (default) compression = true
+[2023-08-07T19:00:34.677131 13840] Config: (default) compression_level = 0
+[2023-08-07T19:00:34.677131 13840] Config: (default) cpp_extension = 
+[2023-08-07T19:00:34.677131 13840] Config: (default) debug = false
+[2023-08-07T19:00:34.677131 13840] Config: (default) debug_dir = 
+[2023-08-07T19:00:34.677131 13840] Config: (default) depend_mode = false
+[2023-08-07T19:00:34.677131 13840] Config: (default) direct_mode = true
+[2023-08-07T19:00:34.677131 13840] Config: (default) disable = false
+[2023-08-07T19:00:34.677131 13840] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:34.677131 13840] Config: (default) file_clone = false
+[2023-08-07T19:00:34.677131 13840] Config: (default) hard_link = false
+[2023-08-07T19:00:34.677131 13840] Config: (default) hash_dir = true
+[2023-08-07T19:00:34.677131 13840] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:34.677131 13840] Config: (default) ignore_options = 
+[2023-08-07T19:00:34.677131 13840] Config: (default) inode_cache = false
+[2023-08-07T19:00:34.677131 13840] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:34.677131 13840] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:34.677131 13840] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:34.677131 13840] Config: (default) max_files = 0
+[2023-08-07T19:00:34.677131 13840] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:34.677131 13840] Config: (default) namespace = 
+[2023-08-07T19:00:34.677131 13840] Config: (default) path = 
+[2023-08-07T19:00:34.677131 13840] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:34.677131 13840] Config: (default) prefix_command = 
+[2023-08-07T19:00:34.677131 13840] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:34.677131 13840] Config: (default) read_only = false
+[2023-08-07T19:00:34.677131 13840] Config: (default) read_only_direct = false
+[2023-08-07T19:00:34.677131 13840] Config: (default) recache = false
+[2023-08-07T19:00:34.677131 13840] Config: (default) reshare = false
+[2023-08-07T19:00:34.677131 13840] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:34.677131 13840] Config: (default) secondary_storage = 
+[2023-08-07T19:00:34.677131 13840] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:34.677131 13840] Config: (default) stats = true
+[2023-08-07T19:00:34.677131 13840] Config: (default) stats_log = 
+[2023-08-07T19:00:34.677131 13840] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:34.677131 13840] Config: (default) umask = 
+[2023-08-07T19:00:34.678131 13840] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o module.PySide6.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src module.PySide6.c
+[2023-08-07T19:00:34.677131 20048] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:34.677131 20048] Config: (default) base_dir = 
+[2023-08-07T19:00:34.677131 20048] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:34.677131 20048] Config: (default) compiler = 
+[2023-08-07T19:00:34.677131 20048] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:34.677131 20048] Config: (default) compiler_type = auto
+[2023-08-07T19:00:34.677131 20048] Config: (default) compression = true
+[2023-08-07T19:00:34.677131 20048] Config: (default) compression_level = 0
+[2023-08-07T19:00:34.677131 20048] Config: (default) cpp_extension = 
+[2023-08-07T19:00:34.677131 20048] Config: (default) debug = false
+[2023-08-07T19:00:34.677131 20048] Config: (default) debug_dir = 
+[2023-08-07T19:00:34.677131 20048] Config: (default) depend_mode = false
+[2023-08-07T19:00:34.677131 20048] Config: (default) direct_mode = true
+[2023-08-07T19:00:34.677131 20048] Config: (default) disable = false
+[2023-08-07T19:00:34.677131 20048] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:34.677131 20048] Config: (default) file_clone = false
+[2023-08-07T19:00:34.677131 20048] Config: (default) hard_link = false
+[2023-08-07T19:00:34.677131 20048] Config: (default) hash_dir = true
+[2023-08-07T19:00:34.677131 20048] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:34.677131 20048] Config: (default) ignore_options = 
+[2023-08-07T19:00:34.677131 20048] Config: (default) inode_cache = false
+[2023-08-07T19:00:34.677131 20048] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:34.677131 20048] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:34.677131 20048] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:34.677131 20048] Config: (default) max_files = 0
+[2023-08-07T19:00:34.677131 20048] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:34.677131 20048] Config: (default) namespace = 
+[2023-08-07T19:00:34.677131 20048] Config: (default) path = 
+[2023-08-07T19:00:34.677131 20048] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:34.677131 20048] Config: (default) prefix_command = 
+[2023-08-07T19:00:34.677131 20048] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:34.677131 20048] Config: (default) read_only = false
+[2023-08-07T19:00:34.677131 20048] Config: (default) read_only_direct = false
+[2023-08-07T19:00:34.677131 20048] Config: (default) recache = false
+[2023-08-07T19:00:34.677131 20048] Config: (default) reshare = false
+[2023-08-07T19:00:34.677131 20048] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:34.677131 20048] Config: (default) secondary_storage = 
+[2023-08-07T19:00:34.677131 20048] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:34.677131 20048] Config: (default) stats = true
+[2023-08-07T19:00:34.677131 20048] Config: (default) stats_log = 
+[2023-08-07T19:00:34.677131 20048] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:34.677131 20048] Config: (default) umask = 
+[2023-08-07T19:00:34.678131 20048] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o module.dreamscape_dialogs.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src module.dreamscape_dialogs.c
+[2023-08-07T19:00:34.682237 14524] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:34.682237 14524] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:34.682237 14524] Config: (default) base_dir = 
+[2023-08-07T19:00:34.682237 14524] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:34.682237 14524] Config: (default) compiler = 
+[2023-08-07T19:00:34.682237 14524] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:34.682237 14524] Config: (default) compiler_type = auto
+[2023-08-07T19:00:34.682237 14524] Config: (default) compression = true
+[2023-08-07T19:00:34.682237 14524] Config: (default) compression_level = 0
+[2023-08-07T19:00:34.682237 14524] Config: (default) cpp_extension = 
+[2023-08-07T19:00:34.682237 14524] Config: (default) debug = false
+[2023-08-07T19:00:34.682237 14524] Config: (default) debug_dir = 
+[2023-08-07T19:00:34.682237 14524] Config: (default) depend_mode = false
+[2023-08-07T19:00:34.682237 14524] Config: (default) direct_mode = true
+[2023-08-07T19:00:34.682237 14524] Config: (default) disable = false
+[2023-08-07T19:00:34.682237 14524] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:34.682237 14524] Config: (default) file_clone = false
+[2023-08-07T19:00:34.682237 14524] Config: (default) hard_link = false
+[2023-08-07T19:00:34.682237 14524] Config: (default) hash_dir = true
+[2023-08-07T19:00:34.682237 14524] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:34.682237 14524] Config: (default) ignore_options = 
+[2023-08-07T19:00:34.682237 14524] Config: (default) inode_cache = false
+[2023-08-07T19:00:34.682237 14524] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:34.682237 14524] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:34.682237 14524] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:34.682237 14524] Config: (default) max_files = 0
+[2023-08-07T19:00:34.682237 14524] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:34.682237 14524] Config: (default) namespace = 
+[2023-08-07T19:00:34.682237 14524] Config: (default) path = 
+[2023-08-07T19:00:34.682237 14524] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:34.682237 14524] Config: (default) prefix_command = 
+[2023-08-07T19:00:34.682237 14524] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:34.682237 14524] Config: (default) read_only = false
+[2023-08-07T19:00:34.682237 14524] Config: (default) read_only_direct = false
+[2023-08-07T19:00:34.682237 14524] Config: (default) recache = false
+[2023-08-07T19:00:34.682237 14524] Config: (default) reshare = false
+[2023-08-07T19:00:34.682237 14524] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:34.682237 14524] Config: (default) secondary_storage = 
+[2023-08-07T19:00:34.682237 14524] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:34.682237 14524] Config: (default) stats = true
+[2023-08-07T19:00:34.682237 14524] Config: (default) stats_log = 
+[2023-08-07T19:00:34.682237 14524] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:34.682237 14524] Config: (default) umask = 
+[2023-08-07T19:00:34.682237 14524] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o module.PySide6.support.deprecated.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src module.PySide6.support.deprecated.c
+[2023-08-07T19:00:34.689355 17928] Hostname: JMissionControl
+[2023-08-07T19:00:34.689355 17928] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.689355 17928] Compiler type: gcc
+[2023-08-07T19:00:34.689355 13840] Hostname: JMissionControl
+[2023-08-07T19:00:34.689355 13840] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.690371 13840] Compiler type: gcc
+[2023-08-07T19:00:34.690371 17928] Source file: module.PySide6.support.c
+[2023-08-07T19:00:34.690371 17928] Object file: module.PySide6.support.o
+[2023-08-07T19:00:34.690371 13840] Source file: module.PySide6.c
+[2023-08-07T19:00:34.690371 13840] Object file: module.PySide6.o
+[2023-08-07T19:00:34.690371 17928] Trying direct lookup
+[2023-08-07T19:00:34.690371 28124] Hostname: JMissionControl
+[2023-08-07T19:00:34.691370 28124] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.691370 28124] Compiler type: gcc
+[2023-08-07T19:00:34.691370 13840] Trying direct lookup
+[2023-08-07T19:00:34.691370 17928] Retrieved 78674nk10m1j15ik55rth48hoh21ilubm from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/8/674nk10m1j15ik55rth48hoh21ilubmM)
+[2023-08-07T19:00:34.691370 28124] Source file: __loader.c
+[2023-08-07T19:00:34.691370 28124] Object file: __loader.o
+ C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/8/674nk10m1j15ik55rth48hoh21ilubmM
+[2023-08-07T19:00:34.691370 13840] Retrieved 85a2rvfcsupat2kaevdr4i6nflj1osps2 from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/8/5/a2rvfcsupat2kaevdr4i6nflj1osps2M)
+[2023-08-07T19:00:34.691370 28124] Trying direct lookup
+[2023-08-07T19:00:34.691370 14524] Hostname: JMissionControl
+[2023-08-07T19:00:34.691370 14524] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.691370 13840] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/8/5/a2rvfcsupat2kaevdr4i6nflj1osps2M
+[2023-08-07T19:00:34.692365 28124] Retrieved 947f1g0r4ac9ha7qgh886p67rvpijv3eu from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/4/7f1g0r4ac9ha7qgh886p67rvpijv3euM)
+[2023-08-07T19:00:34.692365 14524] Source file: module.PySide6.support.deprecated.c
+[2023-08-07T19:00:34.692365 14524] Object file: module.PySide6.support.deprecated.o
+[2023-08-07T19:00:34.692365 14524] Trying direct lookup
+[2023-08-07T19:00:34.692365 28124] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/4/7f1g0r4ac9ha7qgh886p67rvpijv3euM
+[2023-08-07T19:00:34.693375 14524] Retrieved 9d42gfv0vrmbdc2sj05i6ehad0bo6rpsq from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/d/42gfv0vrmbdc2sj05i6ehad0bo6rpsqM)
+[2023-08-07T19:00:34.693375 14524] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/d/42gfv0vrmbdc2sj05i6ehad0bo6rpsqM
+[2023-08-07T19:00:34.694371 20048] Hostname: JMissionControl
+[2023-08-07T19:00:34.694371 20048] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.694371 20048] Compiler type: gcc
+[2023-08-07T19:00:34.694371 28160] Hostname: JMissionControl
+[2023-08-07T19:00:34.694371 25456] Hostname: JMissionControl
+[2023-08-07T19:00:34.694371 28160] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.694371 28160] Compiler type: gcc
+:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.694371 25456] Compiler type: gcc
+[2023-08-07T19:00:34.694371 21508] Hostname: JMissionControl
+[2023-08-07T19:00:34.694371 21508] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.694371 21508] Compiler type: gcc
+dreamscape_dialogs.o
+[2023-08-07T19:00:34.694371 7828 ] Hostname: JMissionControl
+[2023-08-07T19:00:34.694371 7828 ] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.694371 16248] Hostname: JMissionControl
+[2023-08-07T19:00:34.694371 29388] Hostname: JMissionControl
+[2023-08-07T19:00:34.694371 16248] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.694371 16248] Compiler type: gcc
+:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.694371 29388] Compiler type: gcc
+[2023-08-07T19:00:34.694371 20048] Trying direct lookup
+[2023-08-07T19:00:34.694371 28160] Source file: __constants.c
+[2023-08-07T19:00:34.694371 28160] Object file: __constants.o
+[2023-08-07T19:00:34.695364 25456] Source file: __helpers.c
+[2023-08-07T19:00:34.695364 25456] Object file: __helpers.o
+[2023-08-07T19:00:34.695364 28160] Trying direct lookup
+[2023-08-07T19:00:34.695364 25456] Trying direct lookup
+[2023-08-07T19:00:34.695364 21508] Source file: module.dreamscape_config.c
+[2023-08-07T19:00:34.695364 21508] Object file: module.dreamscape_config.o
+[2023-08-07T19:00:34.695364 7828 ] Source file: module.PySide6-preLoad.c
+[2023-08-07T19:00:34.695364 7828 ] Object file: module.PySide6-preLoad.o
+Load.c
+[2023-08-07T19:00:34.695364 16248] Object file: module.PySide6.QtCore-postLoad.o
+[2023-08-07T19:00:34.695364 20048] Retrieved 1eafvi43gvcq019up5uphklvnf4p9cj6u from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/e/afvi43gvcq019up5uphklvnf4p9cj6uM)
+[2023-08-07T19:00:34.695364 29388] Source file: module.__main__.c
+[2023-08-07T19:00:34.695364 29388] Object file: module.__main__.o
+[2023-08-07T19:00:34.695364 7828 ] Trying direct lookup
+[2023-08-07T19:00:34.695364 16248] Trying direct lookup
+[2023-08-07T19:00:34.695364 29388] Trying direct lookup
+[2023-08-07T19:00:34.695364 20048] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/e/afvi43gvcq019up5uphklvnf4p9cj6uM
+[2023-08-07T19:00:34.695364 28160] Retrieved f0d4smjviqsu30pe5o6nie2bteiqh2rru from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/0/d4smjviqsu30pe5o6nie2bteiqh2rruM)
+[2023-08-07T19:00:34.695364 25456] Retrieved ddcdov2uilt5cm8tvim2aep8iqcs5trvs from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/d/d/cdov2uilt5cm8tvim2aep8iqcs5trvsM)
+[2023-08-07T19:00:34.695364 28160] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/0/d4smjviqsu30pe5o6nie2bteiqh2rruM
+[2023-08-07T19:00:34.695364 25456] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/d/d/cdov2uilt5cm8tvim2aep8iqcs5trvsM
+[2023-08-07T19:00:34.695364 21508] Retrieved 668c3hvmgu02uctg9n3v7rmm711umr8di from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/6/6/8c3hvmgu02uctg9n3v7rmm711umr8diM)
+[2023-08-07T19:00:34.695364 7828 ] Retrieved 3ce2q2lppktlj2uul08b0ie13hkd9rasa from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/c/e2q2lppktlj2uul08b0ie13hkd9rasaM)
+[2023-08-07T19:00:34.695364 16248] Retrieved 4c749fpkf54fde4qot2e05rvki7jadgig from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/4/c/749fpkf54fde4qot2e05rvki7jadgigM)
+[2023-08-07T19:00:34.695364 29388] Retrieved 956cn6npdmrnpq1eji1lft8ml4j9usp96 from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/5/6cn6npdmrnpq1eji1lft8ml4j9usp96M)
+[2023-08-07T19:00:34.695364 21508] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/6/6/8c3hvmgu02uctg9n3v7rmm711umr8diM
+[2023-08-07T19:00:34.695364 7828 ] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/c/e2q2lppktlj2uul08b0ie13hkd9rasaM
+[2023-08-07T19:00:34.695364 16248] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/4/c/749fpkf54fde4qot2e05rvki7jadgigM
+[2023-08-07T19:00:34.695364 29388] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/5/6cn6npdmrnpq1eji1lft8ml4j9usp96M
+[2023-08-07T19:00:34.704469 24856] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:34.704469 24856] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:34.704469 24856] Config: (default) base_dir = 
+[2023-08-07T19:00:34.704469 24856] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:34.704469 24856] Config: (default) compiler = 
+[2023-08-07T19:00:34.704469 24856] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:34.704469 24856] Config: (default) compiler_type = auto
+[2023-08-07T19:00:34.704469 24856] Config: (default) compression = true
+[2023-08-07T19:00:34.704469 24856] Config: (default) compression_level = 0
+[2023-08-07T19:00:34.704469 24856] Config: (default) cpp_extension = 
+[2023-08-07T19:00:34.704469 24856] Config: (default) debug = false
+[2023-08-07T19:00:34.704469 24856] Config: (default) debug_dir = 
+[2023-08-07T19:00:34.704469 24856] Config: (default) depend_mode = false
+[2023-08-07T19:00:34.704469 24856] Config: (default) direct_mode = true
+[2023-08-07T19:00:34.704469 24856] Config: (default) disable = false
+[2023-08-07T19:00:34.704469 24856] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:34.704469 24856] Config: (default) file_clone = false
+[2023-08-07T19:00:34.704469 24856] Config: (default) hard_link = false
+[2023-08-07T19:00:34.704469 24856] Config: (default) hash_dir = true
+[2023-08-07T19:00:34.704469 24856] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:34.704469 24856] Config: (default) ignore_options = 
+[2023-08-07T19:00:34.704469 24856] Config: (default) inode_cache = false
+[2023-08-07T19:00:34.704469 24856] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:34.704469 24856] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:34.704469 24856] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:34.704469 24856] Config: (default) max_files = 0
+[2023-08-07T19:00:34.704469 24856] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:34.704469 24856] Config: (default) namespace = 
+[2023-08-07T19:00:34.704469 24856] Config: (default) path = 
+[2023-08-07T19:00:34.704469 24856] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:34.704469 24856] Config: (default) prefix_command = 
+[2023-08-07T19:00:34.704469 24856] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:34.704469 24856] Config: (default) read_only = false
+[2023-08-07T19:00:34.704469 24856] Config: (default) read_only_direct = false
+[2023-08-07T19:00:34.704469 24856] Config: (default) recache = false
+[2023-08-07T19:00:34.704469 24856] Config: (default) reshare = false
+[2023-08-07T19:00:34.704469 24856] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:34.704469 24856] Config: (default) secondary_storage = 
+[2023-08-07T19:00:34.704469 24856] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:34.704469 24856] Config: (default) stats = true
+[2023-08-07T19:00:34.704469 24856] Config: (default) stats_log = 
+[2023-08-07T19:00:34.704469 24856] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:34.704469 24856] Config: (default) umask = 
+[2023-08-07T19:00:34.704469 24856] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o module.dreamscape_layers.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src module.dreamscape_layers.c
+[2023-08-07T19:00:34.709022 24856] Hostname: JMissionControl
+[2023-08-07T19:00:34.709022 24856] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.709022 24856] Compiler type: gcc
+[2023-08-07T19:00:34.710529 24856] Source file: module.dreamscape_layers.c
+[2023-08-07T19:00:34.710529 24856] Object file: module.dreamscape_layers.o
+[2023-08-07T19:00:34.710529 24856] Trying direct lookup
+[2023-08-07T19:00:34.711533 24856] Retrieved d2d7akvr6ap2mabsu87q9unlfddhj20bg from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/d/2/d7akvr6ap2mabsu87q9unlfddhj20bgM)
+[2023-08-07T19:00:34.711533 24856] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/d/2/d7akvr6ap2mabsu87q9unlfddhj20bgM
+[2023-08-07T19:00:34.712533 28124] Got result key from manifest
+[2023-08-07T19:00:34.712533 28124] Retrieved 8735a4u9pp07ct8611unscoap2li4p136 from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/8/7/35a4u9pp07ct8611unscoap2li4p136R)
+[2023-08-07T19:00:34.714534 28124] Reading embedded entry #0 .o (25858 bytes)
+[2023-08-07T19:00:34.714534 28124] Writing to __loader.o
+[2023-08-07T19:00:34.714534 28124] Succeeded getting cached result
+[2023-08-07T19:00:34.714534 28124] Result: direct_cache_hit
+[2023-08-07T19:00:34.714534 28124] Result: primary_storage_hit
+[2023-08-07T19:00:34.715535 28124] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/d/c/stats.lock
+[2023-08-07T19:00:34.716536 28124] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/d/c/stats.lock
+[2023-08-07T19:00:34.755206 28996] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:34.755206 28996] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:34.755206 28996] Config: (default) base_dir = 
+[2023-08-07T19:00:34.755206 28996] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:34.755206 28996] Config: (default) compiler = 
+[2023-08-07T19:00:34.755206 28996] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:34.755206 28996] Config: (default) compiler_type = auto
+[2023-08-07T19:00:34.755206 28996] Config: (default) compression = true
+[2023-08-07T19:00:34.755206 28996] Config: (default) compression_level = 0
+[2023-08-07T19:00:34.755206 28996] Config: (default) cpp_extension = 
+[2023-08-07T19:00:34.755206 28996] Config: (default) debug = false
+[2023-08-07T19:00:34.755206 28996] Config: (default) debug_dir = 
+[2023-08-07T19:00:34.755206 28996] Config: (default) depend_mode = false
+[2023-08-07T19:00:34.755206 28996] Config: (default) direct_mode = true
+[2023-08-07T19:00:34.755206 28996] Config: (default) disable = false
+[2023-08-07T19:00:34.755206 28996] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:34.755206 28996] Config: (default) file_clone = false
+[2023-08-07T19:00:34.755206 28996] Config: (default) hard_link = false
+[2023-08-07T19:00:34.755206 28996] Config: (default) hash_dir = true
+[2023-08-07T19:00:34.755206 28996] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:34.755206 28996] Config: (default) ignore_options = 
+[2023-08-07T19:00:34.755206 28996] Config: (default) inode_cache = false
+[2023-08-07T19:00:34.755206 28996] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:34.755206 28996] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:34.755206 28996] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:34.755206 28996] Config: (default) max_files = 0
+[2023-08-07T19:00:34.755206 28996] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:34.755206 28996] Config: (default) namespace = 
+[2023-08-07T19:00:34.755206 28996] Config: (default) path = 
+[2023-08-07T19:00:34.755206 28996] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:34.755206 28996] Config: (default) prefix_command = 
+[2023-08-07T19:00:34.755206 28996] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:34.755206 28996] Config: (default) read_only = false
+[2023-08-07T19:00:34.755206 28996] Config: (default) read_only_direct = false
+[2023-08-07T19:00:34.755206 28996] Config: (default) recache = false
+[2023-08-07T19:00:34.755206 28996] Config: (default) reshare = false
+[2023-08-07T19:00:34.755206 28996] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:34.755206 28996] Config: (default) secondary_storage = 
+[2023-08-07T19:00:34.755206 28996] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:34.755206 28996] Config: (default) stats = true
+[2023-08-07T19:00:34.755206 28996] Config: (default) stats_log = 
+[2023-08-07T19:00:34.755206 28996] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:34.755206 28996] Config: (default) umask = 
+[2023-08-07T19:00:34.755206 28996] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o module.dreamscape_tiles.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src module.dreamscape_tiles.c
+[2023-08-07T19:00:34.760342 28996] Hostname: JMissionControl
+[2023-08-07T19:00:34.760342 28996] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.760342 28996] Compiler type: gcc
+[2023-08-07T19:00:34.761342 28996] Source file: module.dreamscape_tiles.c
+[2023-08-07T19:00:34.761342 28996] Object file: module.dreamscape_tiles.o
+[2023-08-07T19:00:34.761342 28996] Trying direct lookup
+[2023-08-07T19:00:34.764878 28996] No c786j1c4kpogp5m1fuimklqvgsii9o9re in primary storage
+[2023-08-07T19:00:34.765870 28996] Running preprocessor
+[2023-08-07T19:00:34.793506 7800 ] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) base_dir = 
+[2023-08-07T19:00:34.793506 7800 ] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) compiler = 
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) compiler_type = auto
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) compression = true
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) compression_level = 0
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) cpp_extension = 
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) debug = false
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) debug_dir = 
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) depend_mode = false
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) direct_mode = true
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) disable = false
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) file_clone = false
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) hard_link = false
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) hash_dir = true
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) ignore_options = 
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) inode_cache = false
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:34.793506 7800 ] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) max_files = 0
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) namespace = 
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) path = 
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) prefix_command = 
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) read_only = false
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) read_only_direct = false
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) recache = false
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) reshare = false
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) secondary_storage = 
+[2023-08-07T19:00:34.793506 7800 ] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) stats = true
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) stats_log = 
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:34.793506 7800 ] Config: (default) umask = 
+[2023-08-07T19:00:34.793506 7800 ] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o module.dreamscape_tileset_data.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src module.dreamscape_tileset_data.c
+[2023-08-07T19:00:34.801017 7800 ] Hostname: JMissionControl
+[2023-08-07T19:00:34.801017 7800 ] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.801017 7800 ] Compiler type: gcc
+[2023-08-07T19:00:34.801017 7800 ] Source file: module.dreamscape_tileset_data.c
+[2023-08-07T19:00:34.801017 7800 ] Object file: module.dreamscape_tileset_data.o
+[2023-08-07T19:00:34.801017 7800 ] Trying direct lookup
+[2023-08-07T19:00:34.802536 7800 ] Retrieved abd1evhls39ssb3g58thpc7lhsstrdmoc from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/a/b/d1evhls39ssb3g58thpc7lhsstrdmocM)
+[2023-08-07T19:00:34.803565 7800 ] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/a/b/d1evhls39ssb3g58thpc7lhsstrdmocM
+[2023-08-07T19:00:34.840618 22160] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:34.840618 22160] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:34.840618 22160] Config: (default) base_dir = 
+[2023-08-07T19:00:34.840618 22160] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:34.840618 22160] Config: (default) compiler = 
+[2023-08-07T19:00:34.840618 22160] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:34.840618 22160] Config: (default) compiler_type = auto
+[2023-08-07T19:00:34.840618 22160] Config: (default) compression = true
+[2023-08-07T19:00:34.840618 22160] Config: (default) compression_level = 0
+[2023-08-07T19:00:34.840618 22160] Config: (default) cpp_extension = 
+[2023-08-07T19:00:34.840618 22160] Config: (default) debug = false
+[2023-08-07T19:00:34.840618 22160] Config: (default) debug_dir = 
+[2023-08-07T19:00:34.840618 22160] Config: (default) depend_mode = false
+[2023-08-07T19:00:34.840618 22160] Config: (default) direct_mode = true
+[2023-08-07T19:00:34.840618 22160] Config: (default) disable = false
+[2023-08-07T19:00:34.840618 22160] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:34.840618 22160] Config: (default) file_clone = false
+[2023-08-07T19:00:34.840618 22160] Config: (default) hard_link = false
+[2023-08-07T19:00:34.840618 22160] Config: (default) hash_dir = true
+[2023-08-07T19:00:34.840618 22160] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:34.840618 22160] Config: (default) ignore_options = 
+[2023-08-07T19:00:34.840618 22160] Config: (default) inode_cache = false
+[2023-08-07T19:00:34.840618 22160] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:34.840618 22160] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:34.840618 22160] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:34.840618 22160] Config: (default) max_files = 0
+[2023-08-07T19:00:34.840618 22160] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:34.840618 22160] Config: (default) namespace = 
+[2023-08-07T19:00:34.840618 22160] Config: (default) path = 
+[2023-08-07T19:00:34.840618 22160] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:34.840618 22160] Config: (default) prefix_command = 
+[2023-08-07T19:00:34.840618 22160] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:34.840618 22160] Config: (default) read_only = false
+[2023-08-07T19:00:34.840618 22160] Config: (default) read_only_direct = false
+[2023-08-07T19:00:34.840618 22160] Config: (default) recache = false
+[2023-08-07T19:00:34.840618 22160] Config: (default) reshare = false
+[2023-08-07T19:00:34.840618 22160] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:34.840618 22160] Config: (default) secondary_storage = 
+[2023-08-07T19:00:34.840618 22160] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:34.840618 22160] Config: (default) stats = true
+[2023-08-07T19:00:34.840618 22160] Config: (default) stats_log = 
+[2023-08-07T19:00:34.840618 22160] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:34.840618 22160] Config: (default) umask = 
+[2023-08-07T19:00:34.840618 22160] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o module.dreamscape_tools.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src module.dreamscape_tools.c
+[2023-08-07T19:00:34.848640 22160] Hostname: JMissionControl
+[2023-08-07T19:00:34.848640 22160] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.848640 22160] Compiler type: gcc
+[2023-08-07T19:00:34.849649 22160] Source file: module.dreamscape_tools.c
+[2023-08-07T19:00:34.849649 22160] Object file: module.dreamscape_tools.o
+[2023-08-07T19:00:34.849649 22160] Trying direct lookup
+[2023-08-07T19:00:34.850646 22160] Retrieved cfb4u0tcj56mgdee5ao3nsjv8h5bigflm from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/f/b4u0tcj56mgdee5ao3nsjv8h5bigflmM)
+[2023-08-07T19:00:34.851650 22160] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/f/b4u0tcj56mgdee5ao3nsjv8h5bigflmM
+[2023-08-07T19:00:34.864524 24856] Got result key from manifest
+[2023-08-07T19:00:34.864524 24856] Retrieved 71bbvmdeeaueq0dum7c7fc5heeva6erlu from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/1/bbvmdeeaueq0dum7c7fc5heeva6erluR)
+[2023-08-07T19:00:34.864524 20048] Got result key from manifest
+[2023-08-07T19:00:34.864524 21508] Got result key from manifest
+[2023-08-07T19:00:34.865540 7828 ] Got result key from manifest
+[2023-08-07T19:00:34.865540 20048] Retrieved e781a0qqemu27t1ubr5k8cdrqkim3tp8m from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/7/81a0qqemu27t1ubr5k8cdrqkim3tp8mR)
+[2023-08-07T19:00:34.865540 29388] Got result key from manifest
+[2023-08-07T19:00:34.865540 21508] Retrieved 72efn1at33g9c8hiphk1i3qtaaoe92s88 from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/2/efn1at33g9c8hiphk1i3qtaaoe92s88R)
+[2023-08-07T19:00:34.865540 7828 ] Retrieved 678e7reman4bcus78ib5cehlpb26fhth4 from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/6/7/8e7reman4bcus78ib5cehlpb26fhth4R)
+[2023-08-07T19:00:34.866535 29388] Retrieved 35c00gcdfhkfskg12d62vc0bi1jsu8lpu from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/3/5/c00gcdfhkfskg12d62vc0bi1jsu8lpuR)
+[2023-08-07T19:00:34.866535 17928] Retrieved 9a708sinpktp5f0pg3718kqs19rirr1r8 from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/a/708sinpktp5f0pg3718kqs19rirr1r8R)
+[2023-08-07T19:00:34.866535 25456] Got result key from manifest
+[2023-08-07T19:00:34.866535 24856] Reading embedded entry #0 .o (150134 bytes)
+[2023-08-07T19:00:34.866535 24856] Writing to module.dreamscape_layers.o
+[2023-08-07T19:00:34.866535 28160] Got result key from manifest
+[2023-08-07T19:00:34.866535 25456] Retrieved b94bavqt0jbt2psq3kcdff6rrq6mnbpd8 from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/b/9/4bavqt0jbt2psq3kcdff6rrq6mnbpd8R)
+[2023-08-07T19:00:34.866535 28160] Retrieved ac58gmh4qje58au8dt8ljb58oc3qml89q from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/a/c/58gmh4qje58au8dt8ljb58oc3qml89qR)
+[2023-08-07T19:00:34.866535 21508] Reading embedded entry #0 .o (21134 bytes)
+[2023-08-07T19:00:34.866535 21508] Writing to module.dreamscape_config.o
+[2023-08-07T19:00:34.866535 14524] Retrieved 4ec5jegfe1pnlmud81kg3jgkaeeptk0rk from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/4/e/c5jegfe1pnlmud81kg3jgkaeeptk0rkR)
+[2023-08-07T19:00:34.866535 7828 ] Reading embedded entry #0 .o (9105 bytes)
+[2023-08-07T19:00:34.866535 7828 ] Writing to module.PySide6-preLoad.o
+[2023-08-07T19:00:34.866535 20048] Reading embedded entry #0 .o (25404 bytes)
+[2023-08-07T19:00:34.866535 20048] Writing to module.dreamscape_dialogs.o
+[2023-08-07T19:00:34.866535 17928] Reading embedded entry #0 .o (10070 bytes)
+[2023-08-07T19:00:34.866535 17928] Writing to module.PySide6.support.o
+[2023-08-07T19:00:34.866535 29388] Reading embedded entry #0 .o (17591 bytes)
+[2023-08-07T19:00:34.866535 29388] Writing to module.__main__.o
+[2023-08-07T19:00:34.866535 28160] Reading embedded entry #0 .o (2864 bytes)
+[2023-08-07T19:00:34.866535 28160] Writing to __constants.o
+[2023-08-07T19:00:34.866535 24856] Succeeded getting cached result
+[2023-08-07T19:00:34.866535 25456] Reading embedded entry #0 .o (466 bytes)
+[2023-08-07T19:00:34.866535 25456] Writing to __helpers.o
+[2023-08-07T19:00:34.866535 21508] Succeeded getting cached result
+[2023-08-07T19:00:34.866535 24856] Result: primary_storage_hit
+[2023-08-07T19:00:34.866535 21508] Result: direct_cache_hit
+[2023-08-07T19:00:34.866535 21508] Result: primary_storage_hit
+[2023-08-07T19:00:34.866535 13840] Got result key from manifest
+[2023-08-07T19:00:34.868042 16248] Got result key from manifest
+34471 bytes)
+[2023-08-07T19:00:34.868042 14524] Writing to module.PySide6.support.deprecated.o
+[2023-08-07T19:00:34.868042 24856] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/8/stats.lock
+[2023-08-07T19:00:34.868042 13840] Retrieved cecbbae7dj37d14ivr1912fkrecbp33mc from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/e/cbbae7dj37d14ivr1912fkrecbp33mcR)
+[2023-08-07T19:00:34.868042 16248] Retrieved 4dfaan3i4gu4hsgsevlf3n59mpnofpcoe from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/4/d/faan3i4gu4hsgsevlf3n59mpnofpcoeR)
+[2023-08-07T19:00:34.868042 7828 ] Succeeded getting cached result
+[2023-08-07T19:00:34.868042 7828 ] Result: direct_cache_hit
+[2023-08-07T19:00:34.868042 7828 ] Result: primary_storage_hit
+[2023-08-07T19:00:34.869061 21508] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/0/4/stats.lock
+[2023-08-07T19:00:34.869061 7828 ] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/4/stats.lock
+[2023-08-07T19:00:34.869061 20048] Succeeded getting cached result
+[2023-08-07T19:00:34.869061 20048] Result: direct_cache_hit
+[2023-08-07T19:00:34.869061 20048] Result: primary_storage_hit
+[2023-08-07T19:00:34.869061 17928] Succeeded getting cached result
+[2023-08-07T19:00:34.869061 17928] Result: direct_cache_hit
+[2023-08-07T19:00:34.870570 17928] Result: primary_storage_hit
+[2023-08-07T19:00:34.869061 13840] Reading embedded entry #0 .o (51462 bytes)
+[2023-08-07T19:00:34.870570 13840] Writing to module.PySide6.o
+[2023-08-07T19:00:34.870570 16248] Reading embedded entry #0 .o (15348 bytes)
+[2023-08-07T19:00:34.870570 16248] Writing to module.PySide6.QtCore-postLoad.o
+[2023-08-07T19:00:34.870570 28160] Succeeded getting cached result
+[2023-08-07T19:00:34.870570 28160] Result: direct_cache_hit
+[2023-08-07T19:00:34.870570 20048] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/0/stats.lock
+[2023-08-07T19:00:34.870570 28160] Result: primary_storage_hit
+[2023-08-07T19:00:34.870570 25456] Succeeded getting cached result
+[2023-08-07T19:00:34.871673 25456] Result: direct_cache_hit
+[2023-08-07T19:00:34.871673 25456] Result: primary_storage_hit
+[2023-08-07T19:00:34.871673 14524] Succeeded getting cached result
+[2023-08-07T19:00:34.871673 14524] Result: direct_cache_hit
+[2023-08-07T19:00:34.871673 14524] Result: primary_storage_hit
+[2023-08-07T19:00:34.872691 13840] Succeeded getting cached result
+[2023-08-07T19:00:34.872691 13840] Result: direct_cache_hit
+[2023-08-07T19:00:34.872691 13840] Result: primary_storage_hit
+[2023-08-07T19:00:34.872691 16248] Succeeded getting cached result
+[2023-08-07T19:00:34.872691 16248] Result: direct_cache_hit
+[2023-08-07T19:00:34.872691 16248] Result: primary_storage_hit
+[2023-08-07T19:00:34.873687 16248] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/8/stats.lock
+[2023-08-07T19:00:34.873687 25456] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/0/stats.lock
+[2023-08-07T19:00:34.873687 28160] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/0/0/stats.lock
+[2023-08-07T19:00:34.873687 24856] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/8/stats.lock
+[2023-08-07T19:00:34.873687 20048] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/0/stats.lock
+[2023-08-07T19:00:34.873687 14524] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/b/c/stats.lock
+[2023-08-07T19:00:34.874688 7828 ] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/4/stats.lock
+[2023-08-07T19:00:34.875691 17928] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/0/8/stats.lock
+[2023-08-07T19:00:34.875691 25456] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/0/stats.lock
+[2023-08-07T19:00:34.875691 14524] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/b/c/stats.lock
+[2023-08-07T19:00:34.875691 16248] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/8/stats.lock
+[2023-08-07T19:00:34.875691 28160] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/0/0/stats.lock
+[2023-08-07T19:00:34.875691 21508] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/0/4/stats.lock
+[2023-08-07T19:00:34.876687 13840] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/0/stats.lock
+[2023-08-07T19:00:34.876687 17928] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/0/8/stats.lock
+[2023-08-07T19:00:34.878195 13840] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/1/0/stats.lock
+[2023-08-07T19:00:34.878195 29388] Succeeded getting cached result
+[2023-08-07T19:00:34.878195 29388] Result: direct_cache_hit
+[2023-08-07T19:00:34.878195 29388] Result: primary_storage_hit
+[2023-08-07T19:00:34.879202 29388] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/c/stats.lock
+[2023-08-07T19:00:34.880203 29388] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/c/stats.lock
+[2023-08-07T19:00:34.883652 7800 ] Got result key from manifest
+[2023-08-07T19:00:34.883652 7800 ] Retrieved f16en0sq30uojgtrlv3irnf69uq0s2ch8 from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/f/1/6en0sq30uojgtrlv3irnf69uq0s2ch8R)
+[2023-08-07T19:00:34.885660 7800 ] Reading embedded entry #0 .o (121451 bytes)
+[2023-08-07T19:00:34.885660 7800 ] Writing to module.dreamscape_tileset_data.o
+[2023-08-07T19:00:34.886660 7800 ] Succeeded getting cached result
+[2023-08-07T19:00:34.886660 7800 ] Result: direct_cache_hit
+[2023-08-07T19:00:34.886660 7800 ] Result: primary_storage_hit
+[2023-08-07T19:00:34.886660 7800 ] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/8/stats.lock
+[2023-08-07T19:00:34.902792 14948] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:34.902792 14948] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:34.902792 14948] Config: (default) base_dir = 
+[2023-08-07T19:00:34.902792 14948] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:34.902792 14948] Config: (default) compiler = 
+[2023-08-07T19:00:34.902792 14948] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:34.902792 14948] Config: (default) compiler_type = auto
+[2023-08-07T19:00:34.902792 14948] Config: (default) compression = true
+[2023-08-07T19:00:34.902792 14948] Config: (default) compression_level = 0
+[2023-08-07T19:00:34.902792 14948] Config: (default) cpp_extension = 
+[2023-08-07T19:00:34.902792 14948] Config: (default) debug = false
+[2023-08-07T19:00:34.902792 14948] Config: (default) debug_dir = 
+[2023-08-07T19:00:34.902792 14948] Config: (default) depend_mode = false
+[2023-08-07T19:00:34.902792 14948] Config: (default) direct_mode = true
+[2023-08-07T19:00:34.902792 14948] Config: (default) disable = false
+[2023-08-07T19:00:34.902792 14948] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:34.902792 14948] Config: (default) file_clone = false
+[2023-08-07T19:00:34.902792 14948] Config: (default) hard_link = false
+[2023-08-07T19:00:34.902792 14948] Config: (default) hash_dir = true
+[2023-08-07T19:00:34.902792 14948] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:34.902792 14948] Config: (default) ignore_options = 
+[2023-08-07T19:00:34.902792 14948] Config: (default) inode_cache = false
+[2023-08-07T19:00:34.902792 14948] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:34.902792 14948] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:34.902792 14948] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:34.902792 14948] Config: (default) max_files = 0
+[2023-08-07T19:00:34.902792 14948] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:34.902792 14948] Config: (default) namespace = 
+[2023-08-07T19:00:34.902792 14948] Config: (default) path = 
+[2023-08-07T19:00:34.902792 14948] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:34.902792 14948] Config: (default) prefix_command = 
+[2023-08-07T19:00:34.902792 14948] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:34.902792 14948] Config: (default) read_only = false
+[2023-08-07T19:00:34.902792 14948] Config: (default) read_only_direct = false
+[2023-08-07T19:00:34.902792 14948] Config: (default) recache = false
+[2023-08-07T19:00:34.902792 14948] Config: (default) reshare = false
+[2023-08-07T19:00:34.902792 14948] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:34.902792 14948] Config: (default) secondary_storage = 
+[2023-08-07T19:00:34.902792 14948] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:34.902792 14948] Config: (default) stats = true
+[2023-08-07T19:00:34.902792 14948] Config: (default) stats_log = 
+[2023-08-07T19:00:34.902792 14948] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:34.902792 14948] Config: (default) umask = 
+[2023-08-07T19:00:34.902792 14948] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o module.dreamscape_window.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src module.dreamscape_window.c
+[2023-08-07T19:00:34.902792 7800 ] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/8/stats.lock
+[2023-08-07T19:00:34.908507 14948] Hostname: JMissionControl
+[2023-08-07T19:00:34.908507 14948] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.908507 14948] Compiler type: gcc
+[2023-08-07T19:00:34.908507 14948] Source file: module.dreamscape_window.c
+[2023-08-07T19:00:34.908507 14948] Object file: module.dreamscape_window.o
+[2023-08-07T19:00:34.908507 14948] Trying direct lookup
+[2023-08-07T19:00:34.909513 14948] Retrieved 530bccqltkj31cjerhugf33459g80e0ce from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/3/0bccqltkj31cjerhugf33459g80e0ceM)
+[2023-08-07T19:00:34.910527 14948] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/3/0bccqltkj31cjerhugf33459g80e0ceM
+[2023-08-07T19:00:34.928109 22160] Got result key from manifest
+[2023-08-07T19:00:34.928613 22160] Retrieved 82525sprht9caq2qqhn3sc6l6v8k3dejk from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/8/2/525sprht9caq2qqhn3sc6l6v8k3dejkR)
+[2023-08-07T19:00:34.928613 22160] Reading embedded entry #0 .o (120196 bytes)
+[2023-08-07T19:00:34.928613 22160] Writing to module.dreamscape_tools.o
+[2023-08-07T19:00:34.929618 22160] Succeeded getting cached result
+[2023-08-07T19:00:34.929618 22160] Result: direct_cache_hit
+[2023-08-07T19:00:34.929618 22160] Result: primary_storage_hit
+[2023-08-07T19:00:34.929618 22160] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/0/stats.lock
+[2023-08-07T19:00:34.930617 22160] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/9/0/stats.lock
+[2023-08-07T19:00:34.952369 18044] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:34.952369 18044] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:34.952369 18044] Config: (default) base_dir = 
+[2023-08-07T19:00:34.952369 18044] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:34.952369 18044] Config: (default) compiler = 
+[2023-08-07T19:00:34.952369 18044] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:34.952369 18044] Config: (default) compiler_type = auto
+[2023-08-07T19:00:34.952369 18044] Config: (default) compression = true
+[2023-08-07T19:00:34.952369 18044] Config: (default) compression_level = 0
+[2023-08-07T19:00:34.952369 18044] Config: (default) cpp_extension = 
+[2023-08-07T19:00:34.952369 18044] Config: (default) debug = false
+[2023-08-07T19:00:34.952369 18044] Config: (default) debug_dir = 
+[2023-08-07T19:00:34.952369 18044] Config: (default) depend_mode = false
+[2023-08-07T19:00:34.952369 18044] Config: (default) direct_mode = true
+[2023-08-07T19:00:34.952369 18044] Config: (default) disable = false
+[2023-08-07T19:00:34.952369 18044] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:34.952369 18044] Config: (default) file_clone = false
+[2023-08-07T19:00:34.952369 18044] Config: (default) hard_link = false
+[2023-08-07T19:00:34.952369 18044] Config: (default) hash_dir = true
+[2023-08-07T19:00:34.952369 18044] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:34.952369 18044] Config: (default) ignore_options = 
+[2023-08-07T19:00:34.952369 18044] Config: (default) inode_cache = false
+[2023-08-07T19:00:34.952369 18044] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:34.952369 18044] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:34.952369 18044] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:34.952369 18044] Config: (default) max_files = 0
+[2023-08-07T19:00:34.952369 18044] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:34.952369 18044] Config: (default) namespace = 
+[2023-08-07T19:00:34.952369 18044] Config: (default) path = 
+[2023-08-07T19:00:34.952369 18044] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:34.952369 18044] Config: (default) prefix_command = 
+[2023-08-07T19:00:34.952369 18044] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:34.952369 18044] Config: (default) read_only = false
+[2023-08-07T19:00:34.952369 18044] Config: (default) read_only_direct = false
+[2023-08-07T19:00:34.952369 18044] Config: (default) recache = false
+[2023-08-07T19:00:34.952369 18044] Config: (default) reshare = false
+[2023-08-07T19:00:34.952369 18044] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:34.952369 18044] Config: (default) secondary_storage = 
+[2023-08-07T19:00:34.952369 18044] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:34.952369 18044] Config: (default) stats = true
+[2023-08-07T19:00:34.952369 18044] Config: (default) stats_log = 
+[2023-08-07T19:00:34.952369 18044] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:34.952369 18044] Config: (default) umask = 
+[2023-08-07T19:00:34.952369 18044] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o module.shiboken6.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src module.shiboken6.c
+[2023-08-07T19:00:34.953370 14948] Got result key from manifest
+[2023-08-07T19:00:34.953370 14948] Retrieved 6053ctuu87lu15u92qed1nnne44022tfi from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/6/0/53ctuu87lu15u92qed1nnne44022tfiR)
+[2023-08-07T19:00:34.954371 14948] Reading embedded entry #0 .o (118877 bytes)
+[2023-08-07T19:00:34.954371 14948] Writing to module.dreamscape_window.o
+[2023-08-07T19:00:34.955370 14948] Succeeded getting cached result
+[2023-08-07T19:00:34.955370 14948] Result: direct_cache_hit
+[2023-08-07T19:00:34.955370 14948] Result: primary_storage_hit
+[2023-08-07T19:00:34.955370 14948] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/6/4/stats.lock
+[2023-08-07T19:00:34.956373 18044] Hostname: JMissionControl
+[2023-08-07T19:00:34.956373 18044] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.956373 18044] Compiler type: gcc
+[2023-08-07T19:00:34.957881 18044] Source file: module.shiboken6.c
+[2023-08-07T19:00:34.957881 18044] Object file: module.shiboken6.o
+[2023-08-07T19:00:34.957881 18044] Trying direct lookup
+[2023-08-07T19:00:34.957881 14948] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/6/4/stats.lock
+[2023-08-07T19:00:34.957881 18044] Retrieved 7cd0lpq8ro5f29tapk8jdrqtg9v64qgps from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/c/d0lpq8ro5f29tapk8jdrqtg9v64qgpsM)
+[2023-08-07T19:00:34.957881 18044] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/c/d0lpq8ro5f29tapk8jdrqtg9v64qgpsM
+[2023-08-07T19:00:34.977990 22352] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:34.977990 22352] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:34.977990 22352] Config: (default) base_dir = 
+[2023-08-07T19:00:34.977990 22352] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:34.977990 22352] Config: (default) compiler = 
+[2023-08-07T19:00:34.977990 22352] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:34.977990 22352] Config: (default) compiler_type = auto
+[2023-08-07T19:00:34.977990 22352] Config: (default) compression = true
+[2023-08-07T19:00:34.977990 22352] Config: (default) compression_level = 0
+[2023-08-07T19:00:34.977990 22352] Config: (default) cpp_extension = 
+[2023-08-07T19:00:34.977990 22352] Config: (default) debug = false
+[2023-08-07T19:00:34.977990 22352] Config: (default) debug_dir = 
+[2023-08-07T19:00:34.977990 22352] Config: (default) depend_mode = false
+[2023-08-07T19:00:34.977990 22352] Config: (default) direct_mode = true
+[2023-08-07T19:00:34.977990 22352] Config: (default) disable = false
+[2023-08-07T19:00:34.977990 22352] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:34.977990 22352] Config: (default) file_clone = false
+[2023-08-07T19:00:34.977990 22352] Config: (default) hard_link = false
+[2023-08-07T19:00:34.977990 22352] Config: (default) hash_dir = true
+[2023-08-07T19:00:34.977990 22352] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:34.977990 22352] Config: (default) ignore_options = 
+[2023-08-07T19:00:34.977990 22352] Config: (default) inode_cache = false
+[2023-08-07T19:00:34.977990 22352] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:34.977990 22352] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:34.977990 22352] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:34.977990 22352] Config: (default) max_files = 0
+[2023-08-07T19:00:34.977990 22352] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:34.977990 22352] Config: (default) namespace = 
+[2023-08-07T19:00:34.977990 22352] Config: (default) path = 
+[2023-08-07T19:00:34.977990 22352] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:34.977990 22352] Config: (default) prefix_command = 
+[2023-08-07T19:00:34.977990 22352] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:34.977990 22352] Config: (default) read_only = false
+[2023-08-07T19:00:34.977990 22352] Config: (default) read_only_direct = false
+[2023-08-07T19:00:34.977990 22352] Config: (default) recache = false
+[2023-08-07T19:00:34.977990 22352] Config: (default) reshare = false
+[2023-08-07T19:00:34.977990 22352] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:34.977990 22352] Config: (default) secondary_storage = 
+[2023-08-07T19:00:34.977990 22352] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:34.977990 22352] Config: (default) stats = true
+[2023-08-07T19:00:34.977990 22352] Config: (default) stats_log = 
+[2023-08-07T19:00:34.977990 22352] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:34.977990 22352] Config: (default) umask = 
+[2023-08-07T19:00:34.977990 22352] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o static_src\MainProgram.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src static_src\MainProgram.c
+[2023-08-07T19:00:34.982003 22352] Hostname: JMissionControl
+[2023-08-07T19:00:34.982003 22352] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:34.982003 22352] Compiler type: gcc
+[2023-08-07T19:00:34.982003 22352] Source file: static_src\MainProgram.c
+[2023-08-07T19:00:34.982003 22352] Object file: static_src\MainProgram.o
+[2023-08-07T19:00:34.982003 22352] Trying direct lookup
+[2023-08-07T19:00:34.982003 22352] Retrieved 4b53hmca8b8jpvdea5k23hp1jmlhaokfm from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/4/b/53hmca8b8jpvdea5k23hp1jmlhaokfmM)
+[2023-08-07T19:00:34.982003 22352] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/4/b/53hmca8b8jpvdea5k23hp1jmlhaokfmM
+[2023-08-07T19:00:34.998540 18044] Got result key from manifest
+[2023-08-07T19:00:34.998540 18044] Retrieved 5cdbc98757u6elf4p7q6k7go1lvcl0276 from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/c/dbc98757u6elf4p7q6k7go1lvcl0276R)
+[2023-08-07T19:00:34.999547 18044] Reading embedded entry #0 .o (11419 bytes)
+[2023-08-07T19:00:34.999547 18044] Writing to module.shiboken6.o
+[2023-08-07T19:00:34.999547 18044] Succeeded getting cached result
+[2023-08-07T19:00:35.000547 18044] Result: direct_cache_hit
+[2023-08-07T19:00:35.000547 18044] Result: primary_storage_hit
+[2023-08-07T19:00:35.000547 18044] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/c/stats.lock
+[2023-08-07T19:00:35.001548 18044] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/c/stats.lock
+[2023-08-07T19:00:35.017645 22352] Got result key from manifest
+[2023-08-07T19:00:35.018148 22352] Retrieved d21dun8ob5u0lbbjepev1e60jnja1lom4 from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/d/2/1dun8ob5u0lbbjepev1e60jnja1lom4R)
+[2023-08-07T19:00:35.018148 22352] Reading embedded entry #0 .o (8666 bytes)
+[2023-08-07T19:00:35.018148 22352] Writing to static_src\MainProgram.o
+[2023-08-07T19:00:35.018148 22352] Succeeded getting cached result
+[2023-08-07T19:00:35.018148 22352] Result: direct_cache_hit
+[2023-08-07T19:00:35.018148 22352] Result: primary_storage_hit
+[2023-08-07T19:00:35.018148 22352] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/0/stats.lock
+[2023-08-07T19:00:35.019152 22352] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/5/0/stats.lock
+[2023-08-07T19:00:35.114624 27116] === CCACHE 4.6 STARTED =========================================
+[2023-08-07T19:00:35.114624 27116] Config: (default) absolute_paths_in_stderr = false
+[2023-08-07T19:00:35.114624 27116] Config: (default) base_dir = 
+[2023-08-07T19:00:35.114624 27116] Config: (environment) cache_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache
+[2023-08-07T19:00:35.114624 27116] Config: (default) compiler = 
+[2023-08-07T19:00:35.114624 27116] Config: (default) compiler_check = mtime
+[2023-08-07T19:00:35.114624 27116] Config: (default) compiler_type = auto
+[2023-08-07T19:00:35.114624 27116] Config: (default) compression = true
+[2023-08-07T19:00:35.114624 27116] Config: (default) compression_level = 0
+[2023-08-07T19:00:35.114624 27116] Config: (default) cpp_extension = 
+[2023-08-07T19:00:35.114624 27116] Config: (default) debug = false
+[2023-08-07T19:00:35.114624 27116] Config: (default) debug_dir = 
+[2023-08-07T19:00:35.114624 27116] Config: (default) depend_mode = false
+[2023-08-07T19:00:35.114624 27116] Config: (default) direct_mode = true
+[2023-08-07T19:00:35.114624 27116] Config: (default) disable = false
+[2023-08-07T19:00:35.114624 27116] Config: (default) extra_files_to_hash = 
+[2023-08-07T19:00:35.114624 27116] Config: (default) file_clone = false
+[2023-08-07T19:00:35.114624 27116] Config: (default) hard_link = false
+[2023-08-07T19:00:35.114624 27116] Config: (default) hash_dir = true
+[2023-08-07T19:00:35.114624 27116] Config: (default) ignore_headers_in_manifest = 
+[2023-08-07T19:00:35.114624 27116] Config: (default) ignore_options = 
+[2023-08-07T19:00:35.114624 27116] Config: (default) inode_cache = false
+[2023-08-07T19:00:35.114624 27116] Config: (default) keep_comments_cpp = false
+[2023-08-07T19:00:35.114624 27116] Config: (default) limit_multiple = 0.8
+[2023-08-07T19:00:35.114624 27116] Config: (environment) log_file = C:\Users\JASONR~1\Desktop\DREAMS~1\DREAMS~1\dreamscape.build\ccache-19292.txt
+[2023-08-07T19:00:35.114624 27116] Config: (default) max_files = 0
+[2023-08-07T19:00:35.114624 27116] Config: (default) max_size = 5.0G
+[2023-08-07T19:00:35.114624 27116] Config: (default) namespace = 
+[2023-08-07T19:00:35.114624 27116] Config: (default) path = 
+[2023-08-07T19:00:35.114624 27116] Config: (default) pch_external_checksum = false
+[2023-08-07T19:00:35.114624 27116] Config: (default) prefix_command = 
+[2023-08-07T19:00:35.114624 27116] Config: (default) prefix_command_cpp = 
+[2023-08-07T19:00:35.114624 27116] Config: (default) read_only = false
+[2023-08-07T19:00:35.114624 27116] Config: (default) read_only_direct = false
+[2023-08-07T19:00:35.114624 27116] Config: (default) recache = false
+[2023-08-07T19:00:35.114624 27116] Config: (default) reshare = false
+[2023-08-07T19:00:35.114624 27116] Config: (default) run_second_cpp = true
+[2023-08-07T19:00:35.114624 27116] Config: (default) secondary_storage = 
+[2023-08-07T19:00:35.114624 27116] Config: (environment) sloppiness = include_file_mtime, include_file_ctime
+[2023-08-07T19:00:35.114624 27116] Config: (default) stats = true
+[2023-08-07T19:00:35.114624 27116] Config: (default) stats_log = 
+[2023-08-07T19:00:35.114624 27116] Config: (default) temporary_dir = C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp
+[2023-08-07T19:00:35.114624 27116] Config: (default) umask = 
+[2023-08-07T19:00:35.114624 27116] Command line: C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\ccache\v4.6\ccache.exe C:\Users\Jason Reek\AppData\Local\Nuitka\Nuitka\Cache\downloads\gcc\x86_64\11.3.0-14.0.3-10.0.0-msvcrt-r3\mingw64\bin\gcc.exe -o static_src\CompiledFunctionType.o -c -std=c11 -fvisibility=hidden -fwrapv -pipe -fpartial-inlining -ftrack-macro-expansion=0 -Wno-deprecated-declarations -fno-var-tracking -Wno-misleading-indentation -fcompare-debug-second -O3 -D_WIN32_WINNT=0x0501 -D__NUITKA_NO_ASSERT__ -D_NUITKA_STANDALONE -DMS_WIN64 -D_NUITKA_CONSTANTS_FROM_RESOURCE -D_NUITKA_FROZEN=155 -D_NUITKA_EXE -IC:\Python311\include -I. -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\include -IC:\PYTHON~1\Lib\SITE-P~1\nuitka\build\static_src static_src\CompiledFunctionType.c
+[2023-08-07T19:00:35.118149 27116] Hostname: JMissionControl
+[2023-08-07T19:00:35.118149 27116] Working directory: C:/Users/JASONR~1/Desktop/DREAMS~1/DREAMS~1/dreamscape.build
+[2023-08-07T19:00:35.118149 27116] Compiler type: gcc
+[2023-08-07T19:00:35.118149 27116] Source file: static_src\CompiledFunctionType.c
+[2023-08-07T19:00:35.118149 27116] Object file: static_src\CompiledFunctionType.o
+[2023-08-07T19:00:35.118149 27116] Trying direct lookup
+[2023-08-07T19:00:35.118149 27116] Retrieved 75149v3jkn4pcgpv8ghtke0e3ej8bdfki from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/5/149v3jkn4pcgpv8ghtke0e3ej8bdfkiM)
+[2023-08-07T19:00:35.119163 27116] Looking for result key in C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/7/5/149v3jkn4pcgpv8ghtke0e3ej8bdfkiM
+[2023-08-07T19:00:35.159731 27116] Got result key from manifest
+[2023-08-07T19:00:35.159731 27116] Retrieved d438cied4ocqpaelb74995nsqooum82h0 from primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/d/4/38cied4ocqpaelb74995nsqooum82h0R)
+[2023-08-07T19:00:35.163727 27116] Reading embedded entry #0 .o (902989 bytes)
+[2023-08-07T19:00:35.163727 27116] Writing to static_src\CompiledFunctionType.o
+[2023-08-07T19:00:35.167233 27116] Succeeded getting cached result
+[2023-08-07T19:00:35.167233 27116] Result: direct_cache_hit
+[2023-08-07T19:00:35.167233 27116] Result: primary_storage_hit
+[2023-08-07T19:00:35.168232 27116] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/c/stats.lock
+[2023-08-07T19:00:35.169262 27116] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/e/c/stats.lock
+[2023-08-07T19:00:35.611543 28996] Got result key from preprocessor
+[2023-08-07T19:00:35.611543 28996] No cf6fj32mfdtugpeoh1cng8jtoubkv37ti in primary storage
+[2023-08-07T19:00:35.612542 28996] Running real compiler
+[2023-08-07T19:00:41.945767 28996] Using default compression level 1
+[2023-08-07T19:00:41.945767 28996] Storing embedded entry #0 .o (414612 bytes) from module.dreamscape_tiles.o
+[2023-08-07T19:00:41.960590 28996] Stored cf6fj32mfdtugpeoh1cng8jtoubkv37ti in primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/f/6fj32mfdtugpeoh1cng8jtoubkv37tiR)
+[2023-08-07T19:00:41.964694 28996] Adding result key to C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/7/86j1c4kpogp5m1fuimklqvgsii9o9reM
+[2023-08-07T19:00:41.974200 28996] Using default compression level 1
+[2023-08-07T19:00:41.975200 28996] Stored c786j1c4kpogp5m1fuimklqvgsii9o9re in primary storage (C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/7/86j1c4kpogp5m1fuimklqvgsii9o9reM)
+[2023-08-07T19:00:41.975200 28996] Result: cache_miss
+[2023-08-07T19:00:41.975200 28996] Result: direct_cache_miss
+[2023-08-07T19:00:41.975200 28996] Result: preprocessed_cache_miss
+[2023-08-07T19:00:41.975200 28996] Result: primary_storage_miss
+[2023-08-07T19:00:41.975200 28996] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/stats.lock
+[2023-08-07T19:00:41.976192 28996] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/stats.lock
+[2023-08-07T19:00:41.976192 28996] Acquired lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/stats.lock
+[2023-08-07T19:00:41.980988 28996] Releasing lock C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/c/stats.lock
+[2023-08-07T19:00:41.980988 28996] Unlink C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp/tmp.stderr.gjBah8
+[2023-08-07T19:00:41.980988 28996] Unlink C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp/tmp.stdout.p7i09w
+[2023-08-07T19:00:41.981988 28996] Unlink C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp/tmp.cpp_stderr.wHViGj
+[2023-08-07T19:00:41.981988 28996] Unlink C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp/tmp.cpp_stdout.fdj2xP.i
+[2023-08-07T19:00:41.981988 28996] Unlink C:\Users\JASONR~1\AppData\Local\Nuitka\Nuitka\Cache\ccache/tmp/tmp.cpp_stdout.fdj2xP

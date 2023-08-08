@@ -1,5 +1,6 @@
 import json
 import copy
+from PySide6.QtGui import (QPainter, QPixmap)
 
 class TilesetLayers:
     def __init__(self):
@@ -36,7 +37,33 @@ class TilesetLayers:
 
         # Initialize position index map
         self.buildPositionIndexMap()
-    
+
+    def __deepcopy__(self, memo):
+        new_obj = TilesetLayers()
+            
+        # Manually deep copy simple attributes
+        for attr, value in self.__dict__.items():
+            if attr not in ['layer_pixmaps', 'base_pixmap']:
+                setattr(new_obj, attr, copy.deepcopy(value, memo))
+
+        # Clone the pixmaps in layer_pixmaps
+        new_obj.layer_pixmaps = [self._clone_pixmap(pixmap) for pixmap in self.layer_pixmaps]
+            
+        # Clone the base_pixmap
+        new_obj.base_pixmap = self._clone_pixmap(self.base_pixmap)
+
+        return new_obj
+
+    def _clone_pixmap(self, pixmap):
+        if pixmap is None:
+            return None
+            
+        new_pixmap = QPixmap(pixmap.size())
+        painter = QPainter(new_pixmap)
+        painter.drawPixmap(0, 0, pixmap)
+        painter.end()
+        return new_pixmap
+
     def buildPositionIndexMap(self):
         """Builds the position to index map for each layer."""
         for layer_name, layer_data in self.layers.items():
@@ -79,7 +106,7 @@ class TilesetLayers:
             return self.order[index]
         return None
     
-    def tilesetNameExists(self, name: int):
+    def tilesetNameExists(self, name: str):
         """Check if a tileset name exists."""
         return name in self.order
     

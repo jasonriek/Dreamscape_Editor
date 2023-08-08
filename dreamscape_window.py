@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import (QMainWindow, QToolBar, QWidget, QScrollArea, QMenu, QDockWidget, 
                                QCheckBox, QVBoxLayout, QSizePolicy, QStyle)
-from PySide6.QtGui import (QAction, QIcon, QCursor, QPixmap, QActionGroup)
+from PySide6.QtGui import (QAction, QIcon, QKeySequence, QCursor, QPixmap, QActionGroup)
 from PySide6.QtCore import (Qt, QRect, QSize)
 
 from dreamscape_layers import (Layers)
@@ -208,8 +208,22 @@ class MainWindow(QMainWindow):
         self.action_exit.triggered.connect(self.close)
         self.menu_file.addAction(self.action_exit)
 
-        # Create the Edit menu
+
         self.menu_edit = QMenu('Edit', self)
+        
+        # Create the Edit menu
+        undo_action = QAction("Undo", self)
+        undo_action.setShortcut(QKeySequence.StandardKey.Undo)
+        undo_action.triggered.connect(self.tile_canvas.undo)
+        self.menu_edit.addAction(undo_action)
+
+        redo_action = QAction("Redo", self)
+        redo_action.setShortcut(QKeySequence.StandardKey.Redo)
+        redo_action.triggered.connect(self.tile_canvas.redo)
+        self.menu_edit.addAction(redo_action)
+
+        self.menu_edit.addSeparator()
+
         self.action_set_world_size = QAction('Set World Size', self)
         self.action_set_world_size.triggered.connect(self.setWorldSize)
         #self.action_set_world_size.triggered.connect(self.show_set_world_size_dialog)
