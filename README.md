@@ -2,6 +2,7 @@
 
 ## Helpful Design Suggestions
 - A seperation between the layer number and name
+- Right eye dropper
 
 ## Potential Polished Features
 - Give the ability to change bar color of the layers to whatever you want.
@@ -21,4 +22,8 @@
   - Have music transition options (like crossfade and others) on the transition or "door" window for moving from map to map.
 
 - 08/05/2023
-  - Add a dungeon crawler like feature, where the player can explore a 90's like dungeon crawler envrionment (2D-3D design). 
+  - Add a dungeon crawler like feature, where the player can explore a 90's like dungeon crawler envrionment (2D-3D design).
+
+- 08/07/2023
+  - A tile that will override any collisions. It will be invisible when the game runs, but in the editor will be a translucent X in the outline of a tile, and another one with an O. The O block will be 
+    passable, the X unpassable, and a third will be a block you can go behind like a tree top. So all together 3 collision/passability override blocks.
