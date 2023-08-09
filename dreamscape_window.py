@@ -18,6 +18,9 @@ class MainWindow(QMainWindow):
         # Create and set up the TileCanvas dock
         scroll_area = QScrollArea(self)
         self.tile_canvas = TileCanvas(tileset_bar, scroll_area)
+        self.tile_canvas.undoClicked.connect(self.enableUndo)
+        self.tile_canvas.redoClicked.connect(self.enableRedo)
+        self.tile_canvas.initUndo.connect(self.enableUndo)
 
         # Create and set up the TileSelector dock
         tileset_selector_area = QWidget(self)
@@ -38,7 +41,8 @@ class MainWindow(QMainWindow):
         tileset_bar.tile_selector.active_tile_widget.collision_checkbox.stateChanged.connect(self.tile_canvas.setTileCollision)
         tileset_bar.tile_selector.active_tile_widget.overlay_checkbox.stateChanged.connect(self.tile_canvas.setTileOverlay)
         tileset_bar.tile_selector.active_tile_widget.worldTileClicked.connect(tileset_bar.tile_selector.selectTile)
-        self.tile_canvas.tileDropperClicked.connect(tileset_bar.tile_selector.selectTile)
+        self.tile_canvas.tileDropperClicked.connect(tileset_bar.tile_selector.selectTileFromDropper)
+        self.tile_canvas.tileDropperClicked.connect(self.setDropperIcon)
         self.tile_canvas.tileSelected.connect(tileset_bar.tile_selector.active_tile_widget.updateTileProperties)
 
         layers_area = QWidget(self)
@@ -74,11 +78,11 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Dreamscape Editor")
         self.setupTopMenu()
         self.setupToolBar()
-        self.tile_canvas.tileDropperClicked.connect(self.pencil_action.toggle)
         self.setCentralWidget(scroll_area)
 
         tileset_bar.tile_selector.selectTile(0, 2)
         self.select_action.toggle()
+        self.tile_canvas.tileDropperReleased.connect(self.getTool)
         
 
     def _getToolIcon(self, x, y, w=64, h=64):
@@ -94,6 +98,9 @@ class MainWindow(QMainWindow):
         self.scaled_pix = clipped.scaled(QSize(20, 20), Qt.AspectRatioMode.KeepAspectRatio)
         self.current_cursor = QCursor(self.scaled_pix, -1, -1)
         self.tile_canvas.setCursor(self.current_cursor)
+
+    def setDropperIcon(self):
+        self.setToolCursorIcon(64*4, 0)
 
     def setCursorIconByTool(self, tool_name:str):
         if tool_name == 'Pencil':
@@ -112,7 +119,28 @@ class MainWindow(QMainWindow):
             self.setToolCursorIcon(64*4, 0)
         elif tool_name == 'Select':
             self.setDefaultCursor()
-        
+
+    def getTool(self):
+        tool_id = dreamscape_config.paint_tools.selection
+        tool = self.pencil_action.toggle()   
+        if tool_id == dreamscape_config.PENCIL:
+            tool = self.pencil_action.toggle()
+        elif tool_id == dreamscape_config.BRUSH:
+            tool = self.brush_action.toggle()
+        elif tool_id == dreamscape_config.DRAG_DRAW:
+            tool = self.drag_draw_action.toggle()
+        elif tool_id == dreamscape_config.DRAG:
+            tool = self.drag_action.toggle()
+        elif tool_id == dreamscape_config.BUCKET:
+            tool = self.bucket_action.toggle()
+        elif tool_id == dreamscape_config.ERASER:
+            tool = self.eraser_action.toggle()
+        elif tool_id == dreamscape_config.DROPPER:
+            tool = self.dropper_action.toggle()
+        elif tool_id == dreamscape_config.SELECT:
+            tool = self.select_action.toggle()
+        return tool
+          
     def setToolSelection(self, state):
         tool = self.tool_group.checkedAction()
         if tool and state:
@@ -201,6 +229,12 @@ class MainWindow(QMainWindow):
         self.tool_group.addAction(self.eraser_action)
         self.tool_group.setExclusive(True)
 
+    def enableUndo(self, enable:bool):
+        self.undo_action.setEnabled(enable)
+    
+    def enableRedo(self, enable:bool):
+        self.redo_action.setEnabled(enable)
+
     def setupTopMenu(self):
         # Create the File menu
         self.menu_file = QMenu('File', self)
@@ -208,19 +242,18 @@ class MainWindow(QMainWindow):
         self.action_exit.triggered.connect(self.close)
         self.menu_file.addAction(self.action_exit)
 
-
         self.menu_edit = QMenu('Edit', self)
         
         # Create the Edit menu
-        undo_action = QAction("Undo", self)
-        undo_action.setShortcut(QKeySequence.StandardKey.Undo)
-        undo_action.triggered.connect(self.tile_canvas.undo)
-        self.menu_edit.addAction(undo_action)
+        self.undo_action = QAction("Undo", self)
+        self.undo_action.setShortcut(QKeySequence.StandardKey.Undo)
+        self.undo_action.triggered.connect(self.tile_canvas.undo)
+        self.menu_edit.addAction(self.undo_action)
 
-        redo_action = QAction("Redo", self)
-        redo_action.setShortcut(QKeySequence.StandardKey.Redo)
-        redo_action.triggered.connect(self.tile_canvas.redo)
-        self.menu_edit.addAction(redo_action)
+        self.redo_action = QAction("Redo", self)
+        self.redo_action.setShortcut(QKeySequence.StandardKey.Redo)
+        self.redo_action.triggered.connect(self.tile_canvas.redo)
+        self.menu_edit.addAction(self.redo_action)
 
         self.menu_edit.addSeparator()
 
@@ -242,7 +275,6 @@ class MainWindow(QMainWindow):
         self.action_show_tile_collisions.setChecked(True)
         self.action_show_tile_collisions.toggled.connect(self.tile_canvas.toggleShowTileCollisons)
         self.menu_view.addAction(self.action_show_tile_collisions)
-
 
         # Add menus to the menu bar
         self.menuBar().addMenu(self.menu_file)

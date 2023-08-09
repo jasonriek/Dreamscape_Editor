@@ -69,6 +69,11 @@ class TileSelector(QWidget):
                 painter.drawRect(tile[0] * dreamscape_config.TILE_SIZE, tile[1] * dreamscape_config.TILE_SIZE, dreamscape_config.TILE_SIZE, dreamscape_config.TILE_SIZE)
         painter.end()
 
+    def selectTileFromDropper(self, x, y):
+        self.selectTile(x, y)
+        self.selected_tiles_pixmap = self.selected_tile_pixmap
+        self.selected_tiles = [(x, y)]
+
     def selectTile(self, x, y):
         # Emitting only the first tile in this case, modify as needed
         if self.selected_tiles:
@@ -82,6 +87,7 @@ class TileSelector(QWidget):
             )
             self.tileSelected.emit(x, y)
             self.active_tile_widget.update_active_tile_display(self.selected_tile_pixmap)
+            self.update()
 
     def calculateDragArea(self, event:QMouseEvent):
         """Fill tiles in the rectangular drag area."""
@@ -227,8 +233,12 @@ class TilesetBar(QWidget):
 
 class TileCanvas(QWidget):
     tileDropperClicked = Signal(int, int)
+    tileDropperReleased = Signal(int, int)
     tileSelected = Signal(list)
     mouseMoved = Signal(int, int)
+    undoClicked = Signal(bool)
+    redoClicked = Signal(bool)
+    initUndo = Signal(bool)
     def __init__(self, tileset_bar, scroll_area:QScrollArea):
         super().__init__()
         self.setMouseTracking(True)
@@ -259,6 +269,7 @@ class TileCanvas(QWidget):
         self.fill_y_start = 0
         self.fill_x_end = 0
         self.fill_y_end = 0
+        self.undo_started = False
         self.action_index = -1
         self.saveState()
 
@@ -272,6 +283,9 @@ class TileCanvas(QWidget):
         self.action_history.append(state)
         self.action_index += 1
         print("After saveState, action_index:", self.action_index, "History length:", len(self.action_history))
+        if not self.undo_started:
+            self.initUndo.emit(True)
+            self.undo_started = True
 
     def undo(self):
         if self.action_index > 0:
@@ -280,6 +294,8 @@ class TileCanvas(QWidget):
             self.update()  # Redraw the canvas
             self.redraw_world()
             print("After undo, action_index:", self.action_index)
+            self.undoClicked.emit(self.action_index > 0)
+            self.redoClicked.emit(self.action_index < len(self.action_history))
 
     def redo(self):
         if self.action_index < len(self.action_history) - 1:
@@ -288,6 +304,8 @@ class TileCanvas(QWidget):
             self.update()  # Redraw the canvas
             self.redraw_world()
             print("After redo, action_index:", self.action_index)
+            self.redoClicked.emit(self.action_index < (len(self.action_history) - 1))
+            self.undoClicked.emit(self.action_index > 0)
 
     def resetBucketFillingFlag(self):
         self.bucket_filling = False
@@ -605,10 +623,11 @@ class TileCanvas(QWidget):
             stack.extend([(x+1, y), (x-1, y), (x, y+1), (x, y-1)])
 
     def mousePressEvent(self, event: QMouseEvent):
+        x = int(event.position().x()) // dreamscape_config.TILE_SIZE
+        y = int(event.position().y()) // dreamscape_config.TILE_SIZE
         # Start drawing when left mouse button is pressed
         if event.button() == Qt.MouseButton.LeftButton and not self.bucket_filling:
-            x = int(event.position().x()) // dreamscape_config.TILE_SIZE
-            y = int(event.position().y()) // dreamscape_config.TILE_SIZE
+
             paint_tool = dreamscape_config.paint_tools.selection
             
             if paint_tool == dreamscape_config.PENCIL:
@@ -673,13 +692,20 @@ class TileCanvas(QWidget):
                     self.tileSelected.emit(self.selected_tile)
                 
             event.accept()
+        
+        elif event.button() == Qt.MouseButton.RightButton and not self.bucket_filling:
+            target_tile = self.getTile(x, y)
+            if target_tile:
+                self.tileDropperClicked.emit(target_tile[0], target_tile[1])
         else:
             event.ignore()
             
     def mouseReleaseEvent(self, event: QMouseEvent):
+        x = int(event.position().x()) // dreamscape_config.TILE_SIZE
+        y = int(event.position().y()) // dreamscape_config.TILE_SIZE
         paint_tool = dreamscape_config.paint_tools.selection
         # Stop drawing when left mouse button is released
-        if event.button() == Qt.LeftButton:
+        if event.button() == Qt.MouseButton.LeftButton:
             if paint_tool == dreamscape_config.DRAG_DRAW:
                 self.fillDragArea()
             elif paint_tool == dreamscape_config.DRAG and self.start_drag_point is not None:
@@ -692,6 +718,10 @@ class TileCanvas(QWidget):
             self.update()
             self.redraw_world()
             event.accept()
+        elif event.button() == Qt.MouseButton.RightButton:
+            target_tile = self.getTile(x, y)
+            if target_tile:
+                self.tileDropperReleased.emit(target_tile[0], target_tile[1])
         else:
             event.ignore()
 
