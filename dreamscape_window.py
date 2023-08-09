@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import (QMainWindow, QToolBar, QWidget, QScrollArea, QMenu, QDockWidget, 
-                               QCheckBox, QVBoxLayout, QSizePolicy, QStyle)
+                               QCheckBox, QVBoxLayout, QSizePolicy, QFileDialog)
 from PySide6.QtGui import (QAction, QIcon, QKeySequence, QCursor, QPixmap, QActionGroup)
 from PySide6.QtCore import (Qt, QRect, QSize)
 
@@ -48,18 +48,18 @@ class MainWindow(QMainWindow):
         layers_area = QWidget(self)
         layers_layout = QVBoxLayout(layers_area)
         layers_layout.setContentsMargins(0,0,0,0)
-        layers_widget = Layers(self.tile_canvas)
-        layers_widget.tilesetRemoved.connect(tileset_bar.removeTabByTilesetPath)
-        layers_layout.addWidget(layers_widget)
+        self.layers_widget = Layers(self.tile_canvas)
+        self.layers_widget.tilesetRemoved.connect(tileset_bar.removeTabByTilesetPath)
+        layers_layout.addWidget(self.layers_widget)
         
-        self.tile_canvas.layers_widget = layers_widget
+        self.tile_canvas.layers_widget = self.layers_widget
         
         scroll_area.setWidget(self.tile_canvas)
         scroll_area.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
         
         # Create and set up the ToolDock
         tool_dock = QDockWidget("Tools", self)
-        tools = Tools(tileset_bar, self.tile_canvas, layers_widget)
+        tools = Tools(tileset_bar, self.tile_canvas, self.layers_widget)
         
 
         tools.addToLayout(tileset_bar.tile_selector.active_tile_widget)
@@ -238,6 +238,23 @@ class MainWindow(QMainWindow):
     def setupTopMenu(self):
         # Create the File menu
         self.menu_file = QMenu('File', self)
+
+        # Open action
+        self.action_open = QAction('Open', self)
+        self.action_open.triggered.connect(self.openFile)
+        self.menu_file.addAction(self.action_open)
+
+        # Save action
+        self.action_save = QAction('Save', self)
+        self.action_save.triggered.connect(self.saveFile)
+        self.menu_file.addAction(self.action_save)
+
+        # Save As action
+        self.action_save_as = QAction('Save As', self)
+        self.action_save_as.triggered.connect(self.saveFileAs)
+        self.menu_file.addAction(self.action_save_as)
+
+        self.menu_file.addSeparator()
         self.action_exit = QAction('Exit', self)
         self.action_exit.triggered.connect(self.close)
         self.menu_file.addAction(self.action_exit)
@@ -291,3 +308,29 @@ class MainWindow(QMainWindow):
             dreamscape_config.tileset_layers.world_size_width = w
             dreamscape_config.tileset_layers.world_size_height = h
             self.tile_canvas.resize_canvas(dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.tileset_layers.displayHeight())
+
+    def openFile(self):
+        # Show an Open File dialog and get the selected file path
+        file_path, _ = QFileDialog.getOpenFileName(self, "Open File", "", "Tileset Files (*.ts);;All Files (*)")
+        
+        if file_path:
+            # Logic to load the file data and update the TileCanvas
+            dreamscape_config.tileset_layers = dreamscape_config.loadFromFile(file_path)
+            self.layers_widget.clear()
+            for layer in dreamscape_config.tileset_layers.layers.values():
+                self.layers_widget.addLayer(layer['name'], layer['tileset'], False)
+            self.tile_canvas.update()
+            self.tile_canvas.redraw_world()
+
+    def saveFile(self):
+        # Logic to save the current data
+        # If there's already an existing path, save to it. Otherwise, show the Save As dialog.
+        pass
+
+    def saveFileAs(self):
+        # Show a Save File As dialog and get the selected file path
+        file_path, _ = QFileDialog.getSaveFileName(self, "Save File As", "", "Tileset Files (*.ts);;All Files (*)")
+        
+        if file_path:
+            # Logic to save the current data to the selected file
+            dreamscape_config.saveToFile(dreamscape_config.tileset_layers, file_path)

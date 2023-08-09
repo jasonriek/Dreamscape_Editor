@@ -182,9 +182,10 @@ class Layers(QWidget):
         # Show the context menu
         context_menu.exec(self.view.viewport().mapToGlobal(position))
     
-    def addLayer(self, name:str, path:str):
+    def addLayer(self, name:str, path:str, create_pixmaps=True):
         dreamscape_config.tileset_layers.appendTilesetLayer(name, path, 32, 32)
-        dreamscape_config.tileset_layers.layer_pixmaps.append(QPixmap(dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.tileset_layers.displayHeight()))
+        if create_pixmaps:
+            dreamscape_config.tileset_layers.layer_pixmaps.append(QPixmap(dreamscape_config.tileset_layers.displayWidth(), dreamscape_config.tileset_layers.displayHeight()))
         row = self.model.rowCount()
         new_layer = {'name': f"[Layer {row + 1}]   {name}"}
         self.model.addLayer(new_layer)
@@ -213,7 +214,13 @@ class Layers(QWidget):
                 QMessageBox.warning(self, 'Name Already Exists', f'Layer name "{layer_name}" already exists.')
             else:
                 self.addLayer(layer_name, dreamscape_config.tileset_layers.active_layer_path)
-    
+
+    def clear(self):
+        self.model.beginRemoveRows(QModelIndex(), 0, self.model.rowCount() - 1)
+        self.model.layers.clear()
+        self.model.endRemoveRows()
+
+
     # New method to handle removing the selected layer from the context menu
     def remove_selected_layer(self):
         current_index = self.get_selected_layer_index()
