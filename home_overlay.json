@@ -1,122 +1,227 @@
 {
-  "name": "World Overlay",
-  "world_size": {
-    "width": 150,
-    "height": 150
+ "name": "World Overlay",
+ "world_size": {
+  "width": 150,
+  "height": 150
+ },
+ "layers": [
+  {
+   "name": "c1",
+   "tileset": "/images/jportfolio/tilemaps/cyberpunk_1_assets_1.png",
+   "tile_width": 32,
+   "tile_height": 32,
+   "z": 0,
+   "tiles": [
+    [
+     2,
+     0,
+     8,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     24,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     9,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     10,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     11,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     12,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     13,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     14,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     15,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     16,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     17,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     18,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     19,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     20,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     21,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     22,
+     6,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     23,
+     6,
+     1,
+     1
+    ]
+   ]
   },
-  "layers": {
-    "Cyber Punk 1": {
-      "name": "Cyber Punk 1",
-      "tileset": "cyberpunk_1_assets_1.png",
-      "tile_width": 32,
-      "tile_height": 32,
-      "z": 0,
-      "tiles": [
-        [
-          0,
-          0,
-          11,
-          6,
-          0,
-          1
-        ],
-        [
-          2,
-          0,
-          12,
-          6,
-          0,
-          1
-        ],
-        [
-          2,
-          0,
-          13,
-          6,
-          0,
-          1
-        ],
-        [
-          2,
-          0,
-          14,
-          6,
-          0,
-          1
-        ],
-        [
-          2,
-          0,
-          15,
-          6,
-          0,
-          1
-        ],
-        [
-          2,
-          0,
-          16,
-          6,
-          0,
-          1
-        ],
-        [
-          2,
-          0,
-          17,
-          6,
-          0,
-          1
-        ],
-        [
-          2,
-          0,
-          18,
-          6,
-          0,
-          1
-        ],
-        [
-          2,
-          0,
-          19,
-          6,
-          0,
-          1
-        ],
-        [
-          2,
-          0,
-          20,
-          6,
-          0,
-          1
-        ],
-        [
-          1,
-          0,
-          21,
-          6,
-          0,
-          1
-        ]
-      ]
-    },
-    "c1": {
-      "name": "c1",
-      "tileset": "cyberpunk_1_assets_1.png",
-      "tile_width": 32,
-      "tile_height": 32,
-      "z": 0,
-      "tiles": []
-    },
-    "Cottage": {
-      "name": "Cottage",
-      "tileset": "C:/Users/Jason Reek/Desktop/DreamscapeEditor/Dreamscape_Editor/Cottage_Tileset.png",
-      "tile_width": 32,
-      "tile_height": 32,
-      "z": 0,
-      "tiles": []
-    }
+  {
+   "name": "Cyber Punk 1",
+   "tileset": "/images/jportfolio/tilemaps/cyberpunk_1_assets_1.png",
+   "tile_width": 32,
+   "tile_height": 32,
+   "z": 0,
+   "tiles": []
+  },
+  {
+   "name": "Dark Forest Terrain",
+   "tileset": "/images/jportfolio/tilemaps/darkforest_1_tiles_1.png",
+   "tile_width": 32,
+   "tile_height": 32,
+   "z": 0,
+   "tiles": []
+  },
+  {
+   "name": "Dark Foerest",
+   "tileset": "/images/jportfolio/tilemaps/darkforest_1_assets_1.png",
+   "tile_width": 32,
+   "tile_height": 32,
+   "z": 0,
+   "tiles": [
+    [
+     1,
+     0,
+     9,
+     9,
+     0,
+     1
+    ],
+    [
+     2,
+     0,
+     10,
+     9,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     8,
+     10,
+     0,
+     1
+    ],
+    [
+     0,
+     2,
+     8,
+     11,
+     0,
+     1
+    ],
+    [
+     1,
+     2,
+     9,
+     11,
+     0,
+     1
+    ],
+    [
+     2,
+     2,
+     10,
+     11,
+     0,
+     1
+    ]
+   ]
   }
+ ]
 }

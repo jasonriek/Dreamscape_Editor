@@ -243,9 +243,11 @@ class TilesetLayers:
 
     def getJson(self):
         """Return the class data in JSON format."""
+        base_src = self.base_tile_src.split('/')[-1]
+        base_path = f'/images/jportfolio/tilemaps/{base_src}'
         layers = [{
             'name': 'base',
-            'tileset': self.base_tile_src,
+            'tileset': base_path,
             'tile_width': self.base_tile_src_w,
             'tile_height': self.base_tile_src_h,
             'z': 0,
@@ -255,7 +257,7 @@ class TilesetLayers:
         modified_layers = copy.deepcopy(self.layers)
         overlay_layers =  copy.deepcopy(self.layers)
 
-        for layer in reversed(self.order):
+        for layer in self.order:
             tiles = []
             overlay_tiles = []
             for tile in self.layers[layer]['tiles']:
@@ -266,7 +268,9 @@ class TilesetLayers:
             modified_layers[layer]['tiles'] = tiles
             overlay_layers[layer]['tiles'] = overlay_tiles
         
-        layers.extend([self._modifyImgPath(modified_layers[layer]) for layer in self.order])
+        order = [layer for layer in reversed(self.order)]
+        overlay_layers = [self._modifyImgPath(overlay_layers[layer]) for layer in order]
+        layers.extend([self._modifyImgPath(modified_layers[layer]) for layer in order])
 
         layers_json = json.dumps({
             'name': self.name,
@@ -275,13 +279,13 @@ class TilesetLayers:
             'start_position': {'x': self.start_position_x, 'y': self.start_position_y},
             'doors': self.doors,
             'layers': layers
-        }, indent=2)
+        }, indent=1)
 
         overlay_json = json.dumps({
             'name': self.name + ' Overlay',
             'world_size': {'width': self.world_size_width, 'height': self.world_size_height},
             'layers': overlay_layers
 
-        }, indent=2)
+        }, indent=1)
 
         return layers_json, overlay_json 

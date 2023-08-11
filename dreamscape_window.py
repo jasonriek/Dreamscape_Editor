@@ -13,11 +13,11 @@ import dreamscape_config
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        tileset_bar = TilesetBar()
+        self.tileset_bar = TilesetBar()
         
         # Create and set up the TileCanvas dock
         scroll_area = QScrollArea(self)
-        self.tile_canvas = TileCanvas(tileset_bar, scroll_area)
+        self.tile_canvas = TileCanvas(self.tileset_bar, scroll_area)
         self.tile_canvas.undoClicked.connect(self.enableUndo)
         self.tile_canvas.redoClicked.connect(self.enableRedo)
         self.tile_canvas.initUndo.connect(self.enableUndo)
@@ -28,28 +28,28 @@ class MainWindow(QMainWindow):
         tileset_selector_layout.setContentsMargins(0,0,0,0)
         self.tileset_selector_grid_checkbox = QCheckBox('Tileset Grid', self)
         self.tileset_selector_grid_checkbox.setChecked(False)
-        self.tileset_selector_grid_checkbox.stateChanged.connect(tileset_bar.tile_selector.toggle_grid)
-        tileset_bar.layout_.addWidget(self.tileset_selector_grid_checkbox)
-        tileset_selector_layout.addWidget(tileset_bar)
+        self.tileset_selector_grid_checkbox.stateChanged.connect(self.tileset_bar.tile_selector.toggle_grid)
+        self.tileset_bar.layout_.addWidget(self.tileset_selector_grid_checkbox)
+        tileset_selector_layout.addWidget(self.tileset_bar)
 
         
         selector_dock = QDockWidget("Tile Selector", self)
         selector_dock.setWidget(tileset_selector_area)
         
         
-        tileset_bar.tile_selector.active_tile_widget = ActiveTileWidget(self.tile_canvas)
-        tileset_bar.tile_selector.active_tile_widget.collision_checkbox.stateChanged.connect(self.tile_canvas.setTileCollision)
-        tileset_bar.tile_selector.active_tile_widget.overlay_checkbox.stateChanged.connect(self.tile_canvas.setTileOverlay)
-        tileset_bar.tile_selector.active_tile_widget.worldTileClicked.connect(tileset_bar.tile_selector.selectTile)
-        self.tile_canvas.tileDropperClicked.connect(tileset_bar.tile_selector.selectTileFromDropper)
+        self.tileset_bar.tile_selector.active_tile_widget = ActiveTileWidget(self.tile_canvas)
+        self.tileset_bar.tile_selector.active_tile_widget.collision_checkbox.stateChanged.connect(self.tile_canvas.setTileCollision)
+        self.tileset_bar.tile_selector.active_tile_widget.overlay_checkbox.stateChanged.connect(self.tile_canvas.setTileOverlay)
+        self.tileset_bar.tile_selector.active_tile_widget.worldTileClicked.connect(self.tileset_bar.tile_selector.selectTile)
+        self.tile_canvas.tileDropperClicked.connect(self.tileset_bar.tile_selector.selectTileFromDropper)
         self.tile_canvas.tileDropperClicked.connect(self.setDropperIcon)
-        self.tile_canvas.tileSelected.connect(tileset_bar.tile_selector.active_tile_widget.updateTileProperties)
+        self.tile_canvas.tileSelected.connect(self.tileset_bar.tile_selector.active_tile_widget.updateTileProperties)
 
         layers_area = QWidget(self)
         layers_layout = QVBoxLayout(layers_area)
         layers_layout.setContentsMargins(0,0,0,0)
         self.layers_widget = Layers(self.tile_canvas)
-        self.layers_widget.tilesetRemoved.connect(tileset_bar.removeTabByTilesetPath)
+        self.layers_widget.tilesetRemoved.connect(self.tileset_bar.removeTabByTilesetPath)
         layers_layout.addWidget(self.layers_widget)
         
         self.tile_canvas.layers_widget = self.layers_widget
@@ -59,10 +59,10 @@ class MainWindow(QMainWindow):
         
         # Create and set up the ToolDock
         tool_dock = QDockWidget("Tools", self)
-        tools = Tools(tileset_bar, self.tile_canvas, self.layers_widget)
+        tools = Tools(self.tileset_bar, self.tile_canvas, self.layers_widget)
         
 
-        tools.addToLayout(tileset_bar.tile_selector.active_tile_widget)
+        tools.addToLayout(self.tileset_bar.tile_selector.active_tile_widget)
         tools.setInternalWidgets()
         tool_dock.setWidget(tools)
         
@@ -80,7 +80,7 @@ class MainWindow(QMainWindow):
         self.setupToolBar()
         self.setCentralWidget(scroll_area)
 
-        tileset_bar.tile_selector.selectTile(0, 2)
+        self.tileset_bar.tile_selector.selectTile(0, 2)
         self.select_action.toggle()
         self.tile_canvas.tileDropperReleased.connect(self.getTool)
         
@@ -316,11 +316,21 @@ class MainWindow(QMainWindow):
         if file_path:
             # Logic to load the file data and update the TileCanvas
             dreamscape_config.tileset_layers = dreamscape_config.loadFromFile(file_path)
+            tilesets = []
             self.layers_widget.clear()
-            for layer in dreamscape_config.tileset_layers.layers.values():
-                self.layers_widget.addLayer(layer['name'], layer['tileset'], False)
+            for i in range(self.tileset_bar.tab_bar.count()):
+                self.tileset_bar.tab_bar.removeTab(i)
+            for layer_name in dreamscape_config.tileset_layers.order:
+                tileset = dreamscape_config.tileset_layers.layers[layer_name]['tileset']
+                self.layers_widget.addLayer(dreamscape_config.tileset_layers.layers[layer_name]['name'], tileset, False)
+                if tileset not in tilesets:
+                    tilesets.append(tileset)
+                    self.tileset_bar.addTileset(dreamscape_config.tileset_layers.layers[layer_name]['name'], tileset)
+
             self.tile_canvas.update()
             self.tile_canvas.redraw_world()
+                
+
 
     def saveFile(self):
         # Logic to save the current data
