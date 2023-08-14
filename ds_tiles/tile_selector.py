@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import (QWidget)
+from PySide6.QtWidgets import (QWidget, QSizePolicy)
 from PySide6.QtGui import (QImage, QMouseEvent, QPainter, QColor)
 from PySide6.QtCore import (Qt, Signal, QRect)
 
@@ -18,6 +18,8 @@ class TileSelector(QWidget):
         self.start_drag_y = 0
         self.active_tile_widget = None
         self.show_grid = False
+
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
 
     def toggleGrid(self, state=1):
         self.show_grid = bool(state)

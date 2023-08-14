@@ -1,0 +1,33 @@
+{
+ "name": "World Overlay",
+ "world_size": {
+  "width": 40,
+  "height": 40
+ },
+ "layers": [
+  {
+   "name": "df",
+   "tileset": "/images/jportfolio/tilemaps/darkforest_1_tiles_1.png",
+   "tile_width": 32,
+   "tile_height": 32,
+   "z": 0,
+   "tiles": []
+  },
+  {
+   "name": "df2",
+   "tileset": "/images/jportfolio/tilemaps/darkforest_1_tiles_1.png",
+   "tile_width": 32,
+   "tile_height": 32,
+   "z": 0,
+   "tiles": []
+  },
+  {
+   "name": "df3",
+   "tileset": "/images/jportfolio/tilemaps/darkforest_1_tiles_1.png",
+   "tile_width": 32,
+   "tile_height": 32,
+   "z": 0,
+   "tiles": []
+  }
+ ]
+}

@@ -14,7 +14,7 @@ class Toolbar:
     def setup(self):
         # Create the toolbar
         self.toolbar = QToolBar(self.main_window)
-        self.main_window.addToolBar(Qt.ToolBarArea.TopToolBarArea, self.toolbar)
+        self.main_window.addToolBar(Qt.ToolBarArea.LeftToolBarArea, self.toolbar)
 
         # Select Mode
         self.select_action = QAction(self.icons.defaultMouseIcon(), 'Select')

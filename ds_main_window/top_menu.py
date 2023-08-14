@@ -28,6 +28,11 @@ class TopMenu:
         self.action_save_as = QAction('Save As')
         self.action_save_as.triggered.connect(self.saveFileAs)
         self.menu_file.addAction(self.action_save_as)
+        self.menu_file.addSeparator()
+        # Export World Action
+        self.action_export_world = QAction('Export World')
+        self.action_export_world.triggered.connect(self.exportJSON)
+        self.menu_file.addAction(self.action_export_world)
 
         self.menu_file.addSeparator()
         self.action_exit = QAction('Exit')
@@ -119,3 +124,15 @@ class TopMenu:
         if file_path:
             # Logic to save the current data to the selected file
             ds.Utils.saveToFile(ds.data, file_path)
+    
+    def exportJSON(self):
+        try:
+            file_path, _ = QFileDialog.getSaveFileName(self.main_window, "Export World JSON", "", "JSON Files (*.json)")
+            if file_path:
+                overlay_file_path = file_path.split('.')[0] + '_overlay.json'
+                with open(file_path, 'w') as f, open(overlay_file_path, 'w') as fo:
+                    game, game_overlay = ds.data.layers.getJson()
+                    f.write(game)
+                    fo.write(game_overlay)
+        except Exception as error:
+            print(f'exportJSON() Error: {str(error)}')

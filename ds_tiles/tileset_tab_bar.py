@@ -22,10 +22,10 @@ class TilesetTabBar(QWidget):
         self.tab_bar.currentChanged.connect(self.changeTileset)
 
         # Layout
-        self.layout_ = QVBoxLayout()
-        self.layout_.addWidget(self.tab_bar)
-        self.layout_.addWidget(self.tileset_scroll_area)
-        self.setLayout(self.layout_)
+        self._layout = QVBoxLayout()
+        self._layout.addWidget(self.tab_bar)
+        self._layout.addWidget(self.tileset_scroll_area)
+        self.setLayout(self._layout)
 
         # Dictionary to store tilesets paths associated with tab indexes
         self.tilesets = {}

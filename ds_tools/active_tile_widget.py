@@ -17,7 +17,8 @@ class ActiveTileWidget(QWidget):
         self.initUI()
 
     def initUI(self):
-        layout = QVBoxLayout()
+        layout = QHBoxLayout()
+        layout.setContentsMargins(0,0,0,0)
         
         self.setupSelectedTileGroup()
         self.setupBaseTileGroup()
@@ -28,7 +29,7 @@ class ActiveTileWidget(QWidget):
         self.setLayout(layout)
 
     def setupSelectedTileGroup(self):
-        self.gbox1 = QGroupBox('Selected Tile', self)
+        self.gbox1 = QGroupBox(self)
         self.gbox1_layout = QHBoxLayout()
 
         label1 = QLabel('Selected Tile:')
@@ -61,7 +62,7 @@ class ActiveTileWidget(QWidget):
         self.gbox1.setLayout(self.gbox1_layout)
 
     def setupBaseTileGroup(self):
-        self.gbox2 = QGroupBox('Base Tile', self)
+        self.gbox2 = QGroupBox(self)
         self.gbox2_layout = QHBoxLayout()
 
         label2 = QLabel('Base Tile:')

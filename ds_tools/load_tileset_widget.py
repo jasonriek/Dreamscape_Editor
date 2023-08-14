@@ -1,9 +1,9 @@
-from PySide6.QtWidgets import (QWidget, QPushButton, QFileDialog, QHBoxLayout,  QLabel, QLineEdit, QInputDialog, QMessageBox)
+from PySide6.QtWidgets import (QGroupBox, QPushButton, QFileDialog, QHBoxLayout,  QLabel, QLineEdit, QInputDialog, QMessageBox)
 
 import ds
 
 
-class LoadTilesetWidget(QWidget):
+class LoadTilesetWidget(QGroupBox):
     def __init__(self, tileset_bar, tile_canvas, layers):
         super().__init__()
         self.tileset_bar = tileset_bar
@@ -13,7 +13,7 @@ class LoadTilesetWidget(QWidget):
         self.layers.layerClicked.connect(self.updateByTilesetPath(self.tileset_bar.changeIndexByTilesetPath))
         self.tileset_bar.tilesetChanged.connect(self.updateByTilesetPath(self.layers.selectFistLayerWithTilesetPath))
 
-        self.init_ui()
+        self.initUI()
 
     def updateByTilesetPath(self, callback):
         def _updateByTilesetPath(tileset_path):
@@ -23,7 +23,7 @@ class LoadTilesetWidget(QWidget):
             self.tileset_src_entry.setText(tileset_path)
         return _updateByTilesetPath
 
-    def init_ui(self):
+    def initUI(self):
         layout = QHBoxLayout(self)
 
         self.tileset_src_entry = QLineEdit(readOnly=True)

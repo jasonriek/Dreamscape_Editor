@@ -260,8 +260,8 @@ class TileCanvas(QWidget):
                             tileset_info['tile_width'], tileset_info['tile_height'])
         if len(ds.data.layers.pixmaps):
             ds.data.layers.pixmaps[ds.data.layers.layerIndex(tileset_name)] = pixmap
-        else:
-            ds.data.layers.pixmaps.append(pixmap)
+        #else:
+        #    ds.data.layers.pixmaps.append(pixmap)
         
         painter.end()  # End painting
 
@@ -475,7 +475,6 @@ class TileCanvas(QWidget):
 
             elif paint_tool == ds.data.paint_tools.DRAG:
                 self.start_drag_point = event.position().toPoint()
-                self.setCursor(Qt.CursorShape.ClosedHandCursor)
 
             elif paint_tool == ds.data.paint_tools.BUCKET:
                 if self.bucket_filling or self.bucket_debounce_timer.isActive():
@@ -526,7 +525,6 @@ class TileCanvas(QWidget):
             if paint_tool == ds.data.paint_tools.DRAG_DRAW:
                 self.fillDragArea()
             elif paint_tool == ds.data.paint_tools.DRAG and self.start_drag_point is not None:
-                self.setCursor(Qt.CursorShape.ArrowCursor)  # Reset the cursor
                 self.start_drag_point = None  # Reset the dragging state
            
             self.drag_rectangle = None

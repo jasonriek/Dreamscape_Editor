@@ -16,7 +16,7 @@ class LayersData:
         self.pixmaps = []
         self.base_pixmap = None
         self.position_to_index_map = {}
-        self.setting_tileset = False
+        #self.setting_tileset = False
 
         # Base Tile Attributes
         self.base_tiles_visible = True
@@ -284,7 +284,7 @@ class LayersData:
             'world_size': {'width': self.parent.world.width, 'height': self.parent.world.height},
             'weather': self.parent.world.weather,
             'start_position': {'x': self.parent.world.player_start_position_x, 'y': self.parent.world.player_start_position_y},
-            'doors': self.self.parent.world.doors,
+            'doors': self.parent.world.doors,
             'layers': layers
         }, indent=1)
 

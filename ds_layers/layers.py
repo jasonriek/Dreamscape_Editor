@@ -101,13 +101,13 @@ class Layers(QWidget):
         context_menu.exec(self.view.viewport().mapToGlobal(position))
     
     def addLayer(self, name:str, path:str, create_pixmaps=True):
-        if not ds.data.layers.setting_tileset:
-            ds.data.layers.appendTilesetLayer(name, path, 32, 32)
+        #if not ds.data.layers.setting_tileset:
+        ds.data.layers.appendTilesetLayer(name, path, 32, 32)
 
-            if create_pixmaps:
-                ds.data.layers.pixmaps.append(QPixmap(ds.data.world.displayWidth(), ds.data.world.displayHeight()))
-        else:
-            ds.data.layers.setting_tileset = False
+        if create_pixmaps:
+            ds.data.layers.pixmaps.append(QPixmap(ds.data.world.displayWidth(), ds.data.world.displayHeight()))
+        #else:
+        #    ds.data.layers.setting_tileset = False
         row = self.model.rowCount()
         new_layer = {'name': f"[Layer {row + 1}]   {name}"}
         self.model.addLayer(new_layer)
