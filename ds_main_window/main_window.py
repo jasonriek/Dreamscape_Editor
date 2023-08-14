@@ -50,8 +50,8 @@ class MainWindow(QMainWindow):
 
     def setupTilesetTabBar(self):
         self.tileset_tab_bar.tile_selector.active_tile_widget = self.active_tile_widget
-        self.tileset_tab_bar.tile_selector.active_tile_widget.collision_checkbox.stateChanged.connect(self.tile_canvas.setTileCollision)
-        self.tileset_tab_bar.tile_selector.active_tile_widget.overlay_checkbox.stateChanged.connect(self.tile_canvas.setTileOverlay)
+        self.tileset_tab_bar.tile_selector.active_tile_widget.collision_checkbox.clicked.connect(self.tile_canvas.setTileCollision)
+        self.tileset_tab_bar.tile_selector.active_tile_widget.overlay_checkbox.clicked.connect(self.tile_canvas.setTileOverlay)
         self.tileset_tab_bar.tile_selector.active_tile_widget.worldTileClicked.connect(self.tileset_tab_bar.tile_selector.selectTile)
         self.tile_canvas.tileSelected.connect(self.tileset_tab_bar.tile_selector.active_tile_widget.updateTileProperties)
     
