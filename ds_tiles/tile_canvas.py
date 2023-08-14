@@ -144,21 +144,21 @@ class TileCanvas(QWidget):
         if self.cursor_tile is not None:
             if ds.data.paint_tools.isDrawingTool():
                 if ds.data.paint_tools.selection == ds.data.paint_tools.BRUSH:
-                    painter.drawImage(self.cursor_x * ds.data.TILE_SIZE, 
-                                self.cursor_y * ds.data.TILE_SIZE,
+                    painter.drawImage(self.cursor_x * ds.data.world.tile_width, 
+                                self.cursor_y * ds.data.world.tile_height,
                                 self.tile_selector.selected_tiles_pixmap)    
                 else:
-                    painter.drawImage(self.cursor_x * ds.data.TILE_SIZE, 
-                                self.cursor_y * ds.data.TILE_SIZE,
+                    painter.drawImage(self.cursor_x * ds.data.world.tile_width, 
+                                self.cursor_y * ds.data.world.tile_height,
                                 self.tile_selector.selected_tile_pixmap)
                 
         if ds.data.paint_tools.selection == ds.data.paint_tools.SELECT:
             painter.setPen(QColor(0, 255, 0, 200))  # Semi-transparent green
             painter.drawRect(
-                self.cursor_x * ds.data.TILE_SIZE, 
-                self.cursor_y * ds.data.TILE_SIZE, 
-                ds.data.TILE_SIZE, 
-                ds.data.TILE_SIZE
+                self.cursor_x * ds.data.world.tile_width, 
+                self.cursor_y * ds.data.world.tile_height, 
+                ds.data.world.tile_width, 
+                ds.data.world.tile_height
             )
 
         # Draw a semi-transparent blue square for overlay tiles
@@ -167,13 +167,13 @@ class TileCanvas(QWidget):
             for layer_index in range(len(ds.data.layers.pixmaps)):
                 if ds.data.layers.layer_visibility[layer_index]:  # Check if this layer should be rendered
                     for tile_data in ds.data.layers.tilesetLayer(ds.data.layers.order[layer_index])['tiles']:
-                        _, _, x, y, b, overlay = tile_data
+                        _, _, x, y, b, overlay, tile_width, tile_height = tile_data
                         if overlay == 1:
                             painter.fillRect(
-                                x * ds.data.TILE_SIZE, 
-                                y * ds.data.TILE_SIZE, 
-                                ds.data.TILE_SIZE, 
-                                ds.data.TILE_SIZE, 
+                                x * tile_width, 
+                                y * tile_height, 
+                                tile_width, 
+                                tile_height, 
                                 overlay_brush
                             )         
 
@@ -183,22 +183,22 @@ class TileCanvas(QWidget):
             for layer_index in range(len(ds.data.layers.pixmaps)):
                 if ds.data.layers.layer_visibility[layer_index]:  # Check if this layer should be rendered
                     for tile_data in ds.data.layers.tilesetLayer(ds.data.layers.order[layer_index])['tiles']:
-                        _, _, x, y, b, overlay = tile_data
+                        _, _, x, y, b, overlay, tile_width, tile_height = tile_data
                         if b == 1:
-                            painter.fillRect(x * ds.data.TILE_SIZE, 
-                                             y * ds.data.TILE_SIZE, 
-                                             ds.data.TILE_SIZE, 
-                                             ds.data.TILE_SIZE, 
+                            painter.fillRect(x * tile_width, 
+                                             y * tile_height, 
+                                             tile_width, 
+                                             tile_height, 
                                              barrier_brush
                             )
         
         if ds.data.paint_tools.selection == ds.data.paint_tools.SELECT and self.selected_tile:
             painter.setBrush(QColor(0, 255, 0, 75))  # Semi-transparent green
             painter.drawRect(
-                self.selected_tile[2] * ds.data.TILE_SIZE, 
-                self.selected_tile[3] * ds.data.TILE_SIZE, 
-                ds.data.TILE_SIZE, 
-                ds.data.TILE_SIZE
+                self.selected_tile[2] * ds.data.world.tile_width, 
+                self.selected_tile[3] * ds.data.world.tile_height, 
+                ds.data.world.tile_width, 
+                ds.data.world.tile_height
             )
 
         if self.selected_tiles:
@@ -207,10 +207,10 @@ class TileCanvas(QWidget):
             for tile in self.selected_tiles:
                 if tile[0                                                                                                                                                                                                                    ]:
                     painter.drawRect(
-                        tile[1] * ds.data.TILE_SIZE, 
-                        tile[2] * ds.data.TILE_SIZE, 
-                        ds.data.TILE_SIZE, 
-                        ds.data.TILE_SIZE
+                        tile[1] * ds.data.world.tile_width, 
+                        tile[2] * ds.data.world.tile_height, 
+                        ds.data.world.tile_width, 
+                        ds.data.world.tile_height
                     )
                 
         painter.end()
@@ -247,14 +247,14 @@ class TileCanvas(QWidget):
     def drawTileOnLayer(self, tileset_name, tile_index):
         tile_data = ds.data.layers.tile(tileset_name, tile_index)
         if tile_data:
-            src_x, src_y, x, y, b, overlay = tile_data
+            src_x, src_y, x, y, b, overlay, tile_width, tile_height = tile_data
             tileset_info = ds.data.layers.tilesetLayer(tileset_name)
             tileset_img = QImage(tileset_info['tileset'])
             painter = QPainter(ds.data.layers.pixmaps[ds.data.layers.layerIndex(tileset_name)])  # Assuming you have one QPixmap per tileset layer
-            painter.drawImage(x * tileset_info['tile_width'], y * tileset_info['tile_height'],
+            painter.drawImage(x * tile_width, y * tile_height,
                       tileset_img,
-                      src_x * tileset_info['tile_width'], src_y * tileset_info['tile_height'],
-                      tileset_info['tile_width'], tileset_info['tile_height'])
+                      src_x * tile_width, src_y * tile_height,
+                      tile_width, tile_height)
             painter.end()  # End painting
 
     def redrawWorld(self):
@@ -270,11 +270,11 @@ class TileCanvas(QWidget):
         painter = QPainter(pixmap)
         
         for tile_data in tileset_info['tiles']:
-            src_x, src_y, x, y, b, overlay = tile_data
-            painter.drawImage(x * ds.data.TILE_SIZE, y * ds.data.TILE_SIZE,
+            src_x, src_y, x, y, b, overlay, tile_width, tile_height = tile_data
+            painter.drawImage(x * tile_width, y * tile_height,
                             tileset_img,
-                            src_x * tileset_info['tile_width'], src_y * tileset_info['tile_height'],
-                            tileset_info['tile_width'], tileset_info['tile_height'])
+                            src_x * tile_width, src_y * tile_height,
+                            tile_width, tile_height)
         if len(ds.data.layers.pixmaps):
             ds.data.layers.pixmaps[ds.data.layers.layerIndex(tileset_name)] = pixmap
         #else:
@@ -313,7 +313,6 @@ class TileCanvas(QWidget):
                 x = org_x + abs(first_tile_x - tile[0])
                 y = org_y + abs(first_tile_y - tile[1])
                 self.paintTileAt(x, y, tile[0], tile[1])
-                print(x, y, tile[0], tile[1])
         except Exception as error:
             print(f'paintBrushTileAt({x}, {y}) Error: {str(error)}')
 
@@ -359,7 +358,9 @@ class TileCanvas(QWidget):
                 x,
                 y,
                 ds.data.world.barrier,
-                ds.data.world.overylay]
+                ds.data.world.overylay,
+                ds.data.world.tile_width,
+                ds.data.world.tile_height]
             )
             # Redraw every layer to ensure correct stacking order
             #for tileset_name in dsc.tileset_layers.order:
@@ -371,7 +372,10 @@ class TileCanvas(QWidget):
                 tileselector_y,
                 x,
                 y,
-                ds.data.world.barrier)
+                ds.data.world.barrier,
+                ds.data.world.overylay,
+                ds.data.world.tile_width,
+                ds.data.world.tile_height)
         if current_layer_index is not None:
             # Register the tile drawing as an operation for the selected layer
             self.drawTileOnLayer(ds.data.layers.active_layer_name, tile_index)
@@ -381,8 +385,8 @@ class TileCanvas(QWidget):
         if not self.tile_selector.getSelectedTile():
             return
         
-        x = int(event.position().x()) // ds.data.TILE_SIZE
-        y = int(event.position().y()) // ds.data.TILE_SIZE
+        x = int(event.position().x()) // ds.data.world.tile_width
+        y = int(event.position().y()) // ds.data.world.tile_height
         self.paintTileAt(x, y)
    
     def eraseTileAt(self, x, y):
@@ -403,14 +407,14 @@ class TileCanvas(QWidget):
             print('Nothing here to erase.')
 
     def eraseTile(self, event:QMouseEvent):
-        x = int(event.position().x()) // ds.data.TILE_SIZE
-        y = int(event.position().y()) // ds.data.TILE_SIZE
+        x = int(event.position().x()) // ds.data.world.tile_width
+        y = int(event.position().y()) // ds.data.world.tile_height
         self.eraseTileAt(x, y)
             
     def calculateDragArea(self, event:QMouseEvent):
         """Fill tiles in the rectangular drag area."""
-        x = int(event.position().x()) // ds.data.TILE_SIZE
-        y = int(event.position().y()) // ds.data.TILE_SIZE
+        x = int(event.position().x()) // ds.data.world.tile_width
+        y = int(event.position().y()) // ds.data.world.tile_height
         distance_from_start_x = x - self.start_drag_x
         distance_from_start_y = y - self.start_drag_y
 
@@ -419,10 +423,10 @@ class TileCanvas(QWidget):
         self.fill_y_start, self.fill_y_end = (self.start_drag_y, y) if distance_from_start_y >= 0 else (y, self.start_drag_y)
 
         self.drag_rectangle = QRect(
-            self.fill_x_start * ds.data.TILE_SIZE,
-            self.fill_y_start * ds.data.TILE_SIZE,
-            (self.fill_x_end - self.fill_x_start + 1) * ds.data.TILE_SIZE,
-            (self.fill_y_end - self.fill_y_start + 1) * ds.data.TILE_SIZE
+            self.fill_x_start * ds.data.world.tile_width,
+            self.fill_y_start * ds.data.world.tile_height,
+            (self.fill_x_end - self.fill_x_start + 1) * ds.data.world.tile_width,
+            (self.fill_y_end - self.fill_y_start + 1) * ds.data.world.tile_height
         )
         self.update()
 
@@ -458,8 +462,8 @@ class TileCanvas(QWidget):
             stack.extend([(x+1, y), (x-1, y), (x, y+1), (x, y-1)])
 
     def mousePressEvent(self, event: QMouseEvent):
-        x = int(event.position().x()) // ds.data.TILE_SIZE
-        y = int(event.position().y()) // ds.data.TILE_SIZE
+        x = int(event.position().x()) // ds.data.world.tile_width
+        y = int(event.position().y()) // ds.data.world.tile_height
         # Start drawing when left mouse button is pressed
         if event.button() == Qt.MouseButton.LeftButton and not self.bucket_filling:
 
@@ -540,8 +544,8 @@ class TileCanvas(QWidget):
             event.ignore()
             
     def mouseReleaseEvent(self, event: QMouseEvent):
-        x = int(event.position().x()) // ds.data.TILE_SIZE
-        y = int(event.position().y()) // ds.data.TILE_SIZE
+        x = int(event.position().x()) // ds.data.world.width
+        y = int(event.position().y()) // ds.data.world.height
         paint_tool = ds.data.paint_tools.selection
         # Stop drawing when left mouse button is released
         if event.button() == Qt.MouseButton.LeftButton:
@@ -575,8 +579,8 @@ class TileCanvas(QWidget):
             event.ignore()
 
     def mouseMoveEvent(self, event: QMouseEvent):
-        x = int(event.position().x()) // ds.data.TILE_SIZE
-        y = int(event.position().y()) // ds.data.TILE_SIZE
+        x = int(event.position().x()) // ds.data.world.tile_width
+        y = int(event.position().y()) // ds.data.world.tile_height
         paint_tool = ds.data.paint_tools.selection
         self.mouseMoved.emit(x, y)
         
@@ -603,8 +607,8 @@ class TileCanvas(QWidget):
         elif paint_tool == ds.data.paint_tools.SELECT:
             if self.is_selecting:
                 self.calculateDragArea(event)
-        self.cursor_x = int(event.position().x()) // ds.data.TILE_SIZE
-        self.cursor_y = int(event.position().y()) // ds.data.TILE_SIZE
+        self.cursor_x = int(event.position().x()) // ds.data.world.tile_width
+        self.cursor_y = int(event.position().y()) // ds.data.world.tile_height
         self.cursor_tile = self.tile_selector.getSelectedTile()  # update the tile under the cursor
         self.update()
 

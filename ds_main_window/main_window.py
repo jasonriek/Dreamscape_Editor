@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import (QMainWindow, QWidget, QScrollArea, QDockWidget, QCheckBox, QVBoxLayout, QHBoxLayout, QSizePolicy)
+from PySide6.QtWidgets import (QMainWindow, QWidget, QScrollArea, QLabel, QDockWidget, QCheckBox, QVBoxLayout, QHBoxLayout, QSizePolicy)
 from PySide6.QtCore import (Qt)
 
 from ds_layers import (Layers)
@@ -80,8 +80,18 @@ class MainWindow(QMainWindow):
         self.tileset_selector_bottom_area = QWidget(self)
         self.tileset_selector_bottom_layout = QHBoxLayout(self.tileset_selector_bottom_area)
         self.tileset_selector_bottom_layout.setContentsMargins(0,0,0,0)
-        self.tileset_selector_bottom_layout.addWidget(self.tileset_selector_grid_checkbox)
         self.tileset_selector_bottom_layout.addWidget(self.tileset_properties.tileset_coord_label)
+        tile_width_label = QLabel('Tile Width: ')
+        tile_height_label = QLabel('Tile Height: ')
+        tileset_selector_bottom_filler = QWidget(self)
+        tileset_selector_bottom_filler.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        self.tileset_selector_bottom_layout.addWidget(tileset_selector_bottom_filler)
+        self.tileset_selector_bottom_layout.addWidget(tile_width_label)
+        self.tileset_selector_bottom_layout.addWidget(self.tileset_properties.tile_width_spinbox)
+        self.tileset_selector_bottom_layout.addWidget(tile_height_label)
+        self.tileset_selector_bottom_layout.addWidget(self.tileset_properties.tile_height_spinbox)
+        self.tileset_selector_bottom_layout.addWidget(self.tileset_selector_grid_checkbox)
+        
 
         self.tileset_tab_bar._layout.addWidget(self.tileset_selector_bottom_area)
         self.tileset_selector_layout.addWidget(self.tileset_properties.tileset_loader)

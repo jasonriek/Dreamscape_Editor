@@ -25,8 +25,8 @@ class WorldData:
 
     def displayWidth(self):
         """Retrieve the display width."""
-        return self.width * self.tile_width
+        return self.width * self.parent.TILE_SIZE
 
     def displayHeight(self):
         """Retrieve the display height."""
-        return self.height * self.tile_height
+        return self.height * self.parent.TILE_SIZE

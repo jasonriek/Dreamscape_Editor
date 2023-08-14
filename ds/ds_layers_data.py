@@ -204,7 +204,7 @@ class LayersData:
             return layer
         return None
     
-    def appendTile(self, tileset_name: str, src_x: int, src_y: int, x: int, y: int, b=0, overlay=0):
+    def appendTile(self, tileset_name: str, src_x: int, src_y: int, x: int, y: int, b=0, overlay=0, tile_width=32, tile_height=32):
         if self._layers.get(tileset_name):
             self._layers[tileset_name]['tiles'].append([
                 src_x,
@@ -212,7 +212,9 @@ class LayersData:
                 x,
                 y,
                 b,
-                overlay
+                overlay,
+                tile_width,
+                tile_height
             ])
             self.buildPositionIndexMap()
             return len(self._layers[tileset_name]['tiles']) - 1

@@ -34,7 +34,7 @@ class TileSelector(QWidget):
 
     def setTileset(self, name:str, path:str):
         ds.data.layers.setting_tileset = True
-        ds.data.layers.appendTilesetLayer(name, path, 32, 32)
+        ds.data.layers.appendTilesetLayer(name, path, ds.data.world.tile_width, ds.data.world.tile_height)
         self.changeTileset(name, path)
 
     def paintEvent(self, event):
@@ -70,10 +70,10 @@ class TileSelector(QWidget):
             painter.setPen(QColor(0, 255, 0))  # Set to green color
             for tile in self.selected_tiles:
                 painter.drawRect(
-                    tile[0] * ds.data.TILE_SIZE, 
-                    tile[1] * ds.data.TILE_SIZE, 
-                    ds.data.TILE_SIZE, 
-                    ds.data.TILE_SIZE
+                    tile[0] * ds.data.world.tile_width, 
+                    tile[1] * ds.data.world.tile_height, 
+                    ds.data.world.tile_width, 
+                    ds.data.world.tile_height
                 )
 
         painter.end()
@@ -89,10 +89,10 @@ class TileSelector(QWidget):
             ds.data.world.selected_tile_x = x
             ds.data.world.selected_tile_y = y
             self.selected_tile_pixmap = self.tileset.copy(
-                x * ds.data.TILE_SIZE, 
-                y * ds.data.TILE_SIZE, 
-                ds.data.TILE_SIZE, 
-                ds.data.TILE_SIZE
+                x * ds.data.world.tile_width, 
+                y * ds.data.world.tile_height, 
+                ds.data.world.tile_width, 
+                ds.data.world.tile_height
             )
             self.tileSelected.emit(x, y)
             self.active_tile_widget.updateActiveTileDisplay(self.selected_tile_pixmap)
@@ -100,8 +100,8 @@ class TileSelector(QWidget):
 
     def calculateDragArea(self, event:QMouseEvent):
         """Fill tiles in the rectangular drag area."""
-        x = int(event.position().x()) // ds.data.TILE_SIZE
-        y = int(event.position().y()) // ds.data.TILE_SIZE
+        x = int(event.position().x()) // ds.data.world.tile_width
+        y = int(event.position().y()) // ds.data.world.tile_height
         distance_from_start_x = x - self.start_drag_x
         distance_from_start_y = y - self.start_drag_y
 
@@ -110,10 +110,10 @@ class TileSelector(QWidget):
         self.fill_y_start, self.fill_y_end = (self.start_drag_y, y) if distance_from_start_y >= 0 else (y, self.start_drag_y)
 
         self.drag_rectangle = QRect(
-            self.fill_x_start * ds.data.TILE_SIZE,
-            self.fill_y_start * ds.data.TILE_SIZE,
-            (self.fill_x_end - self.fill_x_start + 1) * ds.data.TILE_SIZE,
-            (self.fill_y_end - self.fill_y_start + 1) * ds.data.TILE_SIZE
+            self.fill_x_start * ds.data.world.tile_width,
+            self.fill_y_start * ds.data.world.tile_height,
+            (self.fill_x_end - self.fill_x_start + 1) * ds.data.world.tile_width,
+            (self.fill_y_end - self.fill_y_start + 1) * ds.data.world.tile_height
         )
         self.update()
 
@@ -121,16 +121,16 @@ class TileSelector(QWidget):
         self.calculateDragArea(event)
 
     def mousePressEvent(self, event: QMouseEvent):
-        x = int(event.position().x()) // ds.data.TILE_SIZE
-        y = int(event.position().y()) // ds.data.TILE_SIZE
+        x = int(event.position().x()) // ds.data.world.tile_width
+        y = int(event.position().y()) // ds.data.world.tile_height
         self.start_drag_x = x
         self.start_drag_y = y
         self.calculateDragArea(event)
         self.drag_start = (x, y)
         
     def mouseReleaseEvent(self, event: QMouseEvent):
-        end_x = int(event.position().x()) // ds.data.TILE_SIZE
-        end_y = int(event.position().y()) // ds.data.TILE_SIZE
+        end_x = int(event.position().x()) // ds.data.world.tile_width
+        end_y = int(event.position().y()) // ds.data.world.tile_height
 
         start_x, start_y = self.drag_start
 
@@ -146,10 +146,10 @@ class TileSelector(QWidget):
         y_len = abs(max_y - min_y) + 1
 
         self.selected_tiles_pixmap = self.tileset.copy(
-            min_x * ds.data.TILE_SIZE, 
-            min_y * ds.data.TILE_SIZE, 
-            ds.data.TILE_SIZE * x_len, 
-            ds.data.TILE_SIZE * y_len
+            min_x * ds.data.world.tile_width, 
+            min_y * ds.data.world.tile_height, 
+            ds.data.world.tile_width * x_len, 
+            ds.data.world.tile_height * y_len
         )
         
         self.drag_rectangle = None

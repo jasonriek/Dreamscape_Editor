@@ -6,24 +6,16 @@
  },
  "layers": [
   {
-   "name": "df",
-   "tileset": "/images/jportfolio/tilemaps/darkforest_1_tiles_1.png",
+   "name": "t2",
+   "tileset": "/images/jportfolio/tilemaps/cyberpunk_1_assets_1.png",
    "tile_width": 32,
    "tile_height": 32,
    "z": 0,
    "tiles": []
   },
   {
-   "name": "df2",
-   "tileset": "/images/jportfolio/tilemaps/darkforest_1_tiles_1.png",
-   "tile_width": 32,
-   "tile_height": 32,
-   "z": 0,
-   "tiles": []
-  },
-  {
-   "name": "df3",
-   "tileset": "/images/jportfolio/tilemaps/darkforest_1_tiles_1.png",
+   "name": "t1",
+   "tileset": "/images/jportfolio/tilemaps/cyberpunk_1_assets_1.png",
    "tile_width": 32,
    "tile_height": 32,
    "z": 0,
