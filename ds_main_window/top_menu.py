@@ -29,6 +29,7 @@ class TopMenu:
         self.action_save_as.triggered.connect(self.saveFileAs)
         self.menu_file.addAction(self.action_save_as)
         self.menu_file.addSeparator()
+
         # Export World Action
         self.action_export_world = QAction('Export World')
         self.action_export_world.triggered.connect(self.exportJSON)
@@ -70,6 +71,12 @@ class TopMenu:
         self.action_show_tile_collisions.setChecked(True)
         self.action_show_tile_collisions.toggled.connect(self.main_window.tile_canvas.toggleShowTileCollisons)
         self.menu_view.addAction(self.action_show_tile_collisions)
+
+        self.action_show_tile_overlay = QAction('Tile Overlay')
+        self.action_show_tile_overlay.setCheckable(True)
+        self.action_show_tile_overlay.setChecked(True)
+        self.action_show_tile_overlay.toggled.connect(self.main_window.tile_canvas.toggleShowTileOverlay)
+        self.menu_view.addAction(self.action_show_tile_overlay)
 
         # Add menus to the menu bar
         self.main_window.menuBar().addMenu(self.menu_file)

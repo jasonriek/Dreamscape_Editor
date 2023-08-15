@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import (QWidget, QSizePolicy, QScrollArea)
-from PySide6.QtGui import (QPainter, QPixmap, QColor, QMouseEvent, QImage, QBrush)
+from PySide6.QtGui import (QPainter, QPixmap, QColor, QMouseEvent, QKeyEvent, QImage, QBrush)
 from PySide6.QtCore import (Qt, Signal, QRect, QTimer)
 import copy
 
@@ -22,7 +22,7 @@ class TileCanvas(QWidget):
         self.setFixedSize(ds.data.world.displayWidth(), ds.data.world.displayHeight())
         self.show_grid = True
         self.show_tile_collisons = True
-        self.show_tile_overlays = True
+        self.show_tile_overlay = True
         self.is_drawing =  False
         self.is_erasing = False
         self.is_selecting = False
@@ -115,6 +115,10 @@ class TileCanvas(QWidget):
         self.show_tile_collisons = bool(state)
         self.update()
 
+    def toggleShowTileOverlay(self, state):
+        self.show_tile_overlay = bool(state)
+        self.update()
+
     def paintEvent(self, event):
         painter = QPainter(self)
         
@@ -162,7 +166,7 @@ class TileCanvas(QWidget):
             )
 
         # Draw a semi-transparent blue square for overlay tiles
-        if self.show_tile_overlays:
+        if self.show_tile_overlay:
             overlay_brush = QBrush(QColor(0, 0, 255, 75)) # Semi-transparent blue
             for layer_index in range(len(ds.data.layers.pixmaps)):
                 if ds.data.layers.layer_visibility[layer_index]:  # Check if this layer should be rendered
@@ -319,6 +323,8 @@ class TileCanvas(QWidget):
     def setTileCollision(self, state):
         if state:
             state = 1
+        else:
+            state = 0
         ds.data.world.barrier = int(state)
         for tile_data in self.selected_tiles:
             tile = ds.data.layers.tile(ds.data.layers.active_layer_name, tile_data[0])
@@ -330,6 +336,8 @@ class TileCanvas(QWidget):
     def setTileOverlay(self, state):
         if state:
             state = 1
+        else:
+            state = 0
         ds.data.world.overylay = int(state)
         for tile_data in self.selected_tiles:
             tile = ds.data.layers.tile(ds.data.layers.active_layer_name, tile_data[0])
@@ -619,5 +627,16 @@ class TileCanvas(QWidget):
         self.cursor_tile = self.tile_selector.getSelectedTile()  # update the tile under the cursor
         self.update()
 
-
+    def removeSelectedTiles(self):
+        if self.selected_tiles:
+            for tile in self.selected_tiles:
+                tile_index = tile[0]
+                if tile_index is not None:
+                    new_tile_index = ds.data.layers.getTileIndexFromXY(tile[1], tile[2])
+                    tile = ds.data.layers.removeTile(ds.data.layers.active_layer_name, new_tile_index)
+                    if tile == self.selected_tile:
+                        self.selected_tile = None
+            self.selected_tiles = []
+            self.update()
+            self.redrawWorld()
 

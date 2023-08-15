@@ -20,4 +20,5 @@ class TilesetScrollArea(QWidget):
         # Set the layout
         layout = QVBoxLayout()
         layout.addWidget(self.scroll_area)
+        layout.setContentsMargins(0,0,0,0)
         self.setLayout(layout)

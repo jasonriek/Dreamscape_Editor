@@ -1,3 +1,4 @@
+from PySide6.QtGui import (QKeyEvent)
 from PySide6.QtWidgets import (QMainWindow, QWidget, QScrollArea, QLabel, QDockWidget, QCheckBox, QVBoxLayout, QHBoxLayout, QSizePolicy)
 from PySide6.QtCore import (Qt)
 
@@ -80,16 +81,8 @@ class MainWindow(QMainWindow):
         self.tileset_selector_bottom_area = QWidget(self)
         self.tileset_selector_bottom_layout = QHBoxLayout(self.tileset_selector_bottom_area)
         self.tileset_selector_bottom_layout.setContentsMargins(0,0,0,0)
-        self.tileset_selector_bottom_layout.addWidget(self.tileset_properties.tileset_coord_label)
-        tile_width_label = QLabel('Tile Width: ')
-        tile_height_label = QLabel('Tile Height: ')
-        tileset_selector_bottom_filler = QWidget(self)
-        tileset_selector_bottom_filler.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
-        self.tileset_selector_bottom_layout.addWidget(tileset_selector_bottom_filler)
-        self.tileset_selector_bottom_layout.addWidget(tile_width_label)
-        self.tileset_selector_bottom_layout.addWidget(self.tileset_properties.tile_width_spinbox)
-        self.tileset_selector_bottom_layout.addWidget(tile_height_label)
-        self.tileset_selector_bottom_layout.addWidget(self.tileset_properties.tile_height_spinbox)
+        self.tileset_selector_bottom_layout.addWidget(self.tileset_properties.tileset_coord_gbox)
+        self.tileset_selector_bottom_layout.addWidget(self.tileset_properties.tile_size_gbox)
         self.tileset_selector_bottom_layout.addWidget(self.tileset_selector_grid_checkbox)
         
 
@@ -123,6 +116,11 @@ class MainWindow(QMainWindow):
         # Add docks
         self.addDockWidget(Qt.DockWidgetArea.RightDockWidgetArea, self.selector_dock)
         self.addDockWidget(Qt.DockWidgetArea.RightDockWidgetArea, self.layers_dock)
+    
+    def keyPressEvent(self, event: QKeyEvent):
+        if event.key() == Qt.Key.Key_Delete:
+            self.tile_canvas.removeSelectedTiles()
+        return super().keyPressEvent(event)
         
         
         

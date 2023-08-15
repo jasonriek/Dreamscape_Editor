@@ -13,7 +13,7 @@ class Toolbar:
 
     def setup(self):
         # Create the toolbar
-        self.toolbar = QToolBar(self.main_window)
+        self.toolbar = QToolBar('Paint Tools', self.main_window)
         self.main_window.addToolBar(Qt.ToolBarArea.LeftToolBarArea, self.toolbar)
 
         # Select Mode
