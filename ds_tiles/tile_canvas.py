@@ -224,8 +224,8 @@ class TileCanvas(QWidget):
             return
 
         # Check if we already have the pixmap, and if not, create it.
-        if not ds.data.layers.base_pixmap:
-            ds.data.layers.base_pixmap = QPixmap(ds.data.world.displayWidth(), ds.data.world.displayHeight())
+        #if not ds.data.layers.base_pixmap:
+        ds.data.layers.base_pixmap = QPixmap(ds.data.world.displayWidth(), ds.data.world.displayHeight())
 
         base_tile_img = QImage(ds.data.layers.base_tile_src)
         

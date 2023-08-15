@@ -84,6 +84,9 @@ class MainWindow(QMainWindow):
         self.tileset_selector_bottom_layout.addWidget(self.tileset_properties.tileset_coord_gbox)
         self.tileset_selector_bottom_layout.addWidget(self.tileset_properties.tile_size_gbox)
         self.tileset_selector_bottom_layout.addWidget(self.tileset_selector_grid_checkbox)
+        tileset_selector_bottom_filler = QWidget(self)
+        tileset_selector_bottom_filler.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Preferred)
+        self.tileset_selector_bottom_layout.addWidget(tileset_selector_bottom_filler)
         
 
         self.tileset_tab_bar._layout.addWidget(self.tileset_selector_bottom_area)

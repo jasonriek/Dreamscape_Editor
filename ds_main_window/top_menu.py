@@ -97,6 +97,7 @@ class TopMenu:
             ds.data.world.setWidth(w)
             ds.data.world.setHeight(h)
             self.main_window.tile_canvas.resizeCanvas(ds.data.world.displayWidth(), ds.data.world.displayHeight())
+            self.main_window.tile_canvas.drawBaseTiles()
 
     def openFile(self):
         # Show an Open File dialog and get the selected file path

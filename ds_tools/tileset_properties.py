@@ -12,8 +12,8 @@ class TilesetProperties:
         self.tileset_loader = LoadTilesetWidget(tileset_tab_bar, tile_canvas, layers)
         self.tile_canvas = tile_canvas
         self.tile_selector = tileset_tab_bar.tile_selector
-        self.world_coord_label = QLabel(' (0, 0)')
-        self.tileset_coord_label = QLabel(' (0, 0)')
+        self.world_coord_label = QLabel('(0, 0)')
+        self.tileset_coord_label = QLabel('(0, 0)')
         self.tile_width_spinbox = QSpinBox()
         self.tile_height_spinbox = QSpinBox()
         self.tile_width_spinbox.setMinimum(1)
@@ -57,10 +57,10 @@ class TilesetProperties:
         self.tile_canvas.mouseMoved.connect(self.setWorldXYInTileTable)
 
     def setWorldXYInTileTable(self, x, y):
-        self.world_coord_label.setText(f' ({x}, {y}) ')
+        self.world_coord_label.setText(f'({x}, {y})')
 
     def setTileXYInTileTable(self, x, y):
-        self.tileset_coord_label.setText(f' ({x}, {y}) ')
+        self.tileset_coord_label.setText(f'({x}, {y})')
     
     def setTileWidth(self, width:int):
         ds.data.world.tile_width = width
