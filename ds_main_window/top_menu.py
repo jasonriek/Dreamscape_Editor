@@ -87,8 +87,8 @@ class TopMenu:
         ok = dialog.exec()
         if ok:
             w, h = dialog.get_values()
-            ds.data.world.width = w
-            ds.data.world.height = h
+            ds.data.world.setWidth(w)
+            ds.data.world.setHeight(h)
             self.main_window.tile_canvas.resizeCanvas(ds.data.world.displayWidth(), ds.data.world.displayHeight())
 
     def openFile(self):

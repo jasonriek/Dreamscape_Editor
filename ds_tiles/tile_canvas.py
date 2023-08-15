@@ -191,7 +191,7 @@ class TileCanvas(QWidget):
                                              tile_height, 
                                              barrier_brush
                             )
-        
+        '''
         if ds.data.paint_tools.selection == ds.data.paint_tools.SELECT and self.selected_tile:
             painter.setBrush(QColor(0, 255, 0, 75))  # Semi-transparent green
             painter.drawRect(
@@ -200,12 +200,12 @@ class TileCanvas(QWidget):
                 ds.data.world.tile_width, 
                 ds.data.world.tile_height
             )
-
+        '''
         if self.selected_tiles:
             painter.setBrush(QColor(0, 255, 0, 75))
             painter.setPen(QColor(0, 255, 0))  # Set to green color
             for tile in self.selected_tiles:
-                if tile[0                                                                                                                                                                                                                    ]:
+                if tile[0] is not None:
                     painter.drawRect(
                         tile[1] * ds.data.world.tile_width, 
                         tile[2] * ds.data.world.tile_height, 
@@ -345,7 +345,7 @@ class TileCanvas(QWidget):
             tileselector_x = src_x
             tileselector_y = src_y
         
-        if x < 0 or x >= ds.data.world.width or y < 0 or y >= ds.data.world.height:
+        if x < 0 or x >= ds.data.world.width() or y < 0 or y >= ds.data.world.height():
             return
 
         # Check if tile already exists here at this layer, if so, replace it.
@@ -390,7 +390,7 @@ class TileCanvas(QWidget):
         self.paintTileAt(x, y)
    
     def eraseTileAt(self, x, y):
-        if x < 0 or x >= ds.data.world.width or y < 0 or y >= ds.data.world.height:
+        if x < 0 or x >= ds.data.world.width() or y < 0 or y >= ds.data.world.height():
             return
         # Check if tile already exists here at this layer, if so, replace it.
         current_layer_index = ds.data.layers.layerIndex(ds.data.layers.active_layer_name)
@@ -447,7 +447,7 @@ class TileCanvas(QWidget):
         
         while stack:
             x, y = stack.pop()
-            if x < 0 or x >= ds.data.world.width or y < 0 or y >= ds.data.world.height:
+            if x < 0 or x >= ds.data.world.width() or y < 0 or y >= ds.data.world.height():
                 continue
 
             current_tile_index = ds.data.layers.getTileIndexFromXY(x, y)
@@ -462,6 +462,7 @@ class TileCanvas(QWidget):
             stack.extend([(x+1, y), (x-1, y), (x, y+1), (x, y-1)])
 
     def mousePressEvent(self, event: QMouseEvent):
+        self.selected_tiles = []
         x = int(event.position().x()) // ds.data.world.tile_width
         y = int(event.position().y()) // ds.data.world.tile_height
         # Start drawing when left mouse button is pressed
@@ -544,8 +545,8 @@ class TileCanvas(QWidget):
             event.ignore()
             
     def mouseReleaseEvent(self, event: QMouseEvent):
-        x = int(event.position().x()) // ds.data.world.width
-        y = int(event.position().y()) // ds.data.world.height
+        x = int(event.position().x()) // ds.data.world.tile_width
+        y = int(event.position().y()) // ds.data.world.tile_height
         paint_tool = ds.data.paint_tools.selection
         # Stop drawing when left mouse button is released
         if event.button() == Qt.MouseButton.LeftButton:
@@ -554,10 +555,10 @@ class TileCanvas(QWidget):
             elif paint_tool == ds.data.paint_tools.DRAG and self.start_drag_point is not None:
                 self.start_drag_point = None  # Reset the dragging state
             elif paint_tool == ds.data.paint_tools.SELECT and self.select_drag_start is not None:
-                start_x, start_y = self.select_drag_start
                 end_x = x
                 end_y = y
 
+                start_x, start_y = self.select_drag_start
                 tl_x, br_x = sorted([start_x, end_x])
                 tl_y, br_y = sorted([start_y, end_y])
                 self.selected_tiles = [(ds.data.layers.getTileIndexFromXY(x, y), x, y) for x in range(tl_x, br_x+1) for y in range(tl_y, br_y+1)]
@@ -571,6 +572,7 @@ class TileCanvas(QWidget):
             self.update()
             self.redrawWorld()
             event.accept()
+
         elif event.button() == Qt.MouseButton.RightButton:
             target_tile = self.getTile(x, y)
             if target_tile:
@@ -586,12 +588,16 @@ class TileCanvas(QWidget):
         
         if self.is_drawing and (paint_tool == ds.data.paint_tools.PENCIL):
             self.paintTile(event)
+
         elif self.is_drawing and paint_tool == ds.data.paint_tools.BRUSH:
             self.paintBrushTileAt(x, y)
+
         elif self.is_erasing and (paint_tool == ds.data.paint_tools.ERASER):
             self.eraseTile(event)
+
         elif self.is_drawing and (paint_tool == ds.data.paint_tools.DRAG_DRAW):
             self.calculateDragArea(event)
+
         elif paint_tool == ds.data.paint_tools.DRAG:
             if self.start_drag_point is not None:  # Check if we started dragging
                 # Calculate the distance moved
@@ -607,6 +613,7 @@ class TileCanvas(QWidget):
         elif paint_tool == ds.data.paint_tools.SELECT:
             if self.is_selecting:
                 self.calculateDragArea(event)
+
         self.cursor_x = int(event.position().x()) // ds.data.world.tile_width
         self.cursor_y = int(event.position().y()) // ds.data.world.tile_height
         self.cursor_tile = self.tile_selector.getSelectedTile()  # update the tile under the cursor
