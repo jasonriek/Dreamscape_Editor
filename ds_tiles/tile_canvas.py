@@ -411,6 +411,7 @@ class TileCanvas(QWidget):
 
             if current_layer_index is not None:
                 self.update()  # Trigger a repaint
+                self.redrawWorld()
         else:
             print('Nothing here to erase.')
 
