@@ -10,12 +10,22 @@ class LoadTilesetWidget(QGroupBox):
         self.tile_canvas = tile_canvas
         self.layers = layers
 
-        self.layers.layerClicked.connect(self.updateByTilesetPath(self.tileset_bar.changeIndexByTilesetPath))
-        self.tileset_bar.tilesetChanged.connect(self.updateByTilesetPath(self.layers.selectFistLayerWithTilesetPath))
+        self.layers.layerClicked.connect(self.updateLayersByTilesetPath(self.tileset_bar.changeIndexByTilesetPath))
+        self.tileset_bar.tilesetChanged.connect(self.updateTilesetBarByTilesetPath(self.layers.selectFirstLayerWithTilesetPath))
 
         self.initUI()
 
-    def updateByTilesetPath(self, callback):
+    
+
+    def updateLayersByTilesetPath(self, callback):
+        def _updateByTilesetPath(tileset_path):
+            self.tileset_bar.blockSignals(True)
+            callback(tileset_path)
+            self.tileset_bar.blockSignals(False)
+            self.tileset_src_entry.setText(tileset_path)
+        return _updateByTilesetPath
+
+    def updateTilesetBarByTilesetPath(self, callback):
         def _updateByTilesetPath(tileset_path):
             self.layers.blockSignals(True)
             callback(tileset_path)

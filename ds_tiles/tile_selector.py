@@ -33,7 +33,6 @@ class TileSelector(QWidget):
         self.update()
 
     def setTileset(self, name:str, path:str):
-        ds.data.layers.setting_tileset = True
         ds.data.layers.appendTilesetLayer(name, path, ds.data.world.tile_width, ds.data.world.tile_height)
         self.changeTileset(name, path)
 

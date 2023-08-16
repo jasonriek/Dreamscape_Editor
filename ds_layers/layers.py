@@ -94,7 +94,7 @@ class Layers(QWidget):
 
         if index.isValid():  # Only add the remove action if a valid layer is clicked
             remove_layer_action = QAction("Remove Layer", self.view)
-            remove_layer_action.triggered.connect(self.remove_selected_layer)
+            remove_layer_action.triggered.connect(self.removeSelectedLayer)
             context_menu.addAction(remove_layer_action)
         
         # Show the context menu
@@ -116,7 +116,7 @@ class Layers(QWidget):
         self.tile_canvas.update()
         self.tile_canvas.redrawWorld()
 
-    def selectFistLayerWithTilesetPath(self, path):
+    def selectFirstLayerWithTilesetPath(self, path):
         i = ds.data.layers.indexOfFirstTilesetWithPath(path)
         index = self.model.index(i, 0)
         self.view.setCurrentIndex(index)
@@ -143,11 +143,9 @@ class Layers(QWidget):
         self.model.endRemoveRows()
 
     # New method to handle removing the selected layer from the context menu
-    def remove_selected_layer(self):
+    def removeSelectedLayer(self):
+        removed_layer = False
         current_index = self.selectedLayerIndex()
-        if ds.data.layers.length() == 1:
-            QMessageBox.warning(self, 'Cannot Remove Layer', 'There must be at least one layer in the editor.')
-            return
         
         if current_index != -1:  # Ensure a layer is selected
             layer_name = ds.data.layers.active_layer_name
@@ -157,13 +155,15 @@ class Layers(QWidget):
                 if(ds.data.layers.lastTileset(layer_path)):
                     button = QMessageBox.warning(self, 'Last Tileset Layer', f'This Layer is associated with a tileset, and will remove the "{layer_name}" tileset from the world.', QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
                     if(button == QMessageBox.StandardButton.Ok):
+                        removed_layer = True
                         ds.data.layers.removeTilesetLayerAtIndex(current_index)
                         self.tilesetRemoved.emit(layer_path)
                     else:
                         return
                 self.model.beginRemoveRows(QModelIndex(), current_index, current_index)
                 del self.model.layers[current_index]
-                ds.data.layers.removeTilesetLayerAtIndex(current_index)
+                if not removed_layer:
+                    ds.data.layers.removeTilesetLayerAtIndex(current_index)
                 self.model.endRemoveRows()
                 index = self.model.index(0, 0)
                 self.view.setCurrentIndex(index)
