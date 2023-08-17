@@ -1,7 +1,9 @@
-from PySide6.QtWidgets import (QWidget, QSizePolicy, QScrollArea)
-from PySide6.QtGui import (QPainter, QPixmap, QColor, QMouseEvent, QKeyEvent, QImage, QBrush)
-from PySide6.QtCore import (Qt, Signal, QRect, QTimer)
+from PySide6.QtWidgets import (QWidget, QSizePolicy, QScrollArea, QMenu, QMessageBox)
+from PySide6.QtGui import (QPainter, QPixmap, QColor, QMouseEvent, QAction, QImage, QBrush)
+from PySide6.QtCore import (Qt, Signal, QRect, QTimer, QPoint)
 import copy
+
+from ds_dialogs import DoorDialog
 
 import ds
 
@@ -14,6 +16,7 @@ class TileCanvas(QWidget):
     undoClicked = Signal(bool)
     redoClicked = Signal(bool)
     initUndo = Signal(bool)
+
     def __init__(self, tileset_tab_bar, scroll_area:QScrollArea):
         super().__init__()
         self.setMouseTracking(True)
@@ -23,6 +26,7 @@ class TileCanvas(QWidget):
         self.show_grid = True
         self.show_tile_collisons = True
         self.show_tile_overlay = True
+        self.show_doors = True
         self.is_drawing =  False
         self.is_erasing = False
         self.is_selecting = False
@@ -51,6 +55,9 @@ class TileCanvas(QWidget):
         self.action_index = -1
 
         self.select_drag_start = None
+
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.customContextMenuRequested.connect(self.showContextMenu)
 
         self.saveState()
 
@@ -195,6 +202,11 @@ class TileCanvas(QWidget):
                                              tile_height, 
                                              barrier_brush
                             )
+        if self.show_doors:
+            door_brush = QBrush(QColor(255, 165, 0, 75))
+            for door_coord, door_name in ds.data.world.doors_xy.items():
+                door = ds.data.world.door(door_name)
+                painter.fillRect(door_coord[0], door_coord[1], door['tile_width'], door['tile_height'], door_brush)
         '''
         if ds.data.paint_tools.selection == ds.data.paint_tools.SELECT and self.selected_tile:
             painter.setBrush(QColor(0, 255, 0, 75))  # Semi-transparent green
@@ -640,4 +652,81 @@ class TileCanvas(QWidget):
             self.selected_tiles = []
             self.update()
             self.redrawWorld()
+    
+    def setNewDoor(self, x:int, y:int):
+        def _setNewDoor():
+            dialog = DoorDialog()
+            dialog.entrance_x_spin.setValue(x * ds.data.world.tile_width)
+            dialog.entrance_y_spin.setValue(y * ds.data.world.tile_height)
+            if(dialog.exec()):
+                door = dialog.getValues()
+                ds.data.world.createDoor(
+                    door['name'],
+                    door['destination'],
+                    door['x'],
+                    door['y'],
+                    ds.data.world.tile_width,
+                    ds.data.world.tile_height,
+                    door['direction'],
+                    door['exit_position']['x'],
+                    door['exit_position']['y'],
+                    door['exit_position']['direction']
+                )
+        return _setNewDoor
 
+    def updateDoor(self, x:int, y:int):
+        def _updateDoor():
+            dialog = DoorDialog()
+            dialog.setValues(x, y)
+            if(dialog.exec()):
+                door = dialog.getValues()
+                ds.data.world.updateDoor(door['name'], door)
+        return _updateDoor
+    
+    def removeDoor(self, x:int, y:int):
+        def _removeDoor():
+            door = ds.data.world.doorFromXY(x,y)
+            if door:
+                message = QMessageBox.warning(self, 
+                            'Remove Door', 
+                            f'Are you sure you want to remove the "{door["name"]}" door at ({x}, {y})?',
+                            QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
+                if(message == QMessageBox.StandardButton.Ok):
+                    ds.data.world.removeDoor(door['name'])
+                    QMessageBox.information(self, 'Door Removed', f'The "{door["name"]}" door was removed.')
+        return _removeDoor
+
+        # New method to display the context menu
+    
+    def showContextMenu(self, position:QPoint):
+        x = int(position.x()) // ds.data.world.tile_width
+        y = int(position.y()) // ds.data.world.tile_height
+        # Create a new QMenu
+        context_menu = QMenu(self)
+        door_menu = QMenu('Door', self)
+        context_menu.addMenu(door_menu)
+
+        # Door Menu
+        set_door_action = QAction('Set Door', self)
+        edit_door_action = QAction('Edit Door', self)
+        remove_door_action = QAction('Remove Door', self)
+        set_door_action.triggered.connect(self.setNewDoor(x,y))
+        edit_door_action.triggered.connect(self.updateDoor(x,y))
+        remove_door_action.triggered.connect(self.removeDoor(x,y))
+        
+        door = ds.data.world.doorFromXY(x, y)
+        if door is None:
+            set_door_action.setEnabled(True)
+            edit_door_action.setDisabled(True)
+            remove_door_action.setDisabled(True)
+        else:
+            set_door_action.setDisabled(True)
+            edit_door_action.setEnabled(True)
+            remove_door_action.setEnabled(True)
+        
+        door_menu.addAction(set_door_action)
+        door_menu.addAction(edit_door_action)
+        door_menu.addAction(remove_door_action)
+
+        # Show the context menu
+        context_menu.exec(self.mapToGlobal(position))

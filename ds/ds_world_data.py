@@ -21,7 +21,68 @@ class WorldData:
         self.selected_tile_y = 0
         self.player_start_position_x = 0
         self.player_start_position_y = 0
-        self.doors = []
+        self.doors = {}
+        self.doors_xy = {}
+
+    def doorExists(self, name:str):
+        return self.doors.get(name) is not None
+
+    def doorNames(self):
+        return list(self.doors.keys())
+
+    def createDoor(self, name:str, destination:str, entrance_x:int, entrance_y:int, tile_width:int, tile_height:int, entrance_direction:str, exit_x:int, exit_y:int, exit_direction:str):
+        if self.doorExists(name):
+            return
+        
+        door = {
+            'name': name,
+            'destination': destination,
+            'x': entrance_x,
+            'y': entrance_y,
+            'tile_width': tile_width,
+            'tile_height': tile_height,
+            'direction': entrance_direction,
+            'exit_position': {
+                'x': exit_x,
+                'y': exit_y,
+                'direction': exit_direction
+            }
+        }
+        self.doors_xy[(entrance_x, entrance_y)] = name
+        self.doors[name] = door
+
+    def door(self, name:str):
+        return self.doors.get(name)
+    
+    def doorNameFromXY(self, x:int, y:int):
+        return self.doors_xy.get((x,y))
+
+    def doorFromXY(self, x:int, y:int):
+        name = self.doorNameFromXY(x, y)
+        if name is not None:
+            return self.doors.get(name)
+        return None
+
+    def updateDoor(self, name:str, door):
+        if self.doorExists(name):
+            coord_change = (door['x'] != self.doors[name]['x'] or door['y'] != self.doors[name]['y'])
+            if coord_change:
+                old_x = self.doors[name]['x']
+                old_y = self.doors[name]['y']
+                new_x = door['x']
+                new_y = door['y']
+                del self.doors_xy[(old_x,old_y)]
+                self.doors_xy[(new_x,new_y)] = name
+                
+            self.doors[name] = door
+
+    def removeDoor(self, name:str):
+        if self.doorExists(name):
+            door = self.door(name)
+            x = door['x']
+            y = door['y']
+            del self.doors_xy[(x,y)]
+            del self.doors[name]
     
     def width(self):
         # Calculating width based on the reference tile size
