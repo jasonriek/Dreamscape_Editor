@@ -65,16 +65,16 @@ class WorldData:
 
     def updateDoor(self, name:str, door):
         if self.doorExists(name):
-            coord_change = (door['x'] != self.doors[name]['x'] or door['y'] != self.doors[name]['y'])
-            if coord_change:
-                old_x = self.doors[name]['x']
-                old_y = self.doors[name]['y']
-                new_x = door['x']
-                new_y = door['y']
-                del self.doors_xy[(old_x,old_y)]
-                self.doors_xy[(new_x,new_y)] = name
-                
-            self.doors[name] = door
+            old_x = self.doors[name]['x']
+            old_y = self.doors[name]['y']
+            new_name = door['name']
+            new_x = door['x']
+            new_y = door['y']
+            del self.doors_xy[(old_x,old_y)]
+            self.doors_xy[(new_x,new_y)] = new_name
+            self.doors[new_name] = door
+            if new_name != name:
+                del self.doors[name]
 
     def removeDoor(self, name:str):
         if self.doorExists(name):

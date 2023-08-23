@@ -206,7 +206,7 @@ class TileCanvas(QWidget):
             door_brush = QBrush(QColor(255, 165, 0, 75))
             for door_coord, door_name in ds.data.world.doors_xy.items():
                 door = ds.data.world.door(door_name)
-                painter.fillRect(door_coord[0], door_coord[1], door['tile_width'], door['tile_height'], door_brush)
+                painter.fillRect(door_coord[0] * door['tile_width'], door_coord[1] * door['tile_height'], door['tile_width'], door['tile_height'], door_brush)
         '''
         if ds.data.paint_tools.selection == ds.data.paint_tools.SELECT and self.selected_tile:
             painter.setBrush(QColor(0, 255, 0, 75))  # Semi-transparent green
@@ -656,8 +656,8 @@ class TileCanvas(QWidget):
     def setNewDoor(self, x:int, y:int):
         def _setNewDoor():
             dialog = DoorDialog()
-            dialog.entrance_x_spin.setValue(x * ds.data.world.tile_width)
-            dialog.entrance_y_spin.setValue(y * ds.data.world.tile_height)
+            dialog.entrance_x_spin.setValue(x)
+            dialog.entrance_y_spin.setValue(y)
             if(dialog.exec()):
                 door = dialog.getValues()
                 ds.data.world.createDoor(
@@ -665,8 +665,8 @@ class TileCanvas(QWidget):
                     door['destination'],
                     door['x'],
                     door['y'],
-                    ds.data.world.tile_width,
-                    ds.data.world.tile_height,
+                    door['tile_width'],
+                    door['tile_height'],
                     door['direction'],
                     door['exit_position']['x'],
                     door['exit_position']['y'],
@@ -680,7 +680,8 @@ class TileCanvas(QWidget):
             dialog.setValues(x, y)
             if(dialog.exec()):
                 door = dialog.getValues()
-                ds.data.world.updateDoor(door['name'], door)
+                ds.data.world.updateDoor(dialog.old_name, door)
+                        
         return _updateDoor
     
     def removeDoor(self, x:int, y:int):
@@ -699,6 +700,7 @@ class TileCanvas(QWidget):
         # New method to display the context menu
     
     def showContextMenu(self, position:QPoint):
+        if self.is_selecting:
         x = int(position.x()) // ds.data.world.tile_width
         y = int(position.y()) // ds.data.world.tile_height
         # Create a new QMenu

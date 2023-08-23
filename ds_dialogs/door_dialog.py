@@ -83,25 +83,36 @@ class DoorDialog(QDialog):
         self.bottom_buttons_layout.addWidget(self.ok_button)
         self.bottom_buttons_layout.addWidget(self.cancel_button)
         self.layout().addWidget(self.bottom_buttons_area)
+
+        self.door = None
+        self.tile_width = ds.data.world.tile_width
+        self.tile_height = ds.data.world.tile_height
+        self.old_name = ''
     
     def setValues(self, x:int, y:int):
-        door = ds.data.world.doorFromXY(x, y)
-        if door is not None:
-            self.name_edit.setText(door['name'])
-            self.destination_edit.setText(door['destination'])
-            self.exit_direction_combo.setCurrentText(door['direction'])
-            self.entrance_x_spin.setValue(door['x'])
-            self.entrance_y_spin.setValue(door['y'])
-            self.exit_x_spin.setValue(door['exit_position']['x'])
-            self.exit_y_spin.setValue(door['exit_position']['y'])
+        self.door = ds.data.world.doorFromXY(x, y)
+        if self.door is not None:
+            self.old_name = self.door['name']
+            self.name_edit.setText(self.door['name'])
+            self.destination_edit.setText(self.door['destination'])
+            self.exit_direction_combo.setCurrentText(self.door['direction'])
+            self.entrance_x_spin.setValue(self.door['x'])
+            self.entrance_y_spin.setValue(self.door['y'])
+            self.exit_x_spin.setValue(self.door['exit_position']['x'])
+            self.exit_y_spin.setValue(self.door['exit_position']['y'])
 
     def getValues(self):
+        if self.door:
+            self.tile_width = self.door['tile_width']
+            self.tile_height = self.door['tile_height']
         return {
             'name': self.name_edit.text(),
             'destination': self.destination_edit.text(),
             'direction': self.entrance_direction_combo.currentText(),
             'x': self.entrance_x_spin.value(),
             'y': self.entrance_y_spin.value(),
+            'tile_width': self.tile_width,
+            'tile_height': self.tile_height,
             'exit_position': {
                 'x': self.exit_x_spin.value(),
                 'y': self.exit_y_spin.value(),
