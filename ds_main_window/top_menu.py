@@ -1,6 +1,8 @@
 from PySide6.QtWidgets import (QMenu, QFileDialog)
 from PySide6.QtGui import (QAction,QKeySequence)
 
+from traceback import format_exc
+
 from ds_dialogs import WorldSizeDialog
 
 import ds
@@ -143,4 +145,4 @@ class TopMenu:
                     f.write(game)
                     fo.write(game_overlay)
         except Exception as error:
-            print(f'exportJSON() Error: {str(error)}')
+            print(f'exportJSON() Error: {str(format_exc())}')

@@ -700,35 +700,37 @@ class TileCanvas(QWidget):
         # New method to display the context menu
     
     def showContextMenu(self, position:QPoint):
-        if self.is_selecting:
-        x = int(position.x()) // ds.data.world.tile_width
-        y = int(position.y()) // ds.data.world.tile_height
-        # Create a new QMenu
-        context_menu = QMenu(self)
-        door_menu = QMenu('Door', self)
-        context_menu.addMenu(door_menu)
+        if ds.data.paint_tools.selection == ds.data.paint_tools.SELECT:
+            x = int(position.x()) // ds.data.world.tile_width
+            y = int(position.y()) // ds.data.world.tile_height
+            
+            # Create a new QMenu
+            context_menu = QMenu(self)
+            door_menu = QMenu('Door', self)
+            context_menu.addMenu(door_menu)
 
-        # Door Menu
-        set_door_action = QAction('Set Door', self)
-        edit_door_action = QAction('Edit Door', self)
-        remove_door_action = QAction('Remove Door', self)
-        set_door_action.triggered.connect(self.setNewDoor(x,y))
-        edit_door_action.triggered.connect(self.updateDoor(x,y))
-        remove_door_action.triggered.connect(self.removeDoor(x,y))
-        
-        door = ds.data.world.doorFromXY(x, y)
-        if door is None:
-            set_door_action.setEnabled(True)
-            edit_door_action.setDisabled(True)
-            remove_door_action.setDisabled(True)
-        else:
-            set_door_action.setDisabled(True)
-            edit_door_action.setEnabled(True)
-            remove_door_action.setEnabled(True)
-        
-        door_menu.addAction(set_door_action)
-        door_menu.addAction(edit_door_action)
-        door_menu.addAction(remove_door_action)
+            # Door Menu
+            set_door_action = QAction('Set Door', self)
+            edit_door_action = QAction('Edit Door', self)
+            remove_door_action = QAction('Remove Door', self)
 
-        # Show the context menu
-        context_menu.exec(self.mapToGlobal(position))
+            set_door_action.triggered.connect(self.setNewDoor(x,y))
+            edit_door_action.triggered.connect(self.updateDoor(x,y))
+            remove_door_action.triggered.connect(self.removeDoor(x,y))
+            
+            door = ds.data.world.doorFromXY(x, y)
+            if door is None:
+                set_door_action.setEnabled(True)
+                edit_door_action.setDisabled(True)
+                remove_door_action.setDisabled(True)
+            else:
+                set_door_action.setDisabled(True)
+                edit_door_action.setEnabled(True)
+                remove_door_action.setEnabled(True)
+            
+            door_menu.addAction(set_door_action)
+            door_menu.addAction(edit_door_action)
+            door_menu.addAction(remove_door_action)
+
+            # Show the context menu
+            context_menu.exec(self.mapToGlobal(position))

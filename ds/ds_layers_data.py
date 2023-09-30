@@ -249,6 +249,11 @@ class LayersData:
     def length(self):
         """Returns the length of layers"""
         return len(self.order)
+    
+    def _modifyDoorToOffset(self, door):
+        door['x'] = door['x'] - 1
+        door['y'] = door['y'] - 2
+        return door
 
     def getJson(self):
         """Return the class data in JSON format."""
@@ -283,16 +288,16 @@ class LayersData:
 
         layers_json = json.dumps({
             'name': self.parent.world.name,
-            'world_size': {'width': self.parent.world.width, 'height': self.parent.world.height},
+            'world_size': {'width': self.parent.world.width(), 'height': self.parent.world.height()},
             'weather': self.parent.world.weather,
             'start_position': {'x': self.parent.world.player_start_position_x, 'y': self.parent.world.player_start_position_y},
-            'doors': self.parent.world.doors,
+            'doors': {door_name:self._modifyDoorToOffset(door) for door_name, door  in self.parent.world.doors.items()},
             'layers': layers
         }, indent=1)
 
         overlay_json = json.dumps({
             'name': self.parent.world.name + ' Overlay',
-            'world_size': {'width': self.parent.world.width, 'height': self.parent.world.height},
+            'world_size': {'width': self.parent.world.width(), 'height': self.parent.world.height()},
             'layers': overlay_layers
 
         }, indent=1)
